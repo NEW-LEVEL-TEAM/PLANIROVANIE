@@ -578,6 +578,35 @@ button, .chip, .aud-choice, .funnel-options button{
   filter:none!important;
   pointer-events:auto!important;
 }
+
+/* ===== Final mobile navigation lock ===== */
+@media(max-width:560px){
+  #wizardNext[disabled],
+  #wizardNext.wizard-next-locked{
+    opacity:.28!important;
+    background:rgba(245,168,0,.38)!important;
+    color:rgba(17,17,17,.6)!important;
+    box-shadow:none!important;
+    filter:saturate(.2)!important;
+    pointer-events:none!important;
+    cursor:default!important;
+    -webkit-tap-highlight-color:transparent!important;
+  }
+
+  #wizardNext:not([disabled]):not(.wizard-next-locked){
+    opacity:1!important;
+    background:var(--accent)!important;
+    color:#111!important;
+    filter:none!important;
+    pointer-events:auto!important;
+    cursor:pointer!important;
+  }
+
+  #wizardPrev[disabled]{
+    opacity:.25!important;
+    pointer-events:none!important;
+  }
+}
 </style></head><body>
 <div class="wrap">
 <section class="hero"><div class="logo"><div class="logo-ring">⚡</div><div class="logo-name">New<br/>Level Team</div></div><div class="eyebrow">Планирование продаж на 7 дней</div><h1>Продажи <b>на неделю</b></h1><p>Собери конкретный план: что ты продаёшь, кому, через какую проблему или желание заходишь, какой связкой ведёшь к продаже и какой объём действий делаешь.</p></section>
@@ -1039,11 +1068,13 @@ button, .chip, .aud-choice, .funnel-options button{
   }
   function goPrev(e){
     if(e)e.preventDefault();
+    if(prev && prev.disabled)return;
     if(audienceInnerPrev()) return;
     salesWizardShow(step-1,true);
   }
   function goNext(e){
     if(e)e.preventDefault();
+    if(next && next.disabled)return;
     if(audienceInnerNext()){
       syncNextAvailability();
       return;
@@ -1068,13 +1099,48 @@ button, .chip, .aud-choice, .funnel-options button{
     next.disabled=true;
     salesWizardShow(step===panels.length-1?0:step+1,true);
   }
-  if(prev){
-    prev.onclick=goPrev;
-    prev.addEventListener('touchend',function(e){e.preventDefault();goPrev(e)},{passive:false});
+  var lastNavTouch=0;
+  var navTransitionLock=false;
+
+  function guardedPrev(e){
+    if(prev && prev.disabled)return;
+    if(navTransitionLock)return;
+    navTransitionLock=true;
+    goPrev(e);
+    setTimeout(function(){navTransitionLock=false},220);
   }
+
+  function guardedNext(e){
+    if(next && next.disabled)return;
+    if(navTransitionLock)return;
+    navTransitionLock=true;
+    goNext(e);
+    setTimeout(function(){navTransitionLock=false},220);
+  }
+
+  if(prev){
+    prev.onclick=function(e){
+      if(Date.now()-lastNavTouch<700){e.preventDefault();return}
+      guardedPrev(e);
+    };
+    prev.addEventListener('touchend',function(e){
+      e.preventDefault();
+      lastNavTouch=Date.now();
+      guardedPrev(e);
+    },{passive:false});
+  }
+
   if(next){
-    next.onclick=goNext;
-    next.addEventListener('touchend',function(e){e.preventDefault();goNext(e)},{passive:false});
+    next.onclick=function(e){
+      if(Date.now()-lastNavTouch<700){e.preventDefault();return}
+      guardedNext(e);
+    };
+    next.addEventListener('touchend',function(e){
+      e.preventDefault();
+      lastNavTouch=Date.now();
+      if(next.disabled)return;
+      guardedNext(e);
+    },{passive:false});
   }
   salesWizardShow(0,false);
 })();
