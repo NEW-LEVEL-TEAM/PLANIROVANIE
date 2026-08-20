@@ -612,6 +612,15 @@ button, .chip, .aud-choice, .funnel-options button{
 @media(max-width:560px){
   #wizardGuide{scroll-margin-top:8px}
 }
+
+.activity-choice-box{margin-top:4px}
+.activity-choice-title{font-size:9px;font-weight:900;color:rgba(255,255,255,.42);text-transform:uppercase;letter-spacing:.55px;margin-bottom:7px}
+.activity-choice-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.activity-choice-list button{border:1px solid rgba(255,255,255,.09);background:#15151a;color:rgba(255,255,255,.66);border-radius:9px;min-height:42px;padding:7px 9px;display:grid;grid-template-columns:18px 1fr;gap:6px;align-items:center;text-align:left;font-family:inherit;font-size:9.5px;line-height:1.2;cursor:pointer}
+.activity-choice-list button span{width:18px;height:18px;border-radius:5px;border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;color:transparent;font-size:9px;font-weight:1000}
+.activity-choice-list button.active{border-color:rgba(245,168,0,.48);background:rgba(245,168,0,.08);color:#fff}
+.activity-choice-list button.active span{background:var(--accent);border-color:var(--accent);color:#111}
+@media(max-width:560px){.activity-choice-list{grid-template-columns:1fr}.activity-choice-list button{min-height:40px}}
 </style></head><body>
 <div class="wrap">
 <section class="hero"><div class="logo"><div class="logo-ring">⚡</div><div class="logo-name">New<br/>Level Team</div></div><div class="eyebrow">Планирование продаж на 7 дней</div><h1>Продажи <b>на неделю</b></h1><p>Собери конкретный план: что ты продаёшь, кому, через какую проблему или желание заходишь, какой связкой ведёшь к продаже и какой объём действий делаешь.</p></section>
@@ -826,7 +835,33 @@ button, .chip, .aud-choice, .funnel-options button{
 </div></div>
 <div class="action-card action-collapsible" data-action-box="3">
 <button type="button" class="action-toggle" data-action-toggle="3"><span class="action-toggle-mark">✓</span><b>Отработка активности</b><em>Добавить в план</em></button>
-<div class="action-card-body"><div><h3>Отработка активности</h3><p>Работа с теми, кто уже проявился: реакции, комментарии, ответы, новые друзья, просмотры Stories.</p></div><div class="action-controls"><select class="mini-select" id="act_activity"><option value="">Не делаю / не выбрано</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option><option>2 раза в неделю</option><option>1 раз в неделю</option><option>Свой режим</option></select><input id="act_activity_note" placeholder="Пропиши, как конкретно будешь отрабатывать активность"/></div></div></div>
+<div class="action-card-body">
+  <div><h3>Отработка активности</h3><p>Выбери частоту и отметь, с какой активностью ты реально будешь работать.</p></div>
+  <div class="action-controls">
+    <select class="mini-select" id="act_activity">
+      <option value="">Частота не выбрана</option>
+      <option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
+      <option>2 раза в неделю</option><option>1 раз в неделю</option><option>Свой режим</option>
+    </select>
+
+    <div class="activity-choice-box">
+      <div class="activity-choice-title">Что именно отрабатываю</div>
+      <div class="activity-choice-list" id="activityChoiceList">
+        <button type="button" data-activity-type="Добавились в друзья"><span>✓</span>Добавились в друзья</button>
+        <button type="button" data-activity-type="Приняли заявку в друзья"><span>✓</span>Приняли заявку в друзья</button>
+        <button type="button" data-activity-type="Отреагировали на нейрокомментинг / комментинг"><span>✓</span>Отреагировали на нейрокомментинг / комментинг</button>
+        <button type="button" data-activity-type="Поставили лайк"><span>✓</span>Поставили лайк</button>
+        <button type="button" data-activity-type="Написали комментарий"><span>✓</span>Написали комментарий</button>
+        <button type="button" data-activity-type="Ответили на Stories"><span>✓</span>Ответили на Stories</button>
+        <button type="button" data-activity-type="Отреагировали на Stories"><span>✓</span>Отреагировали на Stories</button>
+        <button type="button" data-activity-type="Ответили на рассылку"><span>✓</span>Ответили на рассылку</button>
+        <button type="button" data-activity-type="Забрали полезный материал / зашли в бот"><span>✓</span>Забрали полезный материал / зашли в бот</button>
+      </div>
+    </div>
+
+    <input id="act_activity_note" placeholder="Свой вариант или заметка для себя"/>
+  </div>
+</div></div>
 <div class="action-card action-collapsible" data-action-box="4">
 <button type="button" class="action-toggle" data-action-toggle="4"><span class="action-toggle-mark">✓</span><b>Исходящие сообщения</b><em>Добавить в план</em></button>
 <div class="action-card-body"><div><h3>Исходящие сообщения</h3><p>Сколько сообщений отправляешь и кому. Сюда же можно включить возвраты в старые или текущие диалоги - отдельный блок для них не нужен.</p></div><div class="action-controls three"><div class="counter"><button data-counter="outgoing" data-d="-1">−</button><input id="act_outgoing" min="0" type="number" value="0"/><button data-counter="outgoing" data-d="1">+</button></div><select class="mini-select" id="act_outgoing_unit"><option>в день</option><option>за неделю</option></select><input id="act_outgoing_note" placeholder="Кому пишу: новые люди / активность / старые диалоги / текущие диалоги / своя выборка"/></div></div></div>
@@ -1569,6 +1604,7 @@ const actionIds=['act_posts','act_posts_note','act_stories_freq','act_stories_no
 let trafficSelected=[];
 let trafficDetails={};
 let actionEnabled={posts:false,stories:false,traffic:false,activity:false,outgoing:false,mail:false};
+let activitySelected=[];
 
 function renderTrafficMethods(){
   const list=$('trafficMethodList'); if(!list)return;
@@ -1642,6 +1678,36 @@ document.getElementById('actionsUI')?.addEventListener('click',e=>{
   syncActionBoxes();changed();
 });
 syncActionBoxes();
+
+const activityKnown=[
+  'Добавились в друзья',
+  'Приняли заявку в друзья',
+  'Отреагировали на нейрокомментинг / комментинг',
+  'Поставили лайк',
+  'Написали комментарий',
+  'Ответили на Stories',
+  'Отреагировали на Stories',
+  'Ответили на рассылку',
+  'Забрали полезный материал / зашли в бот'
+];
+function renderActivityChoices(){
+  document.querySelectorAll('#activityChoiceList [data-activity-type]').forEach(b=>{
+    const active=activitySelected.includes(b.dataset.activityType);
+    b.classList.toggle('active',active);
+    b.setAttribute('aria-pressed',active?'true':'false');
+  });
+}
+$('activityChoiceList')?.addEventListener('click',e=>{
+  const b=e.target.closest('[data-activity-type]');if(!b)return;
+  e.preventDefault();
+  const x=b.dataset.activityType;
+  const i=activitySelected.indexOf(x);
+  if(i>=0)activitySelected.splice(i,1);else activitySelected.push(x);
+  renderActivityChoices();
+  changed();
+});
+renderActivityChoices();
+
 function actionLines(){
   const a=[];let n;
   if(actionEnabled.posts && (n=+val('act_posts'))>0)a.push(`Посты: ${n}${val('act_posts_note')?' - '+val('act_posts_note'):''}`);
@@ -1655,7 +1721,11 @@ function actionLines(){
       a.push(t);
     });
   }
-  if(actionEnabled.activity && val('act_activity'))a.push(`Отработка активности: ${val('act_activity')}${val('act_activity_note')?' - '+val('act_activity_note'):''}`);
+  if(actionEnabled.activity && val('act_activity') && (activitySelected.length || val('act_activity_note'))){
+    const parts=[...activitySelected];
+    if(val('act_activity_note'))parts.push(`Свой вариант / заметка: ${val('act_activity_note')}`);
+    a.push(`Отработка активности: ${val('act_activity')}${parts.length?' - '+parts.join('; '):''}`);
+  }
   if(actionEnabled.outgoing && (n=+val('act_outgoing'))>0)a.push(`Исходящие сообщения: ${n} ${val('act_outgoing_unit')}${val('act_outgoing_note')?' - '+val('act_outgoing_note'):''}`);
   if(actionEnabled.mail && (n=+val('act_mail'))>0)a.push(`Рассылки по подписной базе: ${n}${val('act_mail_note')?' - '+val('act_mail_note'):''}`);
   return a.concat(customActions);
@@ -1804,7 +1874,7 @@ function importFunnelText(raw){
   });
 }
 function importActionsText(raw){
-  trafficSelected=[];trafficDetails={};customActions=[];actionEnabled={posts:false,stories:false,traffic:false,activity:false,outgoing:false,mail:false};
+  trafficSelected=[];trafficDetails={};customActions=[];activitySelected=[];actionEnabled={posts:false,stories:false,traffic:false,activity:false,outgoing:false,mail:false};
   $('act_posts').value=0;$('act_posts_note').value='';
   $('act_stories_freq').value='';$('act_stories_note').value='';
   $('act_activity').value='';$('act_activity_note').value='';
@@ -1829,7 +1899,17 @@ function importActionsText(raw){
       return;
     }
     if((m=row.match(/^Отработка активности:\s*([^-]+?)(?:\s*-\s*(.*))?$/i))){
-      actionEnabled.activity=true;$('act_activity').value=m[1].trim();$('act_activity_note').value=m[2]||'';return;
+      actionEnabled.activity=true;
+      $('act_activity').value=m[1].trim();
+      activitySelected=[];
+      $('act_activity_note').value='';
+      const details=(m[2]||'').split(/\s*;\s*/).map(x=>x.trim()).filter(Boolean);
+      details.forEach(x=>{
+        if(activityKnown.includes(x))activitySelected.push(x);
+        else if(/^Свой вариант \/ заметка:\s*/i.test(x))$('act_activity_note').value=x.replace(/^Свой вариант \/ заметка:\s*/i,'').trim();
+        else if(x)$('act_activity_note').value=[$('act_activity_note').value,x].filter(Boolean).join('; ');
+      });
+      return;
     }
     if((m=row.match(/^Исходящие сообщения:\s*(\d+)\s+(в день|за неделю)(?:\s*-\s*(.*))?$/i))){
       actionEnabled.outgoing=true;$('act_outgoing').value=+m[1];$('act_outgoing_unit').value=m[2];$('act_outgoing_note').value=m[3]||'';return;
@@ -1857,7 +1937,7 @@ function resetForImportedPlan(){
   aud={type:'',situation:'',focus:[],angleType:'',angleSpecific:'',customType:false,customSituation:false,customFocus:false,customAngle:false};
   audStep=1;
   funnelState={source:'',trigger:'',contact:'',conversion:'',outcomes:[]};
-  trafficSelected=[];trafficDetails={};customActions=[];salesGoalVals={};
+  trafficSelected=[];trafficDetails={};customActions=[];salesGoalVals={};activitySelected=[];
 
   ['product','point','place','audienceWho','audiencePain','funnel','actions','goalEngage','goalSales','goalEngageTarget'].forEach(id=>{if($(id))$(id).value=''});
   ['act_posts','act_outgoing','act_mail','goalEngageQty'].forEach(id=>{if($(id))$(id).value=0});
@@ -1884,6 +1964,7 @@ function applyImportedPlanText(txt){
   renderAudience();
   renderFunnel();
   renderTrafficMethods();
+  renderActivityChoices();
   syncActionBoxes();
   renderCustomActions();
   renderSalesGoals();
@@ -2071,13 +2152,13 @@ function changed(renderSales=true){
 }
 ['product','point','place','audienceWho','audiencePain'].forEach(id=>{$ (id).addEventListener('input',()=>changed(id==='product'));$(id).addEventListener('change',()=>changed(id==='product'))});renderSalesGoals();changed(false);syncWeeklyRoute();
 $('copyBtn').onclick=async()=>{const txt=build();try{await navigator.clipboard.writeText(txt)}catch(e){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1500)};$('resetBtn').onclick=()=>{if(!confirm('Очистить текущий план и начать новую неделю?'))return;
-  state={}; aud={type:'',situation:'',focus:[],angleType:'',angleSpecific:'',customType:false,customSituation:false,customFocus:false,customAngle:false}; audStep=1; funnelState={source:'',trigger:'',contact:'',conversion:'',outcomes:[]}; trafficSelected=[]; trafficDetails={}; customActions=[]; salesGoalVals={}; actionEnabled={posts:false,stories:false,traffic:false,activity:false,outgoing:false,mail:false};
+  state={}; aud={type:'',situation:'',focus:[],angleType:'',angleSpecific:'',customType:false,customSituation:false,customFocus:false,customAngle:false}; audStep=1; funnelState={source:'',trigger:'',contact:'',conversion:'',outcomes:[]}; trafficSelected=[]; trafficDetails={}; customActions=[]; salesGoalVals={}; activitySelected=[]; actionEnabled={posts:false,stories:false,traffic:false,activity:false,outgoing:false,mail:false};
   document.querySelectorAll('input, textarea, select').forEach(el=>{
     if(el.tagName==='SELECT') el.selectedIndex=0;
     else if(el.type==='number') el.value=0;
     else el.value='';
   });
-  renderAudience(); renderFunnel(); renderTrafficMethods(); syncActionBoxes(); renderCustomActions(); renderSalesGoals(); syncBasicChips(); changed(false); syncWeeklyRoute();
+  renderAudience(); renderFunnel(); renderTrafficMethods(); renderActivityChoices(); syncActionBoxes(); renderCustomActions(); renderSalesGoals(); syncBasicChips(); changed(false); syncWeeklyRoute();
   if(window.salesWizardShow) window.salesWizardShow(0,true); else window.scrollTo({top:0,behavior:'smooth'});
 };
 
