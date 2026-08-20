@@ -533,7 +533,7 @@ button, .chip, .aud-choice, .funnel-options button{
 </style></head><body>
 <div class="wrap">
 <section class="hero"><div class="logo"><div class="logo-ring">⚡</div><div class="logo-name">New<br/>Level Team</div></div><div class="eyebrow">Планирование продаж на 7 дней</div><h1>Продажи <b>на неделю</b></h1><p>Собери конкретный план: что ты продаёшь, кому, через какую проблему или желание заходишь, какой связкой ведёшь к продаже и какой объём действий делаешь.</p></section>
-<div style="display:none"><input id="weekDate" type="date"/><b id="progressText">0 из 8</b><div id="progressFill"></div></div>
+<div style="display:none"><b id="progressText">0 из 8</b><div id="progressFill"></div></div>
 <div class="wizard-shell" id="wizardShell">
 <div class="sales-route-wrap">
   <div class="sales-route-head sales-route-head-simple">
@@ -756,7 +756,7 @@ button, .chip, .aud-choice, .funnel-options button{
     </div>
     <div class="plan-import-body">
       <textarea id="importPlanText" placeholder="МОЙ ПЛАН ПРОДАЖ НА НЕДЕЛЮ&#10;&#10;🎯 ЧТО ПРОДАЮ&#10;• ...&#10;&#10;📍 КУДА ВОВЛЕКАЮ&#10;..."></textarea>
-      <div class="plan-import-note">Лучше вставлять план целиком без изменений в заголовках разделов. Дата из старого плана не переносится - останется текущая.</div>
+      <div class="plan-import-note">Лучше вставлять план целиком без изменений в заголовках разделов. Если в старом плане есть строка с датой, она просто игнорируется.</div>
       <div class="plan-import-error" id="importPlanError"></div>
     </div>
     <div class="plan-import-actions">
@@ -942,9 +942,6 @@ let state={};
 const clean=s=>s.replace(/^\s*[•\-*]\s*/,'').trim(); const lines=id=>val(id).split('\n').map(clean).filter(Boolean); const norm=s=>clean(s).replace(/[«»"]/g,'').toLowerCase();
 function bullets(arr){return arr.length?arr.map(x=>'• '+x).join('\n'):'НЕ ЗАПОЛНЕНО'}
 function setLines(id,arr){$ (id).value=arr.map(x=>'• '+x).join('\n')}
-function moscowToday(){const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Moscow',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const o=Object.fromEntries(p.map(x=>[x.type,x.value]));return `${o.year}-${o.month}-${o.day}`}
-function pretty(v){if(!v)return'';const [y,m,d]=v.split('-');return `${d}.${m}.${y}`}
-$('weekDate').value=moscowToday();
 function multiToggle(id,text){
   let a=lines(id),i=a.findIndex(x=>norm(x)===norm(text));
   if(i>=0)a.splice(i,1); else a.push(text);
@@ -1420,7 +1417,7 @@ let salesGoalVals={};function renderSalesGoals(){const prods=lines('product');co
 function updateSalesGoalHidden(){const a=lines('product').filter(p=>salesGoalVals[p]>0).map(p=>`${salesGoalVals[p]} - ${p}`);$('goalSales').value=a.map(x=>'• '+x).join('\n')}
 
 function autoEngage(){const p=val('point');if(p&&(!val('goalEngageTarget')||state.lastAutoPoint===val('goalEngageTarget'))){$('goalEngageTarget').value=p;state.lastAutoPoint=p}$('engageTargetLabel').textContent=val('goalEngageTarget')||'Точка продаж пока не выбрана';const n=+val('goalEngageQty');$('goalEngage').value=n>0?`${n} заявок / вовлечений → ${val('goalEngageTarget')||'точка продаж'}`:'';$('goalEngagePreview').textContent=$('goalEngage').value||'Укажи количество.'}
-function build(){const d=val('weekDate');return `МОЙ ПЛАН ПРОДАЖ НА НЕДЕЛЮ${d?'\nНеделя с '+pretty(d):''}\n\n🎯 ЧТО ПРОДАЮ\n${bullets(lines('product'))}\n\n📍 КУДА ВОВЛЕКАЮ\n${val('point')||'НЕ ЗАПОЛНЕНО'}\n\n📱 ГДЕ ПРОДАЮ\n${bullets(lines('place'))}\n\n👥 КОМУ ПРОДАЮ\n${val('audienceWho')||'НЕ ЗАПОЛНЕНО'}\n\n🔥 ЧЕРЕЗ ЧТО ЗАХОЖУ\n${val('audiencePain')||'НЕ ЗАПОЛНЕНО'}\n\n🔗 ПРОДАЮЩАЯ СВЯЗКА\n${val('funnel')||'НЕ ЗАПОЛНЕНО'}\n\n⚡ ОБЪЁМ ДЕЙСТВИЙ\n${bullets(actionLines())}\n\n🏁 ЦЕЛЬ ПО ВОВЛЕЧЕНИЮ\n${val('goalEngage')||'НЕ ЗАПОЛНЕНО'}\n\n💰 ЦЕЛЬ ПО ПРОДАЖАМ\n${val('goalSales')||'НЕ ЗАПОЛНЕНО'}`}
+function build(){return `МОЙ ПЛАН ПРОДАЖ НА НЕДЕЛЮ\n\n🎯 ЧТО ПРОДАЮ\n${bullets(lines('product'))}\n\n📍 КУДА ВОВЛЕКАЮ\n${val('point')||'НЕ ЗАПОЛНЕНО'}\n\n📱 ГДЕ ПРОДАЮ\n${bullets(lines('place'))}\n\n👥 КОМУ ПРОДАЮ\n${val('audienceWho')||'НЕ ЗАПОЛНЕНО'}\n\n🔥 ЧЕРЕЗ ЧТО ЗАХОЖУ\n${val('audiencePain')||'НЕ ЗАПОЛНЕНО'}\n\n🔗 ПРОДАЮЩАЯ СВЯЗКА\n${val('funnel')||'НЕ ЗАПОЛНЕНО'}\n\n⚡ ОБЪЁМ ДЕЙСТВИЙ\n${bullets(actionLines())}\n\n🏁 ЦЕЛЬ ПО ВОВЛЕЧЕНИЮ\n${val('goalEngage')||'НЕ ЗАПОЛНЕНО'}\n\n💰 ЦЕЛЬ ПО ПРОДАЖАМ\n${val('goalSales')||'НЕ ЗАПОЛНЕНО'}`}
 
 
 
@@ -1696,9 +1693,7 @@ function currentPlanSections(){
 
 function currentPlanText(){
   const sections=currentPlanSections();
-  const date=pretty(val('weekDate'));
   let out='МОЙ ПЛАН ПРОДАЖ НА НЕДЕЛЮ';
-  if(date) out+=`\nНеделя с ${date}`;
   if(sections.length) out+='\n\n'+sections.map(([t,v])=>`${t.toUpperCase()}\n${v}`).join('\n\n');
   return out;
 }
@@ -1780,12 +1775,11 @@ function changed(renderSales=true){
   completion();
   syncWeeklyRoute();
 }
-['weekDate','product','point','place','audienceWho','audiencePain'].forEach(id=>{$ (id).addEventListener('input',()=>changed(id==='product'));$(id).addEventListener('change',()=>changed(id==='product'))});renderSalesGoals();changed(false);syncWeeklyRoute();
+['product','point','place','audienceWho','audiencePain'].forEach(id=>{$ (id).addEventListener('input',()=>changed(id==='product'));$(id).addEventListener('change',()=>changed(id==='product'))});renderSalesGoals();changed(false);syncWeeklyRoute();
 $('copyBtn').onclick=async()=>{const txt=build();try{await navigator.clipboard.writeText(txt)}catch(e){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1500)};$('resetBtn').onclick=()=>{if(!confirm('Очистить текущий план и начать новую неделю?'))return;
   state={}; aud={type:'',situation:'',focus:[],angleType:'',angleSpecific:'',customType:false,customSituation:false,customFocus:false,customAngle:false}; audStep=1; funnelState={source:'',trigger:'',contact:'',conversion:'',outcomes:[]}; trafficSelected=[]; trafficDetails={}; customActions=[]; salesGoalVals={};
   document.querySelectorAll('input, textarea, select').forEach(el=>{
-    if(el.id==='weekDate') el.value=moscowToday();
-    else if(el.tagName==='SELECT') el.selectedIndex=0;
+    if(el.tagName==='SELECT') el.selectedIndex=0;
     else if(el.type==='number') el.value=0;
     else el.value='';
   });
