@@ -725,6 +725,19 @@ button, .chip, .aud-choice, .funnel-options button{
   background:#111115!important;
   color:#fff!important;
 }
+
+.action-groups{display:grid;gap:12px}.action-group{border:1px solid rgba(255,255,255,.10);border-radius:16px;background:#0e0e12;overflow:hidden}
+.action-group-head{width:100%;display:grid;grid-template-columns:34px 1fr 24px;gap:11px;align-items:center;text-align:left;padding:14px 15px;border:0;background:#121216;color:#fff;cursor:pointer}
+.action-group-head>span{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(245,168,0,.12);color:var(--accent);font-weight:900}
+.action-group-head b{display:block;font-size:15px}.action-group-head small{display:block;margin-top:3px;color:var(--muted);font-size:10px;font-weight:600}.action-group-head i{font-style:normal;color:var(--accent);font-size:18px}
+.action-group:not(.open) .action-group-body{display:none}.action-group.open .action-group-head i{transform:rotate(180deg)}.action-group-body{padding:10px;display:grid;gap:9px}
+.traffic-inline-controls-v2{grid-template-columns:minmax(145px,190px) minmax(190px,240px) minmax(220px,1fr)!important}.traffic-qty-wrap{display:grid;grid-template-columns:minmax(90px,1fr) 120px;gap:7px}.traffic-qty{width:100%!important}
+.sales-goal-comment{margin-top:9px;width:100%}
+@media(max-width:700px){.traffic-inline-controls-v2{grid-template-columns:1fr!important}.traffic-qty-wrap{grid-template-columns:1fr 120px}.action-group-head{grid-template-columns:30px 1fr 20px;padding:12px}}
+
+.traffic-direct{padding:2px}.traffic-direct-head{padding:4px 4px 10px}.traffic-direct-head h3{margin:0 0 4px;font-size:15px}.traffic-direct-head p{margin:0;color:var(--muted);font-size:11px}
+
+.traffic-method-row.traffic-no-qty .traffic-qty-wrap{display:none!important}
 </style></head><body>
 <div class="wrap">
 <section class="hero"><div class="logo"><div class="logo-ring">⚡</div><div class="logo-name">New<br/>Level Team</div></div><div class="eyebrow">Планирование продаж на 7 дней</div><h1>Продажи <b>на неделю</b></h1><p>Собери конкретный план: что ты продаёшь, кому, через какую проблему или желание заходишь, какой связкой ведёшь к продаже и какой объём действий делаешь.</p></section>
@@ -753,7 +766,7 @@ button, .chip, .aud-choice, .funnel-options button{
 </div><div class="wizard-guide" id="wizardGuide"><div class="wizard-guide-icon">?</div><div><b id="wizardGuideTitle">Что сейчас сделать</b><span id="wizardGuideText"></span></div></div></div><main class="form">
 <section class="card" data-sales-step="0"><div class="topline"><div class="num">01</div><div class="titlebox"><h2>Что продаём?</h2><p>Выбери одно или несколько направлений.</p><div class="micro">Можно выбрать готовое или написать своё</div></div></div>
 <div class="chips" data-mode="multi" data-target="product">
-<button class="chip">Партнёрство в проекте</button><button class="chip">Обучение/Систему</button>
+<button class="chip">Партнёрство в проекте</button><button class="chip">Обучение/Система</button>
 <button class="chip">Тест-драйв системы</button><button class="chip">Тест-драйв проекта</button>
 <button class="chip">Нейрорекрутинг</button><button class="chip">Обучение по трафику</button>
 <button class="chip">Игровая воронка</button><button class="chip">Бот-рекрутер</button>
@@ -865,121 +878,20 @@ button, .chip, .aud-choice, .funnel-options button{
 </div>
 <input id="funnel" type="hidden"/>
 </section>
-<section class="card" data-sales-step="5" hidden=""><div class="topline"><div class="num">06</div><div class="titlebox"><h2>Какой объём действий?</h2><p>Отметь только то, что реально будешь делать на этой неделе.</p><div class="micro">Не нужно использовать всё. Выбрала действие → появились его настройки.</div></div></div>
-<div id="actionsUI">
-<div class="action-card action-collapsible" data-action-box="0">
-<button type="button" class="action-toggle" data-action-toggle="0"><span class="action-toggle-mark">✓</span><b>Посты</b><em>Добавить в план</em></button>
-<div class="action-card-body"><div><h3>Посты</h3><p>Сколько постов выйдет за неделю?</p></div><div class="action-controls"><div class="counter"><button data-counter="posts" data-d="-1">−</button><input id="act_posts" min="0" type="number" value="0"/><button data-counter="posts" data-d="1">+</button></div><input id="act_posts_note" placeholder="Необязательно: заметка для себя, например смысл или тема постов"/></div></div></div>
-<div class="action-card action-collapsible" data-action-box="1">
-<button type="button" class="action-toggle" data-action-toggle="1"><span class="action-toggle-mark">✓</span><b>Stories</b><em>Добавить в план</em></button>
-<div class="action-card-body"><div><h3>Stories</h3><p>Как часто выходишь в Stories?</p></div><div class="action-controls"><select class="mini-select" id="act_stories_freq"><option value="">Не выбрано</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option><option>2 раза в неделю</option><option>1 раз в неделю</option><option>Свой режим</option></select><input id="act_stories_note" placeholder="Необязательно: комментарий для себя"/></div></div></div>
-<div class="action-card action-collapsible" data-action-box="2">
-<button type="button" class="action-toggle" data-action-toggle="2"><span class="action-toggle-mark">✓</span><b>Трафик</b><em>Добавить в план</em></button>
-<div class="action-card-body"><div><h3>Трафик</h3><p>Выбери нужные способы. Частота появится сразу внутри каждого выбранного способа.</p></div>
-<div class="traffic-method-list" id="trafficMethodList">
-<div class="traffic-method-row" data-traffic-method="Нейрокомментинг">
-<div class="traffic-method-main"><b>Нейрокомментинг</b><span class="traffic-method-check">✓</span></div>
-<div class="traffic-inline-controls">
-<select class="mini-select traffic-freq">
-<option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
-<option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option>
-</select>
-<input class="traffic-note" placeholder="Объём / детали для этого способа"/>
-</div></div><div class="traffic-method-row" data-traffic-method="Реклама">
-<div class="traffic-method-main"><b>Реклама</b><span class="traffic-method-check">✓</span></div>
-<div class="traffic-inline-controls">
-<select class="mini-select traffic-freq">
-<option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
-<option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option>
-</select>
-<input class="traffic-note" placeholder="Объём / детали для этого способа"/>
-</div></div><div class="traffic-method-row" data-traffic-method="Клипы">
-<div class="traffic-method-main"><b>Клипы</b><span class="traffic-method-check">✓</span></div>
-<div class="traffic-inline-controls">
-<select class="mini-select traffic-freq">
-<option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
-<option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option>
-</select>
-<input class="traffic-note" placeholder="Объём / детали для этого способа"/>
-</div></div><div class="traffic-method-row" data-traffic-method="Посевы / размещения">
-<div class="traffic-method-main"><b>Посевы / размещения</b><span class="traffic-method-check">✓</span></div>
-<div class="traffic-inline-controls">
-<select class="mini-select traffic-freq">
-<option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
-<option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option>
-</select>
-<input class="traffic-note" placeholder="Объём / детали для этого способа"/>
-</div></div><div class="traffic-method-row" data-traffic-method="Масслайкинг">
-<div class="traffic-method-main"><b>Масслайкинг</b><span class="traffic-method-check">✓</span></div>
-<div class="traffic-inline-controls">
-<select class="mini-select traffic-freq">
-<option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
-<option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option>
-</select>
-<input class="traffic-note" placeholder="Объём / детали для этого способа"/>
-</div></div><div class="traffic-method-row" data-traffic-method="Массфолловинг">
-<div class="traffic-method-main"><b>Массфолловинг</b><span class="traffic-method-check">✓</span></div>
-<div class="traffic-inline-controls">
-<select class="mini-select traffic-freq">
-<option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
-<option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option>
-</select>
-<input class="traffic-note" placeholder="Объём / детали для этого способа"/>
-</div></div><div class="traffic-method-row" data-traffic-method="Свой способ">
-<div class="traffic-method-main"><b>Свой способ</b><span class="traffic-method-check">✓</span></div>
-<div class="traffic-inline-controls">
-<select class="mini-select traffic-freq">
-<option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
-<option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option>
-</select>
-<input class="traffic-note" placeholder="Объём / детали для этого способа"/>
-</div></div>
-</div>
-<textarea id="act_traffic_type" style="display:none"></textarea>
-</div></div>
-<div class="action-card action-collapsible" data-action-box="3">
-<button type="button" class="action-toggle" data-action-toggle="3"><span class="action-toggle-mark">✓</span><b>Отработка активности</b><em>Добавить в план</em></button>
-<div class="action-card-body">
-  <div><h3>Отработка активности</h3><p>Выбери частоту и отметь, с какой активностью ты реально будешь работать.</p></div>
-  <div class="activity-controls">
-    <div class="activity-frequency-row">
-      <select class="mini-select" id="act_activity">
-        <option value="">Частота не выбрана</option>
-        <option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
-        <option>2 раза в неделю</option><option>1 раз в неделю</option><option>Свой режим</option>
-      </select>
-      <div class="action-validation-error" id="activityFreqError">Сначала выбери частоту отработки активности ↑</div>
-    </div>
-
-    <div class="activity-choice-box">
-      <div class="activity-choice-title">Что именно отрабатываю</div>
-      <div class="activity-choice-list" id="activityChoiceList">
-        <button type="button" data-activity-type="Добавились в друзья"><span>✓</span>Добавились в друзья</button>
-        <button type="button" data-activity-type="Приняли заявку в друзья"><span>✓</span>Приняли заявку в друзья</button>
-        <button type="button" data-activity-type="Отреагировали на нейрокомментинг / комментинг"><span>✓</span>Отреагировали на нейрокомментинг / комментинг</button>
-        <button type="button" data-activity-type="Поставили лайк"><span>✓</span>Поставили лайк</button>
-        <button type="button" data-activity-type="Написали комментарий"><span>✓</span>Написали комментарий</button>
-        <button type="button" data-activity-type="Ответили на Stories"><span>✓</span>Ответили на Stories</button>
-        <button type="button" data-activity-type="Отреагировали на Stories"><span>✓</span>Отреагировали на Stories</button>
-        <button type="button" data-activity-type="Ответили на рассылку"><span>✓</span>Ответили на рассылку</button>
-        <button type="button" data-activity-type="Забрали полезный материал / зашли в бот"><span>✓</span>Забрали полезный материал / зашли в бот</button>
-      </div>
-    </div>
-
-    <div class="activity-note-wrap">
-      <input id="act_activity_note" placeholder="Свой вариант или заметка для себя"/>
-    </div>
-  </div>
-</div></div>
-<div class="action-card action-collapsible" data-action-box="4">
-<button type="button" class="action-toggle" data-action-toggle="4"><span class="action-toggle-mark">✓</span><b>Исходящие сообщения</b><em>Добавить в план</em></button>
-<div class="action-card-body"><div><h3>Исходящие сообщения</h3><p>Сколько сообщений отправляешь и кому. Сюда же можно включить возвраты в старые или текущие диалоги - отдельный блок для них не нужен.</p></div><div class="action-controls three"><div class="counter"><button data-counter="outgoing" data-d="-1">−</button><input id="act_outgoing" min="0" type="number" value="0"/><button data-counter="outgoing" data-d="1">+</button></div><select class="mini-select" id="act_outgoing_unit"><option>в день</option><option>за неделю</option></select><input id="act_outgoing_note" placeholder="Кому пишу: новые люди / активность / старые диалоги / текущие диалоги / своя выборка"/></div></div></div>
-<div class="action-card action-collapsible" data-action-box="5">
-<button type="button" class="action-toggle" data-action-toggle="5"><span class="action-toggle-mark">✓</span><b>Рассылки по подписной базе</b><em>Добавить в план</em></button>
-<div class="action-card-body"><div><h3>Рассылки по подписной базе</h3><p>Сколько отдельных рассылок сделаешь за неделю?</p></div><div class="action-controls"><div class="counter"><button data-counter="mail" data-d="-1">−</button><input id="act_mail" min="0" type="number" value="0"/><button data-counter="mail" data-d="1">+</button></div><input id="act_mail_note" placeholder="Необязательно: комментарий для себя - тема, сегмент или куда веду"/></div></div></div>
-</div>
-<div class="divider"></div><div class="custom-inline"><input id="customAction" placeholder="Добавить своё действие, например: эфир"/><button class="chip" id="addCustomAction">Добавить</button></div><div id="customActionsList"></div><textarea id="actions" style="display:none"></textarea></section><section class="card" data-sales-step="6" hidden=""><div class="math-transition"><small>Финальная проверка</small><b>Теперь проверим математику недели</b><span>Ты уже собрала путь и действия. Осталось понять, сколько людей хочешь довести до точки вовлечения и какой результат получить в продажах.</span></div><div class="topline"><div class="num">07</div><div class="titlebox"><h2>Цель по вовлечению</h2><p id="engageQuestion">Сколько людей хочешь довести до выбранной точки?</p></div></div><div class="goal-row"><div><div class="goal-row-title" id="engageTargetLabel">Точка продаж пока не выбрана</div><div class="goal-row-sub">Цель подтягивается из пункта 02. При необходимости название можно поправить.</div><input id="goalEngageTarget" placeholder="Например: разбор" style="margin-top:8px"/></div><div class="counter"><button data-counter="engage" data-d="-1">−</button><input id="goalEngageQty" min="0" type="number" value="0"/><button data-counter="engage" data-d="1">+</button></div></div><div class="goal-preview" id="goalEngagePreview">Укажи количество.</div><input id="goalEngage" type="hidden"/></section>
-<section class="card" data-sales-step="7" hidden=""><div class="topline"><div class="num">08</div><div class="titlebox"><h2>Цель по продажам</h2><p id="salesGoalQuestion">Ты выбрала направления продаж. Какой результат хочешь получить по каждому?</p></div></div><div class="goal-list" id="salesGoals"></div><div class="hint">Если в пункте 01 выбрано два продукта, здесь автоматически появятся две отдельные цели.</div><textarea id="goalSales" style="display:none"></textarea></section>
+<section class="card" data-sales-step="5" hidden=""><div class="topline"><div class="num">06</div><div class="titlebox"><h2>Какой объём действий?</h2><p>Собери неделю по трём блокам: контент, трафик и касания.</p><div class="micro">Открой нужный блок и отметь только то, что реально будешь делать.</div></div></div><div id="actionsUI" class="action-groups">
+<div class="action-group open"><button type="button" class="action-group-head"><span>01</span><div><b>Контент</b><small>Посты, Stories, клипы и свои форматы</small></div><i>⌄</i></button><div class="action-group-body">
+<div class="action-card action-collapsible" data-action-box="0"><button type="button" class="action-toggle" data-action-toggle="0"><span class="action-toggle-mark">✓</span><b>Посты</b><em>Добавить в план</em></button><div class="action-card-body"><div><h3>Посты</h3><p>Сколько постов выйдет за неделю?</p></div><div class="action-controls"><div class="counter"><button data-counter="posts" data-d="-1">−</button><input id="act_posts" min="0" type="number" value="0"/><button data-counter="posts" data-d="1">+</button></div><input id="act_posts_note" placeholder="Комментарий для себя: смыслы, темы, под какую продажу"/></div></div></div>
+<div class="action-card action-collapsible" data-action-box="1"><button type="button" class="action-toggle" data-action-toggle="1"><span class="action-toggle-mark">✓</span><b>Stories</b><em>Добавить в план</em></button><div class="action-card-body"><div><h3>Stories</h3><p>Как часто выходишь в Stories?</p></div><div class="action-controls"><select class="mini-select" id="act_stories_freq"><option value="">Не выбрано</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option><option>2 раза в неделю</option><option>1 раз в неделю</option><option>Свой режим</option></select><input id="act_stories_note" placeholder="Комментарий для себя"/></div></div></div>
+<div class="action-card action-collapsible" data-action-box="6"><button type="button" class="action-toggle" data-action-toggle="6"><span class="action-toggle-mark">✓</span><b>Клипы</b><em>Добавить в план</em></button><div class="action-card-body"><div><h3>Клипы</h3><p>Как часто выходят клипы?</p></div><div class="action-controls"><select class="mini-select" id="act_clips_freq"><option value="">Не выбрано</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option><option>2 раза в неделю</option><option>1 раз в неделю</option><option>Свой режим</option></select><input id="act_clips_note" placeholder="Комментарий для себя"/></div></div></div>
+<div class="custom-inline"><input id="customContentAction" placeholder="Свой формат контента"/><button class="chip" id="addCustomContentAction">Добавить</button></div><div id="customContentActionsList"></div></div></div>
+<div class="action-group"><button type="button" class="action-group-head"><span>02</span><div><b>Трафик</b><small>Откуда приводим новых людей</small></div><i>⌄</i></button><div class="action-group-body"><div class="traffic-direct"><div class="traffic-direct-head"><h3>Способы трафика</h3><p>Выбери один или несколько способов. У каждого выбранного способа укажи частоту, количество и комментарий.</p></div><div class="traffic-method-list" id="trafficMethodList"><div class="traffic-method-row" data-traffic-method="Нейрокомментинг"><div class="traffic-method-main"><b>Нейрокомментинг</b><span class="traffic-method-check">✓</span></div><div class="traffic-inline-controls traffic-inline-controls-v2"><select class="mini-select traffic-freq"><option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option><option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option></select><div class="traffic-qty-wrap"><input class="traffic-qty" type="number" min="0" placeholder="Количество"/><select class="mini-select traffic-unit"><option>в день</option><option>за неделю</option></select></div><input class="traffic-note" placeholder="Комментарий / что конкретно делаю"/></div></div><div class="traffic-method-row traffic-no-qty" data-traffic-method="Реклама"><div class="traffic-method-main"><b>Реклама</b><span class="traffic-method-check">✓</span></div><div class="traffic-inline-controls traffic-inline-controls-v2"><select class="mini-select traffic-freq"><option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option><option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option></select><div class="traffic-qty-wrap"><input class="traffic-qty" type="number" min="0" placeholder="Количество"/><select class="mini-select traffic-unit"><option>в день</option><option>за неделю</option></select></div><input class="traffic-note" placeholder="Комментарий / что конкретно делаю"/></div></div><div class="traffic-method-row" data-traffic-method="Посевы / размещения"><div class="traffic-method-main"><b>Посевы / размещения</b><span class="traffic-method-check">✓</span></div><div class="traffic-inline-controls traffic-inline-controls-v2"><select class="mini-select traffic-freq"><option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option><option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option></select><div class="traffic-qty-wrap"><input class="traffic-qty" type="number" min="0" placeholder="Количество"/><select class="mini-select traffic-unit"><option>в день</option><option>за неделю</option></select></div><input class="traffic-note" placeholder="Комментарий / что конкретно делаю"/></div></div><div class="traffic-method-row" data-traffic-method="Масслайкинг"><div class="traffic-method-main"><b>Масслайкинг</b><span class="traffic-method-check">✓</span></div><div class="traffic-inline-controls traffic-inline-controls-v2"><select class="mini-select traffic-freq"><option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option><option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option></select><div class="traffic-qty-wrap"><input class="traffic-qty" type="number" min="0" placeholder="Количество"/><select class="mini-select traffic-unit"><option>в день</option><option>за неделю</option></select></div><input class="traffic-note" placeholder="Комментарий / что конкретно делаю"/></div></div><div class="traffic-method-row" data-traffic-method="Массфолловинг"><div class="traffic-method-main"><b>Массфолловинг</b><span class="traffic-method-check">✓</span></div><div class="traffic-inline-controls traffic-inline-controls-v2"><select class="mini-select traffic-freq"><option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option><option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option></select><div class="traffic-qty-wrap"><input class="traffic-qty" type="number" min="0" placeholder="Количество"/><select class="mini-select traffic-unit"><option>в день</option><option>за неделю</option></select></div><input class="traffic-note" placeholder="Комментарий / что конкретно делаю"/></div></div><div class="traffic-method-row" data-traffic-method="Свой способ"><div class="traffic-method-main"><b>Свой способ</b><span class="traffic-method-check">✓</span></div><div class="traffic-inline-controls traffic-inline-controls-v2"><select class="mini-select traffic-freq"><option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option><option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option></select><div class="traffic-qty-wrap"><input class="traffic-qty" type="number" min="0" placeholder="Количество"/><select class="mini-select traffic-unit"><option>в день</option><option>за неделю</option></select></div><input class="traffic-note" placeholder="Комментарий / что конкретно делаю"/></div></div></div><textarea id="act_traffic_type" style="display:none"></textarea></div></div></div>
+<div class="action-group"><button type="button" class="action-group-head"><span>03</span><div><b>Касания</b><small>Работа с людьми, которые уже проявились или есть в базе</small></div><i>⌄</i></button><div class="action-group-body">
+<div class="action-card action-collapsible" data-action-box="3"><button type="button" class="action-toggle" data-action-toggle="3"><span class="action-toggle-mark">✓</span><b>Отработка активности</b><em>Добавить в план</em></button><div class="action-card-body"><div><h3>Отработка активности</h3><p>Выбери частоту и отметь, с какой активностью будешь работать.</p></div><div class="activity-controls"><div class="activity-frequency-row"><select class="mini-select" id="act_activity"><option value="">Частота не выбрана</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option><option>2 раза в неделю</option><option>1 раз в неделю</option><option>Свой режим</option></select><div class="action-validation-error" id="activityFreqError">Сначала выбери частоту отработки активности ↑</div></div><div class="activity-choice-box"><div class="activity-choice-title">Что именно отрабатываю</div><div class="activity-choice-list" id="activityChoiceList"><button type="button" data-activity-type="Добавились в друзья"><span>✓</span>Добавились в друзья</button><button type="button" data-activity-type="Приняли заявку в друзья"><span>✓</span>Приняли заявку в друзья</button><button type="button" data-activity-type="Отреагировали на нейрокомментинг / комментинг"><span>✓</span>Отреагировали на нейрокомментинг / комментинг</button><button type="button" data-activity-type="Поставили лайк"><span>✓</span>Поставили лайк</button><button type="button" data-activity-type="Написали комментарий"><span>✓</span>Написали комментарий</button><button type="button" data-activity-type="Ответили на Stories"><span>✓</span>Ответили на Stories</button><button type="button" data-activity-type="Отреагировали на Stories"><span>✓</span>Отреагировали на Stories</button><button type="button" data-activity-type="Забрали полезный материал / зашли в бот"><span>✓</span>Забрали полезный материал / зашли в бот</button></div></div><div class="activity-note-wrap"><input id="act_activity_note" placeholder="Свой вариант или заметка для себя"/></div></div></div></div>
+<div class="action-card action-collapsible" data-action-box="7"><button type="button" class="action-toggle" data-action-toggle="7"><span class="action-toggle-mark">✓</span><b>Исходящие заявки в друзья</b><em>Добавить в план</em></button><div class="action-card-body"><div><h3>Исходящие заявки в друзья</h3><p>Сколько заявок отправляешь и с какой частотой?</p></div><div class="action-controls three"><div class="counter"><button data-counter="friendreq" data-d="-1">−</button><input id="act_friendreq" min="0" type="number" value="0"/><button data-counter="friendreq" data-d="1">+</button></div><select class="mini-select" id="act_friendreq_unit"><option>в день</option><option>за неделю</option></select><input id="act_friendreq_note" placeholder="Комментарий для себя: кому отправляю заявки"/></div></div></div>
+<div class="action-card action-collapsible" data-action-box="4"><button type="button" class="action-toggle" data-action-toggle="4"><span class="action-toggle-mark">✓</span><b>Исходящие сообщения</b><em>Добавить в план</em></button><div class="action-card-body"><div><h3>Исходящие сообщения</h3><p>Сколько сообщений отправляешь и кому.</p></div><div class="action-controls three"><div class="counter"><button data-counter="outgoing" data-d="-1">−</button><input id="act_outgoing" min="0" type="number" value="0"/><button data-counter="outgoing" data-d="1">+</button></div><select class="mini-select" id="act_outgoing_unit"><option>в день</option><option>за неделю</option></select><input id="act_outgoing_note" placeholder="Кому пишу: активность / старые диалоги / текущие диалоги / своя выборка"/></div></div></div>
+<div class="action-card action-collapsible" data-action-box="5"><button type="button" class="action-toggle" data-action-toggle="5"><span class="action-toggle-mark">✓</span><b>Рассылки по подписной базе</b><em>Добавить в план</em></button><div class="action-card-body"><div><h3>Рассылки по подписной базе</h3><p>Сколько отдельных рассылок сделаешь за неделю?</p></div><div class="action-controls"><div class="counter"><button data-counter="mail" data-d="-1">−</button><input id="act_mail" min="0" type="number" value="0"/><button data-counter="mail" data-d="1">+</button></div><input id="act_mail_note" placeholder="Комментарий для себя"/></div></div></div>
+<div class="custom-inline"><input id="customAction" placeholder="Добавить своё касание"/><button class="chip" id="addCustomAction">Добавить</button></div><div id="customActionsList"></div></div></div>
+<textarea id="actions" style="display:none"></textarea></div></section><section class="card" data-sales-step="6" hidden=""><div class="math-transition"><small>Финальная проверка</small><b>Теперь проверим математику недели</b><span>Осталось зафиксировать конкретный результат по вовлечению и продажам.</span></div><div class="topline"><div class="num">07</div><div class="titlebox"><h2>Цель по вовлечению</h2><p id="engageQuestion">Какой конкретный результат хочешь получить в точке вовлечения?</p></div></div><div class="goal-row"><div><div class="goal-row-title" id="engageTargetLabel">Точка вовлечения пока не выбрана</div><div class="goal-row-sub">Считаем сам результат, а не заявки «на». Если ведёшь на разбор - ставим цель по количеству проведённых разборов.</div><input id="goalEngageTarget" placeholder="Например: разборов" style="margin-top:8px"/></div><div class="counter"><button data-counter="engage" data-d="-1">−</button><input id="goalEngageQty" min="0" type="number" value="0"/><button data-counter="engage" data-d="1">+</button></div></div><div class="goal-preview" id="goalEngagePreview">Укажи количество.</div><input id="goalEngage" type="hidden"/></section><section class="card" data-sales-step="7" hidden=""><div class="topline"><div class="num">08</div><div class="titlebox"><h2>Цель по продажам</h2><p id="salesGoalQuestion">Ты выбрала направления продаж. Какой результат хочешь получить по каждому?</p></div></div><div class="goal-list" id="salesGoals"></div><div class="hint">Если в пункте 01 выбрано два продукта, здесь автоматически появятся две отдельные цели.</div><textarea id="goalSales" style="display:none"></textarea></section>
 </main><div class="wizard-nav" id="wizardNav"><button class="wizard-prev" id="wizardPrev">← Назад</button><button class="wizard-next" id="wizardNext">Дальше →</button></div>
 <section class="result" data-sales-step="8" hidden=""><div class="result-head"><div class="small">Готовый итог</div><h2>Мой план продаж на неделю</h2><p>Собирается автоматически из заполненных пунктов.</p></div><div class="strategy" id="strategy"></div><button class="copy" id="copyBtn">Скопировать план продаж</button><button class="reset" id="resetBtn">Очистить и собрать новую неделю</button></section></div>
 
@@ -1093,7 +1005,7 @@ button, .chip, .aud-choice, .funnel-options button{
       return !!(f && f.value.trim());
     }
     if(index===5){
-      return typeof actionLines==='function' && actionLines().length>0 && validateActions(false);
+      return typeof actionLines==='function' && actionLines().length>0 && validateActionStepGlobal();
     }
     if(index===6){
       var ge=document.getElementById('goalEngage');
@@ -1259,7 +1171,7 @@ button, .chip, .aud-choice, .funnel-options button{
       return;
     }
     if(!canLeaveCurrentStepForward()){
-      if(step===5)validateActions(true);
+      if(step===5)validateActionStepGlobal();
       syncNextAvailability();
       var guide=document.getElementById('wizardGuideText');
       var hints=[
@@ -1741,10 +1653,10 @@ Object.values(funnelCustomMap).forEach(id=>{
 });
 renderFunnel();
 
-const actionIds=['act_posts','act_posts_note','act_stories_freq','act_stories_note','act_activity','act_activity_note','act_outgoing','act_outgoing_unit','act_outgoing_note','act_mail','act_mail_note'];actionIds.forEach(id=>{$(id).addEventListener('input',changed);$(id).addEventListener('change',changed)});let customActions=[];
+const actionIds=['act_posts','act_posts_note','act_stories_freq','act_stories_note','act_clips_freq','act_clips_note','act_activity','act_activity_note','act_friendreq','act_friendreq_unit','act_friendreq_note','act_outgoing','act_outgoing_unit','act_outgoing_note','act_mail','act_mail_note'];actionIds.forEach(id=>{$(id).addEventListener('input',changed);$(id).addEventListener('change',changed)});let customActions=[];let customContentActions=[];
 let trafficSelected=[];
 let trafficDetails={};
-let actionEnabled={posts:false,stories:false,traffic:false,activity:false,outgoing:false,mail:false};
+let actionEnabled={posts:false,stories:false,traffic:false,activity:false,outgoing:false,mail:false,clips:false,friendreq:false};
 let activitySelected=[];
 
 function renderTrafficMethods(){
@@ -1755,9 +1667,9 @@ function renderTrafficMethods(){
     row.classList.toggle('active',active);
     const f=row.querySelector('.traffic-freq');
     const n=row.querySelector('.traffic-note');
-    const d=trafficDetails[x]||{freq:'',note:''};
+    const q=row.querySelector('.traffic-qty'),u=row.querySelector('.traffic-unit');const d=trafficDetails[x]||{freq:'',qty:'',unit:'в день',note:''};
     if(f && f.value!==d.freq) f.value=d.freq||'';
-    if(n && n.value!==d.note) n.value=d.note||'';
+    if(x==='Реклама'){d.qty='';d.unit='в день'}if(q && String(q.value)!==String(d.qty||''))q.value=d.qty||'';if(u&&u.value!==(d.unit||'в день'))u.value=d.unit||'в день';if(n && n.value!==d.note) n.value=d.note||'';
   });
   $('act_traffic_type').value=trafficSelected.join('\n');
 }
@@ -1773,32 +1685,34 @@ $('trafficMethodList')?.addEventListener('click',e=>{
     delete trafficDetails[x];
   }else{
     trafficSelected.push(x);
-    trafficDetails[x]={freq:'',note:''};
+    trafficDetails[x]={freq:'',qty:'',unit:'в день',note:''};
   }
-  renderTrafficMethods(); changed();
+  actionEnabled.traffic=trafficSelected.length>0;
+  renderTrafficMethods(); syncActionBoxes(); changed();
 });
 
 $('trafficMethodList')?.addEventListener('change',e=>{
   const row=e.target.closest('.traffic-method-row'); if(!row)return;
   const x=row.dataset.trafficMethod;
   if(!trafficSelected.includes(x))return;
-  trafficDetails[x]=trafficDetails[x]||{freq:'',note:''};
-  if(e.target.classList.contains('traffic-freq')) trafficDetails[x].freq=e.target.value;
+  trafficDetails[x]=trafficDetails[x]||{freq:'',qty:'',unit:'в день',note:''};
+  if(e.target.classList.contains('traffic-freq')) trafficDetails[x].freq=e.target.value;if(e.target.classList.contains('traffic-unit')) trafficDetails[x].unit=e.target.value;
   renderTrafficMethods(); changed();
 });
 $('trafficMethodList')?.addEventListener('input',e=>{
   const row=e.target.closest('.traffic-method-row'); if(!row)return;
   const x=row.dataset.trafficMethod;
   if(!trafficSelected.includes(x))return;
-  trafficDetails[x]=trafficDetails[x]||{freq:'',note:''};
-  if(e.target.classList.contains('traffic-note')) trafficDetails[x].note=e.target.value;
+  trafficDetails[x]=trafficDetails[x]||{freq:'',qty:'',unit:'в день',note:''};
+  if(e.target.classList.contains('traffic-note')) trafficDetails[x].note=e.target.value;if(e.target.classList.contains('traffic-qty')) trafficDetails[x].qty=e.target.value;
   changed();
 });
 renderTrafficMethods();
 
-document.querySelectorAll('[data-counter]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();const key=b.dataset.counter,map={posts:'act_posts',outgoing:'act_outgoing',mail:'act_mail',engage:'goalEngageQty'};const inp=$(map[key]);inp.value=Math.max(0,(+inp.value||0)+(+b.dataset.d));changed()}));
+document.querySelectorAll('[data-counter]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();const key=b.dataset.counter,map={posts:'act_posts',friendreq:'act_friendreq',outgoing:'act_outgoing',mail:'act_mail',engage:'goalEngageQty'};const inp=$(map[key]);inp.value=Math.max(0,(+inp.value||0)+(+b.dataset.d));changed()}));
 
-const actionKeys=['posts','stories','traffic','activity','outgoing','mail'];
+document.querySelectorAll('.action-group-head').forEach(b=>b.addEventListener('click',()=>b.closest('.action-group').classList.toggle('open')));
+const actionKeys=['posts','stories','traffic','activity','outgoing','mail','clips','friendreq'];
 function syncActionBoxes(){
   document.querySelectorAll('[data-action-box]').forEach(box=>{
     const key=actionKeys[+box.dataset.actionBox];
@@ -1838,7 +1752,6 @@ const activityKnown=[
   'Написали комментарий',
   'Ответили на Stories',
   'Отреагировали на Stories',
-  'Ответили на рассылку',
   'Забрали полезный материал / зашли в бот'
 ];
 function renderActivityChoices(){
@@ -1886,36 +1799,35 @@ $('act_activity_note')?.addEventListener('input',()=>{
 updateActivityRequiredUI();
 
 function actionLines(){
-  const a=[];let n;
-  if(actionEnabled.posts && (n=+val('act_posts'))>0)a.push(`Посты: ${n}${val('act_posts_note')?' - '+val('act_posts_note'):''}`);
-  if(actionEnabled.stories && val('act_stories_freq'))a.push(`Stories: ${val('act_stories_freq')}${val('act_stories_note')?' - '+val('act_stories_note'):''}`);
-  if(actionEnabled.traffic && trafficSelected.length){
-    trafficSelected.forEach(x=>{
-      const d=trafficDetails[x]||{};
-      let t=`Трафик - ${x}`;
-      if(d.freq)t+=`: ${d.freq}`;
-      if(d.note)t+=` - ${d.note}`;
-      a.push(t);
-    });
-  }
-  if(actionEnabled.activity && val('act_activity') && (activitySelected.length || val('act_activity_note'))){
-    const parts=[...activitySelected];
-    if(val('act_activity_note'))parts.push(`Свой вариант / заметка: ${val('act_activity_note')}`);
-    let t=`Отработка активности: ${val('act_activity')}`;
-    if(parts.length)t+='\n'+parts.map(x=>'     - '+x).join('\n');
-    a.push(t);
-  }
-  if(actionEnabled.outgoing && (n=+val('act_outgoing'))>0)a.push(`Исходящие сообщения: ${n} ${val('act_outgoing_unit')}${val('act_outgoing_note')?' - '+val('act_outgoing_note'):''}`);
-  if(actionEnabled.mail && (n=+val('act_mail'))>0)a.push(`Рассылки по подписной базе: ${n}${val('act_mail_note')?' - '+val('act_mail_note'):''}`);
-  return a.concat(customActions);
+ const a=[];let n;
+ if(actionEnabled.posts&&(n=+val('act_posts'))>0)a.push(`Контент - Посты: ${n}${val('act_posts_note')?' - '+val('act_posts_note'):''}`);
+ if(actionEnabled.stories&&val('act_stories_freq'))a.push(`Контент - Stories: ${val('act_stories_freq')}${val('act_stories_note')?' - '+val('act_stories_note'):''}`);
+ if(actionEnabled.clips&&val('act_clips_freq'))a.push(`Контент - Клипы: ${val('act_clips_freq')}${val('act_clips_note')?' - '+val('act_clips_note'):''}`)
+ customContentActions.forEach(x=>a.push(`Контент - ${x}`));
+ if(actionEnabled.traffic&&trafficSelected.length)trafficSelected.forEach(x=>{const d=trafficDetails[x]||{};let t=`Трафик - ${x}`;if(d.freq)t+=`: ${d.freq}`;if(x!=='Реклама' && +d.qty>0)t+=`${d.freq?' · ':': '}количество ${d.qty} ${d.unit||'в день'}`;if(d.note)t+=` - ${d.note}`;a.push(t)});
+ if(actionEnabled.activity&&val('act_activity')&&(activitySelected.length||val('act_activity_note'))){const parts=[...activitySelected];if(val('act_activity_note'))parts.push(`Свой вариант / заметка: ${val('act_activity_note')}`);let t=`Касания - Отработка активности: ${val('act_activity')}`;if(parts.length)t+='\n'+parts.map(x=>'     - '+x).join('\n');a.push(t)}
+ if(actionEnabled.friendreq&&(n=+val('act_friendreq'))>0)a.push(`Касания - Исходящие заявки в друзья: ${n} ${val('act_friendreq_unit')}${val('act_friendreq_note')?' - '+val('act_friendreq_note'):''}`);
+ if(actionEnabled.outgoing&&(n=+val('act_outgoing'))>0)a.push(`Касания - Исходящие сообщения: ${n} ${val('act_outgoing_unit')}${val('act_outgoing_note')?' - '+val('act_outgoing_note'):''}`);
+ if(actionEnabled.mail&&(n=+val('act_mail'))>0)a.push(`Касания - Рассылки по подписной базе: ${n}${val('act_mail_note')?' - '+val('act_mail_note'):''}`);
+ return a.concat(customActions.map(x=>`Касания - ${x}`));
 }
+$('addCustomContentAction').onclick=()=>{const x=val('customContentAction');if(x){customContentActions.push(x);$('customContentAction').value='';renderCustomContentActions();changed()}};
+function renderCustomContentActions(){$('customContentActionsList').innerHTML=customContentActions.map((x,i)=>`<div class="goal-row"><div class="goal-row-title">${x}</div><button class="chip" data-content-remove="${i}">Удалить</button></div>`).join('')}
+$('customContentActionsList').onclick=e=>{const b=e.target.closest('[data-content-remove]');if(!b)return;customContentActions.splice(+b.dataset.contentRemove,1);renderCustomContentActions();changed()};renderCustomContentActions();
 $('addCustomAction').onclick=()=>{const x=val('customAction');if(x){customActions.push(x);$('customAction').value='';renderCustomActions();changed()}};function renderCustomActions(){$('customActionsList').innerHTML=customActions.map((x,i)=>`<div class="goal-row"><div class="goal-row-title">${x}</div><button class="chip" data-custom-remove="${i}">Удалить</button></div>`).join('')};$('customActionsList').onclick=e=>{const b=e.target.closest('[data-custom-remove]');if(!b)return;customActions.splice(+b.dataset.customRemove,1);renderCustomActions();changed()};renderCustomActions();
 
 $('goalEngageQty').addEventListener('input',changed);$('goalEngageTarget').addEventListener('input',changed);
-let salesGoalVals={};function renderSalesGoals(){const prods=lines('product');const box=$('salesGoals');if(!prods.length){box.innerHTML='<div class="hint">Сначала выбери, что продаёшь в пункте 01.</div>';$('goalSales').value='';return}box.innerHTML=prods.map((p,i)=>`<div class="goal-row"><div><div class="goal-row-title">${p}</div><div class="goal-row-sub">Сколько продаж хочешь сделать?</div></div><div class="counter"><button data-sales="${i}" data-d="-1">−</button><input type="number" min="0" data-sales-input="${i}" value="${salesGoalVals[p]||0}"><button data-sales="${i}" data-d="1">+</button></div></div>`).join('');box.querySelectorAll('[data-sales-input]').forEach(inp=>inp.addEventListener('input',()=>{salesGoalVals[prods[+inp.dataset.salesInput]]=+inp.value||0;changed(false)}));box.querySelectorAll('button[data-sales]').forEach(b=>b.addEventListener('click',()=>{const p=prods[+b.dataset.sales],inp=box.querySelector(`[data-sales-input="${b.dataset.sales}"]`);inp.value=Math.max(0,(+inp.value||0)+(+b.dataset.d));salesGoalVals[p]=+inp.value;changed(false)}));updateSalesGoalHidden()}
-function updateSalesGoalHidden(){const a=lines('product').filter(p=>salesGoalVals[p]>0).map(p=>`${salesGoalVals[p]} - ${p}`);$('goalSales').value=a.map(x=>'• '+x).join('\n')}
-
-function autoEngage(){const p=val('point');if(p&&(!val('goalEngageTarget')||state.lastAutoPoint===val('goalEngageTarget'))){$('goalEngageTarget').value=p;state.lastAutoPoint=p}$('engageTargetLabel').textContent=val('goalEngageTarget')||'Точка продаж пока не выбрана';const n=+val('goalEngageQty');$('goalEngage').value=n>0?`${n} заявок / вовлечений → ${val('goalEngageTarget')||'точка продаж'}`:'';$('goalEngagePreview').textContent=$('goalEngage').value||'Укажи количество.'}
+let salesGoalVals={};let salesGoalNotes={};
+function renderSalesGoals(){
+ const prods=lines('product'),box=$('salesGoals');if(!prods.length){box.innerHTML='<div class="hint">Сначала выбери, что продаёшь в пункте 01.</div>';$('goalSales').value='';return}
+ box.innerHTML=prods.map((p,i)=>`<div class="goal-row"><div style="min-width:0;flex:1"><div class="goal-row-title">${p}</div><div class="goal-row-sub">Сколько хочешь получить по итогу? Конкретизируй, что именно считаешь результатом.</div><input class="sales-goal-comment" data-sales-note="${i}" value="${(salesGoalNotes[p]||'').replace(/"/g,'&quot;')}" placeholder="${p==='Партнёрство в проекте'?'Например: активированный партнёр с оформленным заказом':p==='Обучение/Система'?'Например: клиент с оплатой системы':'Конкретизируй, что именно считаешь продажей'}"/></div><div class="counter"><button data-sales="${i}" data-d="-1">−</button><input type="number" min="0" data-sales-input="${i}" value="${salesGoalVals[p]||0}"><button data-sales="${i}" data-d="1">+</button></div></div>`).join('');
+ box.querySelectorAll('[data-sales-input]').forEach(inp=>inp.addEventListener('input',()=>{salesGoalVals[prods[+inp.dataset.salesInput]]=+inp.value||0;changed(false)}));
+ box.querySelectorAll('[data-sales-note]').forEach(inp=>inp.addEventListener('input',()=>{salesGoalNotes[prods[+inp.dataset.salesNote]]=inp.value;changed(false)}));
+ box.querySelectorAll('button[data-sales]').forEach(b=>b.addEventListener('click',()=>{const p=prods[+b.dataset.sales],inp=box.querySelector(`[data-sales-input="${b.dataset.sales}"]`);inp.value=Math.max(0,(+inp.value||0)+(+b.dataset.d));salesGoalVals[p]=+inp.value;changed(false)}));updateSalesGoalHidden()
+}
+function updateSalesGoalHidden(){const a=lines('product').filter(p=>salesGoalVals[p]>0).map(p=>`• ${salesGoalVals[p]} - ${p}${salesGoalNotes[p]?`\n     - ${salesGoalNotes[p]}`:''}`);$('goalSales').value=a.join('\n')}
+function engageResultLabel(point){const p=String(point||'').trim().toLowerCase();if(p.includes('разбор'))return 'разборов';if(p.includes('аудит'))return 'аудитов';if(p.includes('тест-драйв'))return 'участников тест-драйва';if(p.includes('эфир')||p.includes('вебинар'))return 'участников эфира / вебинара';if(p.includes('бот'))return 'переходов в бот';if(p.includes('личк'))return 'диалогов в личке';return point?point.replace(/^(на|в)\s+/i,'').trim():''}
+function autoEngage(){const p=val('point'),auto=engageResultLabel(p);if(auto&&(!val('goalEngageTarget')||state.lastAutoPoint===val('goalEngageTarget'))){$('goalEngageTarget').value=auto;state.lastAutoPoint=auto}$('engageTargetLabel').textContent=p?`Точка вовлечения: ${p}`:'Точка вовлечения пока не выбрана';const n=+val('goalEngageQty'),target=val('goalEngageTarget');$('goalEngage').value=n>0&&target?`${n} ${target}`:'';$('goalEngagePreview').textContent=$('goalEngage').value||'Укажи количество.'}
 function build(){return `МОЙ ПЛАН ПРОДАЖ НА НЕДЕЛЮ\n\n🎯 ЧТО ПРОДАЮ\n${bullets(lines('product'))}\n\n📍 КУДА ВОВЛЕКАЮ\n${val('point')||'НЕ ЗАПОЛНЕНО'}\n\n📱 ГДЕ ПРОДАЮ\n${bullets(lines('place'))}\n\n👥 КОМУ ПРОДАЮ\n${val('audienceWho')||'НЕ ЗАПОЛНЕНО'}\n\n🔥 ЧЕРЕЗ ЧТО ЗАХОЖУ\n${val('audiencePain')||'НЕ ЗАПОЛНЕНО'}\n\n🔗 ПРОДАЮЩАЯ СВЯЗКА\n${val('funnel')||'НЕ ЗАПОЛНЕНО'}\n\n⚡ ОБЪЁМ ДЕЙСТВИЙ\n${bullets(actionLines())}\n\n🏁 ЦЕЛЬ ПО ВОВЛЕЧЕНИЮ\n${val('goalEngage')||'НЕ ЗАПОЛНЕНО'}\n\n💰 ЦЕЛЬ ПО ПРОДАЖАМ\n${val('goalSales')||'НЕ ЗАПОЛНЕНО'}`}
 
 
@@ -1923,7 +1835,7 @@ function build(){return `МОЙ ПЛАН ПРОДАЖ НА НЕДЕЛЮ\n\n🎯 
 
 function normalizeProductName(x){
   const t=String(x||'').trim();
-  return t==='Обучение' ? 'Обучение/Систему' : t;
+  return (t==='Обучение'||t==='Обучение/Систему') ? 'Обучение/Система' : t;
 }
 function normalizeImportedPlanText(txt){
   return String(txt||'').replace(/\r/g,'').replace(/\u00a0/g,' ').trim();
@@ -2058,8 +1970,8 @@ function importFunnelText(raw){
   });
 }
 function importActionsText(raw){
-  trafficSelected=[];trafficDetails={};customActions=[];activitySelected=[];actionEnabled={posts:false,stories:false,traffic:false,activity:false,outgoing:false,mail:false};
-  $('act_posts').value=0;$('act_posts_note').value='';
+  trafficSelected=[];trafficDetails={};customActions=[];customContentActions=[];activitySelected=[];actionEnabled={posts:false,stories:false,traffic:false,activity:false,outgoing:false,mail:false,clips:false,friendreq:false};
+  $('act_posts').value=0;$('act_posts_note').value='';$('act_clips_freq').value='';$('act_clips_note').value='';
   $('act_stories_freq').value='';$('act_stories_note').value='';
   $('act_activity').value='';$('act_activity_note').value='';
   $('act_outgoing').value=0;$('act_outgoing_unit').value='в день';$('act_outgoing_note').value='';
@@ -2080,6 +1992,7 @@ function importActionsText(raw){
     }
   }
   rows.forEach(row=>{
+    row=row.replace(/^Контент\s*-\s*/i,'').replace(/^Касания\s*-\s*/i,'');
     let m;
     if((m=row.match(/^Посты:\s*(\d+)(?:\s*-\s*(.*))?$/i))){
       actionEnabled.posts=true;$('act_posts').value=+m[1];$('act_posts_note').value=m[2]||'';return;
@@ -2087,6 +2000,8 @@ function importActionsText(raw){
     if((m=row.match(/^Stories:\s*([^-]+?)(?:\s*-\s*(.*))?$/i))){
       actionEnabled.stories=true;$('act_stories_freq').value=m[1].trim();$('act_stories_note').value=m[2]||'';return;
     }
+    if((m=row.match(/^Клипы:\s*([^-·]+?)(?:\s*-\s*(.*))?$/i))){actionEnabled.clips=true;$('act_clips_freq').value=m[1].trim();$('act_clips_note').value=m[2]||'';return}
+    if((m=row.match(/^Клипы:\s*\d+\s*·\s*([^-]+?)(?:\s*-\s*(.*))?$/i))){actionEnabled.clips=true;$('act_clips_freq').value=m[1].trim();$('act_clips_note').value=m[2]||'';return}
     if((m=row.match(/^Трафик\s*-\s*(.+?):\s*([^-]+?)(?:\s*-\s*(.*))?$/i))){
       actionEnabled.traffic=true;const method=m[1].trim(),freq=m[2].trim(),note=m[3]||'';
       const available=[...document.querySelectorAll('#trafficMethodList .traffic-method-row')].map(x=>x.dataset.trafficMethod);
@@ -2113,6 +2028,9 @@ function importActionsText(raw){
       });
       return;
     }
+    if((m=row.match(/^Исходящие заявки в друзья:\s*(\d+)\s+(в день|за неделю)(?:\s*-\s*(.*))?$/i))){
+      actionEnabled.friendreq=true;$('act_friendreq').value=+m[1];$('act_friendreq_unit').value=m[2];$('act_friendreq_note').value=m[3]||'';return;
+    }
     if((m=row.match(/^Исходящие сообщения:\s*(\d+)\s+(в день|за неделю)(?:\s*-\s*(.*))?$/i))){
       actionEnabled.outgoing=true;$('act_outgoing').value=+m[1];$('act_outgoing_unit').value=m[2];$('act_outgoing_note').value=m[3]||'';return;
     }
@@ -2122,16 +2040,19 @@ function importActionsText(raw){
     customActions.push(row);
   });
 }
-function importEngageText(raw){
-  const txt=(raw||'').trim();
-  const m=txt.match(/^(\d+)\s+заявок\s*\/\s*вовлечений\s*→\s*(.+)$/i);
-  if(m){$('goalEngageQty').value=+m[1];$('goalEngageTarget').value=m[2].trim()}
-}
+function importEngageText(raw){const txt=(raw||'').trim();let m=txt.match(/^(\d+)\s+заявок\s*\/\s*вовлечений\s*→\s*(.+)$/i);if(m){$('goalEngageQty').value=+m[1];$('goalEngageTarget').value=engageResultLabel(m[2].trim());return}m=txt.match(/^(\d+)\s+(.+)$/);if(m){$('goalEngageQty').value=+m[1];$('goalEngageTarget').value=m[2].trim()}}
 function importSalesText(raw){
-  salesGoalVals={};
-  String(raw||'').split('\n').map(stripBulletLine).filter(Boolean).forEach(row=>{
-    const m=row.match(/^(\d+)\s*-\s*(.+)$/);
-    if(m)salesGoalVals[normalizeProductName(m[2].trim())]=+m[1];
+  salesGoalVals={};salesGoalNotes={};
+  let current='';
+  String(raw||'').split('\n').forEach(line=>{
+    const trimmed=line.trim();
+    const main=trimmed.match(/^[•*-]?\s*(\d+)\s*-\s*(.+)$/);
+    if(main){
+      const p=normalizeProductName(main[2].trim());
+      salesGoalVals[p]=+main[1];current=p;return;
+    }
+    const note=trimmed.match(/^-\s*(.+)$/);
+    if(note&&current)salesGoalNotes[current]=note[1].trim();
   });
 }
 function resetForImportedPlan(){
@@ -2139,12 +2060,12 @@ function resetForImportedPlan(){
   aud={type:'',situation:'',focus:[],angleType:'',angleSpecific:'',customType:false,customSituation:false,customFocus:false,customAngle:false};
   audStep=1;
   funnelState={source:'',trigger:'',contact:'',conversion:'',outcomes:[]};
-  trafficSelected=[];trafficDetails={};customActions=[];salesGoalVals={};activitySelected=[];
+  trafficSelected=[];trafficDetails={};customActions=[];customContentActions=[];salesGoalVals={};salesGoalNotes={};activitySelected=[];
 
   ['product','point','place','audienceWho','audiencePain','funnel','actions','goalEngage','goalSales','goalEngageTarget'].forEach(id=>{if($(id))$(id).value=''});
-  ['act_posts','act_outgoing','act_mail','goalEngageQty'].forEach(id=>{if($(id))$(id).value=0});
-  ['act_posts_note','act_stories_note','act_activity_note','act_outgoing_note','act_mail_note'].forEach(id=>{if($(id))$(id).value=''});
-  ['act_stories_freq','act_activity'].forEach(id=>{if($(id))$(id).selectedIndex=0});
+  ['act_posts','act_friendreq','act_outgoing','act_mail','goalEngageQty'].forEach(id=>{if($(id))$(id).value=0});
+  ['act_posts_note','act_stories_note','act_clips_note','act_activity_note','act_friendreq_note','act_outgoing_note','act_mail_note'].forEach(id=>{if($(id))$(id).value=''});
+  ['act_stories_freq','act_clips_freq','act_activity','act_friendreq_unit'].forEach(id=>{if($(id))$(id).selectedIndex=0});
   if($('act_outgoing_unit'))$('act_outgoing_unit').value='в день';
 }
 function applyImportedPlanText(txt){
@@ -2170,10 +2091,12 @@ function applyImportedPlanText(txt){
   renderActivityChoices();
   syncActionBoxes();
   renderCustomActions();
+  if(typeof renderCustomContentActions==='function')renderCustomContentActions();
   renderSalesGoals();
   updateSalesGoalHidden();
   autoEngage();
   syncBasicChips();
+  validateActionStepGlobal();
   changed(false);
   if(window.salesWizardShow)window.salesWizardShow(0,true);
 }
@@ -2338,6 +2261,19 @@ function renderPlanChecks(){
   if(!hasTraffic&&!hasOtherAttraction)checks.push([false,'','В действиях нет явного способа привлечения или выхода к людям. Проверь, откуда придут новые диалоги']);
   box.innerHTML=`<div class="plan-check-list">${checks.map(c=>`<div class="plan-check-item ${c[0]?'good':'warn'}"><i>${c[0]?'✓':'!'}</i><span>${c[0]?c[1]:c[2]}</span></div>`).join('')}</div>`;
 }
+
+function validateActionStepGlobal(){
+  const activityBox=document.querySelector('[data-action-box="3"]');
+  const activityOn=!!(activityBox && activityBox.classList.contains('active'));
+  const freqEl=$('act_activity');
+  const selectedCount=document.querySelectorAll('#activityChoiceList [data-activity-type].active').length;
+  const note=$('act_activity_note');
+  const missing=activityOn && (selectedCount>0 || !!(note && note.value.trim())) && !(freqEl && freqEl.value.trim());
+  if(freqEl)freqEl.classList.toggle('action-field-error',missing);
+  const err=$('activityFreqError');
+  if(err)err.classList.toggle('show',missing);
+  return !missing;
+}
 function changed(renderSales=true){
   ensureSelectionMarks();
   syncContextualCopy();
@@ -2351,18 +2287,19 @@ function changed(renderSales=true){
   syncBasicChips();
   completion();
   syncWeeklyRoute();
-  validateActions(false);
+  validateActionStepGlobal();
+  validateActionStepGlobal();
   renderPlanChecks();
 }
 ['product','point','place','audienceWho','audiencePain'].forEach(id=>{$ (id).addEventListener('input',()=>changed(id==='product'));$(id).addEventListener('change',()=>changed(id==='product'))});renderSalesGoals();changed(false);syncWeeklyRoute();
 $('copyBtn').onclick=async()=>{const txt=build();try{await navigator.clipboard.writeText(txt)}catch(e){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1500)};$('resetBtn').onclick=()=>{if(!confirm('Очистить текущий план и начать новую неделю?'))return;
-  state={}; aud={type:'',situation:'',focus:[],angleType:'',angleSpecific:'',customType:false,customSituation:false,customFocus:false,customAngle:false}; audStep=1; funnelState={source:'',trigger:'',contact:'',conversion:'',outcomes:[]}; trafficSelected=[]; trafficDetails={}; customActions=[]; salesGoalVals={}; activitySelected=[]; actionEnabled={posts:false,stories:false,traffic:false,activity:false,outgoing:false,mail:false};
+  state={}; aud={type:'',situation:'',focus:[],angleType:'',angleSpecific:'',customType:false,customSituation:false,customFocus:false,customAngle:false}; audStep=1; funnelState={source:'',trigger:'',contact:'',conversion:'',outcomes:[]}; trafficSelected=[]; trafficDetails={}; customActions=[]; customContentActions=[]; salesGoalVals={}; salesGoalNotes={}; activitySelected=[]; actionEnabled={posts:false,stories:false,traffic:false,activity:false,outgoing:false,mail:false,clips:false,friendreq:false};
   document.querySelectorAll('input, textarea, select').forEach(el=>{
     if(el.tagName==='SELECT') el.selectedIndex=0;
     else if(el.type==='number') el.value=0;
     else el.value='';
   });
-  renderAudience(); renderFunnel(); renderTrafficMethods(); renderActivityChoices(); syncActionBoxes(); renderCustomActions(); renderSalesGoals(); syncBasicChips(); changed(false); syncWeeklyRoute();
+  renderAudience(); renderFunnel(); renderTrafficMethods(); renderActivityChoices(); syncActionBoxes(); renderCustomActions(); renderCustomContentActions(); renderSalesGoals(); syncBasicChips(); changed(false); syncWeeklyRoute();
   if(window.salesWizardShow) window.salesWizardShow(0,true); else window.scrollTo({top:0,behavior:'smooth'});
 };
 
