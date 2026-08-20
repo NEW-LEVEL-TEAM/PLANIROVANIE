@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"/><title>Продажи на неделю</title><style>
+*{box-sizing:border-box}
+:root{--bg:#0f0f12;--panel:#16161b;--text:#fff;--muted:rgba(255,255,255,.5);--line:rgba(255,255,255,.09);--accent:#F5A800;--accentSoft:rgba(245,168,0,.075);--accentLine:rgba(245,168,0,.38)}
+html{scroll-behavior:smooth}body{margin:0;background:#0d0d10;color:var(--text);font-family:Inter,Arial,sans-serif;overflow-x:hidden}button,input,textarea{font:inherit}.wrap{width:min(920px,100%);margin:0 auto;padding:0 20px 72px}.hero{padding:36px 0 24px;text-align:center;border-bottom:1px solid var(--line)}.logo{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px}.logo-ring{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:20px}.logo-name{font-size:11px;font-weight:800;color:var(--accent);letter-spacing:1.3px;text-transform:uppercase;line-height:1.3;text-align:left}.eyebrow{font-size:10px;letter-spacing:2.2px;text-transform:uppercase;color:rgba(255,255,255,.28);font-weight:800;margin-bottom:9px}.hero h1{font-size:clamp(32px,7vw,54px);line-height:1.05;letter-spacing:-1.2px;margin:0 0 13px}.hero h1 b{color:var(--accent)}.hero p{max-width:650px;margin:0 auto 18px;color:var(--muted);line-height:1.6;font-size:15px}.weekrow{display:flex;justify-content:center;gap:10px;align-items:center;flex-wrap:wrap}.week{width:min(330px,100%);display:flex;align-items:center;gap:9px}.week span{font-size:12px;color:var(--muted);white-space:nowrap}.week input{flex:1}.save-note{font-size:11px;color:rgba(255,255,255,.32)}.progress{margin:18px auto 0;width:min(520px,100%)}.progress-top{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:var(--muted);margin-bottom:7px}.progress-bar{height:5px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--accent);transition:.2s}.form{display:grid;gap:14px;margin-top:20px}.card{width:100%;min-width:0;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.026),rgba(255,255,255,.012));border-radius:18px;padding:22px}.topline{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}.num{flex:0 0 42px;height:42px;border-radius:50%;border:1px solid rgba(245,168,0,.32);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:900;font-size:12px}.titlebox{min-width:0}.titlebox h2{font-size:22px;line-height:1.2;margin:0 0 5px}.titlebox p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}.micro{display:inline-flex;align-items:center;gap:5px;margin-top:7px;color:rgba(245,168,0,.68);font-size:10px;font-weight:800;letter-spacing:.2px}.label{display:block;margin:14px 0 7px;color:rgba(255,255,255,.6);font-weight:900;font-size:10px;letter-spacing:1.2px;text-transform:uppercase}.chips{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0 3px}.chip{max-width:100%;border:1px solid var(--line);background:rgba(255,255,255,.018);color:rgba(255,255,255,.7);border-radius:999px;padding:8px 11px;font-size:11px;font-weight:750;cursor:pointer;white-space:normal;text-align:left;transition:.15s}.chip:hover{border-color:rgba(245,168,0,.35);color:#fff}.chip:active{transform:scale(.985)}.chip.active{border-color:var(--accentLine);background:var(--accentSoft);color:#fff;box-shadow:inset 0 0 0 1px rgba(245,168,0,.08)}input,textarea{width:100%;min-width:0;border:1px solid var(--line);background:#101014;color:#fff;border-radius:12px;padding:12px 13px;outline:none}textarea{resize:vertical;min-height:86px;line-height:1.5}input:focus,textarea:focus{border-color:rgba(245,168,0,.55);box-shadow:0 0 0 3px rgba(245,168,0,.06)}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.builder{border:1px solid var(--line);background:#101014;border-radius:14px;padding:14px;margin-top:10px}.builder-label{font-size:10px;font-weight:900;letter-spacing:1.1px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:9px}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:7px;min-height:44px}.flow-empty{color:rgba(255,255,255,.28);font-size:12px}.flow-step{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--accentLine);background:var(--accentSoft);border-radius:11px;padding:8px 9px;color:#fff;font-size:11px;font-weight:800}.flow-step .idx{color:var(--accent);font-size:9px}.flow-step button{border:0;background:transparent;color:rgba(255,255,255,.5);cursor:pointer;padding:0 1px}.flow-arrow{color:rgba(245,168,0,.55);font-weight:900}.flow-tools{display:flex;gap:4px}.flow-tools button{width:21px;height:21px;border-radius:6px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:rgba(255,255,255,.55);font-size:10px;cursor:pointer}.action-grid{display:grid;gap:8px;margin-top:10px}.action-row{display:grid;grid-template-columns:minmax(0,1fr) 126px;gap:12px;align-items:center;border:1px solid var(--line);background:#101014;border-radius:12px;padding:10px 11px}.action-name{font-size:12px;font-weight:800;line-height:1.35}.action-sub{font-size:10px;color:var(--muted);margin-top:3px}.counter{display:grid;grid-template-columns:34px 1fr 34px;align-items:center;border:1px solid var(--line);border-radius:10px;overflow:hidden}.counter button{height:36px;border:0;background:rgba(255,255,255,.035);color:#fff;font-weight:900;cursor:pointer}.counter input{height:36px;border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);border-radius:0;text-align:center;padding:0 5px}.goal-builder{display:grid;grid-template-columns:105px 150px minmax(0,1fr);gap:8px;align-items:center}.goal-builder input,.goal-builder select{height:44px;border:1px solid var(--line);background:#101014;color:#fff;border-radius:11px;padding:0 11px;outline:none}.goal-preview{margin-top:9px;border:1px solid rgba(245,168,0,.18);background:rgba(245,168,0,.045);border-radius:11px;padding:10px 12px;font-size:12px;color:rgba(255,255,255,.72)}.hint{margin-top:7px;color:rgba(255,255,255,.3);font-size:11px;line-height:1.45}.divider{height:1px;background:var(--line);margin:16px 0}.result{margin-top:18px;border:1px solid rgba(245,168,0,.24);background:var(--accentSoft);border-radius:20px;padding:24px}.result-head{margin-bottom:16px}.result-head .small{color:var(--accent);font-size:10px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase}.result-head h2{font-size:28px;margin:6px 0 7px}.result-head p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}.strategy{white-space:pre-wrap;background:#101014;border:1px solid var(--line);border-radius:14px;padding:17px;color:rgba(255,255,255,.88);font-size:13px;line-height:1.68;min-height:220px}.copy{width:100%;margin-top:12px;border:0;background:var(--accent);color:#111;padding:15px 18px;border-radius:13px;font-weight:900;font-size:15px;cursor:pointer}.copy:active{transform:translateY(1px)}.reset{width:100%;margin-top:8px;border:1px solid var(--line);background:transparent;color:rgba(255,255,255,.52);padding:12px 18px;border-radius:12px;font-weight:800;font-size:12px;cursor:pointer}.reset:hover{color:#fff;border-color:rgba(255,255,255,.18)}.toast{position:fixed;right:16px;bottom:16px;background:var(--accent);color:#111;padding:11px 15px;border-radius:11px;font-weight:900;opacity:0;transform:translateY(10px);transition:.2s;pointer-events:none;z-index:9}.toast.show{opacity:1;transform:none}
+@media(max-width:680px){.action-row{grid-template-columns:1fr}.goal-builder{grid-template-columns:82px 1fr}.goal-builder .goal-target{grid-column:1/-1}.wrap{padding:0 14px 46px}.hero{padding-top:29px}.weekrow{display:block}.week{margin:0 auto;flex-direction:column;align-items:stretch;gap:6px}.save-note{margin-top:8px}.card{padding:17px 14px;border-radius:16px}.topline{gap:10px}.num{flex-basis:36px;height:36px}.titlebox h2{font-size:19px}.two{grid-template-columns:1fr}.result{padding:18px 14px}.result-head h2{font-size:24px}.chip{font-size:10.5px;padding:8px 9px}}
+
+.choice-level{border:1px solid var(--line);background:#101014;border-radius:14px;padding:13px;margin-top:10px}.choice-level .level-title{font-size:10px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:8px}.choice-level.hidden{display:none}.subtle-box{border-left:2px solid rgba(245,168,0,.45);padding:9px 11px;margin-top:10px;background:rgba(245,168,0,.035);border-radius:0 10px 10px 0;color:rgba(255,255,255,.48);font-size:11px;line-height:1.5}.funnel-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.funnel-group{border:1px solid var(--line);background:#101014;border-radius:13px;padding:12px}.funnel-group h3{font-size:12px;margin:0 0 3px}.funnel-group p{font-size:10px;color:var(--muted);margin:0 0 8px;line-height:1.4}.action-card{border:1px solid var(--line);background:#101014;border-radius:13px;padding:12px;margin-top:8px}.action-card-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.action-card h3{font-size:13px;margin:0 0 3px}.action-card p{font-size:10px;color:var(--muted);margin:0;line-height:1.45}.action-controls{display:grid;grid-template-columns:120px minmax(0,1fr);gap:8px;margin-top:10px}.action-controls.three{grid-template-columns:120px 150px minmax(0,1fr)}.mini-select{width:100%;height:40px;border:1px solid var(--line);background:#101014;color:#fff;border-radius:10px;padding:0 10px}.toggle{display:flex;gap:6px}.toggle .chip{flex:0 0 auto}.goal-row{display:grid;grid-template-columns:minmax(0,1fr) 126px;gap:10px;align-items:center;border:1px solid var(--line);background:#101014;border-radius:12px;padding:10px 11px;margin-top:8px}.goal-row-title{font-size:12px;font-weight:800}.goal-row-sub{font-size:10px;color:var(--muted);margin-top:3px}.goal-list{display:grid;gap:8px}.custom-inline{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:8px}.pill-note{display:inline-block;font-size:10px;color:rgba(245,168,0,.72);margin-top:6px}.section-result{margin-top:10px;border:1px solid rgba(245,168,0,.16);background:rgba(245,168,0,.035);border-radius:12px;padding:11px 12px}.section-result b{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin-bottom:5px}.section-result div{font-size:12px;line-height:1.5;color:rgba(255,255,255,.78);white-space:pre-wrap}.dialog-return-grid{display:grid;gap:8px;margin-top:10px}.return-line{display:grid;grid-template-columns:minmax(0,1fr) 126px;gap:12px;align-items:center;border:1px solid var(--line);border-radius:11px;padding:10px}.return-line b{display:block;font-size:11px}.return-line span{display:block;font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4}@media(max-width:680px){.funnel-groups{grid-template-columns:1fr}.action-controls,.action-controls.three{grid-template-columns:1fr}.return-line{grid-template-columns:1fr}.goal-row{grid-template-columns:1fr}.custom-inline{grid-template-columns:1fr}}
+
+/* ===== Guided wizard UX v2 ===== */
+body.wizard-mode .form{display:block;margin-top:18px}
+body.wizard-mode .form>.card{display:none}
+body.wizard-mode .form>.card.wizard-active{display:block;animation:stepIn .22s ease}
+body.wizard-mode .result{display:none;margin-top:18px}
+body.wizard-mode .result.wizard-active{display:block;animation:stepIn .22s ease}
+@keyframes stepIn{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}
+.wizard-shell{margin:18px 0 0}
+.wizard-status{border:1px solid var(--line);background:#121216;border-radius:16px;padding:13px 15px;margin-bottom:12px}
+.wizard-status-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+.wizard-step-name{font-size:12px;font-weight:900}.wizard-step-count{font-size:11px;color:var(--accent);font-weight:900;white-space:nowrap}
+.wizard-track{height:5px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}.wizard-track>i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:.2s}
+.wizard-guide{display:flex;gap:10px;align-items:flex-start;border:1px solid rgba(245,168,0,.22);background:rgba(245,168,0,.055);border-radius:14px;padding:12px 13px;margin-bottom:12px}
+.wizard-guide-icon{width:28px;height:28px;flex:0 0 28px;border-radius:50%;background:rgba(245,168,0,.12);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px}
+.wizard-guide b{display:block;font-size:12px;margin:1px 0 3px}.wizard-guide span{display:block;font-size:11px;color:rgba(255,255,255,.56);line-height:1.5}
+.wizard-nav{display:grid;grid-template-columns:120px 1fr;gap:9px;margin:12px 0 18px;position:sticky;bottom:10px;z-index:7;padding:8px;background:rgba(13,13,16,.92);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:15px}
+.wizard-prev,.wizard-next{min-height:48px;border-radius:11px;font-weight:900;cursor:pointer}.wizard-prev{border:1px solid var(--line);background:#16161b;color:rgba(255,255,255,.7)}.wizard-next{border:0;background:var(--accent);color:#111}.wizard-prev:disabled{opacity:.25;cursor:default}
+body.wizard-mode .hero{padding-bottom:18px}.wizard-mode .hero .progress{display:none}.wizard-mode .hero p{margin-bottom:13px}.wizard-mode .weekrow{margin-top:12px}
+body.wizard-mode .card{border-color:rgba(255,255,255,.11);box-shadow:0 16px 50px rgba(0,0,0,.18)}
+body.wizard-mode .topline{margin-bottom:18px}.wizard-mode .topline .num{background:var(--accentSoft)}
+body.wizard-mode .choice-level{padding:15px;margin-top:12px}.wizard-mode .choice-level .level-title{font-size:11px;color:rgba(255,255,255,.62);letter-spacing:.7px}
+body.wizard-mode .chip{padding:10px 13px;font-size:12px;line-height:1.35}.wizard-mode .chip.active{background:rgba(245,168,0,.14);border-color:rgba(245,168,0,.65)}
+body.wizard-mode input,body.wizard-mode textarea,body.wizard-mode select{font-size:14px}
+.wizard-mini-help{font-size:11px;color:rgba(255,255,255,.4);margin:0 0 10px;line-height:1.45}
+@media(max-width:680px){.wizard-status{padding:11px 12px}.wizard-guide{padding:11px}.wizard-nav{grid-template-columns:92px 1fr;bottom:7px;margin-left:-2px;margin-right:-2px}.wizard-prev,.wizard-next{min-height:50px}.wizard-mode .chip{font-size:11.5px;padding:10px 11px}.wizard-mode .hero h1{font-size:32px}.wizard-mode .hero p{font-size:13px}.wizard-mode .card{padding:18px 14px}.wizard-mode .funnel-groups{grid-template-columns:1fr}}
+
+/* UX concept: one audience question at a time */
+.audience-focus .choice-level{display:none}.aud-stepper{display:grid;gap:8px;margin:0 0 14px}.aud-stepbar{display:grid;grid-template-columns:28px 1fr;gap:9px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:9px 10px;background:#111115}.aud-stepbar i{font-style:normal;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05);font-size:10px;font-weight:900;color:rgba(255,255,255,.4)}.aud-stepbar.on{border-color:rgba(245,168,0,.5)}.aud-stepbar.on i,.aud-stepbar.done i{background:rgba(245,168,0,.12);color:var(--accent)}.aud-stepbar small{display:block;color:rgba(255,255,255,.38);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.7px}.aud-stepbar span{display:block;font-size:11px;line-height:1.35;margin-top:2px}.aud-one-title{font-size:18px;font-weight:900;margin:16px 0 5px}.aud-one-help{font-size:11px;color:var(--muted);line-height:1.45;margin-bottom:10px}.aud-one-options{display:grid;gap:8px}.aud-one{border:1px solid var(--line);background:#111115;color:rgba(255,255,255,.78);border-radius:13px;padding:12px;text-align:left;font-size:12px;line-height:1.45;font-weight:700;cursor:pointer}.aud-one.active{border-color:rgba(245,168,0,.65);background:rgba(245,168,0,.09);color:#fff}.aud-one-back{border:0;background:transparent;color:rgba(255,255,255,.45);font-size:11px;font-weight:800;padding:12px 0 0;cursor:pointer}.aud-final{border:1px solid rgba(245,168,0,.28);background:rgba(245,168,0,.045);border-radius:14px;padding:13px;margin-top:14px}.aud-final b{display:block;color:var(--accent);font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}.aud-final div{font-size:12px;line-height:1.5}.aud-final .angle{font-size:13px;color:#fff;font-weight:800;margin-top:8px}.audience-focus>label,.audience-focus>textarea,.audience-focus>.section-result{display:none}
+
+.aud-one{position:relative;display:block;width:100%;min-height:50px}
+.aud-one:active{transform:scale(.995);border-color:var(--accent);background:rgba(245,168,0,.11)}
+.aud-sub{display:block;font-size:10px;font-weight:600;color:rgba(255,255,255,.42);margin-top:4px}
+.aud-two{grid-template-columns:1fr 1fr}
+@media(max-width:560px){.aud-two{grid-template-columns:1fr}}
+
+[hidden]{display:none!important;}
+
+/* ====== Guided Interview UX ====== */
+body{background:#0b0b0e}
+.wrap{max-width:760px;padding:18px 14px 110px}
+.hero{border:0!important;background:transparent!important;padding:8px 4px 16px!important}
+.hero h1{font-size:32px!important;letter-spacing:-1px}
+.hero>p{max-width:620px}
+.wizard-shell{margin-top:8px}
+.wizard-status{background:transparent!important;border:0!important;padding:0 2px 11px!important;margin:0!important}
+.wizard-status-top{margin-bottom:8px!important}
+.wizard-step-name{font-size:11px!important;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1px}
+.wizard-step-count{font-size:11px!important}
+.wizard-guide{border:0!important;background:transparent!important;padding:0 2px 15px!important;margin:0!important;display:block!important}
+.wizard-guide-icon{display:none!important}
+.wizard-guide b{font-size:12px!important;color:var(--accent);margin-bottom:3px!important}
+.wizard-guide span{font-size:11px!important}
+.form{margin-top:0!important}
+.card{
+  border:0!important;
+  background:transparent!important;
+  border-radius:0!important;
+  padding:8px 2px 22px!important;
+  box-shadow:none!important
+}
+.topline{display:block!important;margin-bottom:20px!important}
+.topline .num{display:none!important}
+.titlebox h2{font-size:27px!important;line-height:1.12!important;letter-spacing:-.6px;margin:0 0 7px!important}
+.titlebox p{font-size:13px!important;line-height:1.55!important;color:rgba(255,255,255,.58)!important}
+.micro{margin-top:7px!important;font-size:10px!important}
+
+/* Choice buttons now look unmistakably clickable */
+.chips{display:grid!important;grid-template-columns:1fr!important;gap:8px!important}
+.chip{
+  position:relative!important;
+  width:100%!important;
+  min-height:52px!important;
+  border-radius:14px!important;
+  border:1px solid rgba(255,255,255,.11)!important;
+  background:#121216!important;
+  color:rgba(255,255,255,.88)!important;
+  padding:12px 42px 12px 14px!important;
+  text-align:left!important;
+  font-size:12px!important;
+  line-height:1.35!important;
+  font-weight:750!important
+}
+.chips[data-target] .chip:after,.funnel-pieces .chip:after{
+  content:'';position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  width:18px;height:18px;border:1px solid rgba(255,255,255,.2);border-radius:50%;
+}
+.chip.active{
+  border-color:rgba(245,168,0,.65)!important;
+  background:rgba(245,168,0,.08)!important;
+  color:#fff!important
+}
+.chips[data-target] .chip.active:after,.funnel-pieces .chip.active:after{
+  content:'✓';display:flex;align-items:center;justify-content:center;
+  background:var(--accent);border-color:var(--accent);color:#111;font-size:11px;font-weight:1000
+}
+.label{font-size:10px!important;color:rgba(255,255,255,.45)!important;margin-top:15px!important}
+textarea,input,select{
+  border-radius:13px!important;background:#111115!important;border-color:rgba(255,255,255,.11)!important
+}
+textarea{min-height:76px}
+.hint{border:0!important;background:transparent!important;padding:8px 1px 0!important;color:rgba(255,255,255,.38)!important;font-size:10px!important}
+
+/* Funnel/actions cleaner */
+.funnel-groups{display:grid!important;grid-template-columns:1fr!important;gap:10px!important}
+.funnel-group,.action-card,.goal-row,.builder,.section-result{
+  background:#111115!important;border:1px solid rgba(255,255,255,.09)!important;border-radius:15px!important
+}
+.funnel-group{padding:13px!important}
+.funnel-group h3{font-size:12px!important}
+.funnel-group p{font-size:10px!important}
+.funnel-group .chips{margin-top:9px}
+.builder{margin-top:12px!important}
+.action-card{padding:14px!important}
+.action-card h3{font-size:13px!important}
+.action-card p{font-size:10px!important}
+
+/* Audience = interview, not nested cards */
+.aud-interview{margin-top:4px}
+
+.aud-q-kicker{font-size:10px;color:var(--accent);font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.aud-q{font-size:23px;line-height:1.18;font-weight:900;letter-spacing:-.4px;margin-bottom:6px}
+.aud-help{font-size:12px;line-height:1.5;color:rgba(255,255,255,.48);margin-bottom:14px}
+.aud-options{display:grid;gap:8px}
+.aud-choice{
+  width:100%;position:relative;text-align:left;cursor:pointer;
+  background:#121216;border:1px solid rgba(255,255,255,.11);border-radius:14px;
+  color:rgba(255,255,255,.9);padding:13px 45px 13px 14px;
+  font-size:12px;line-height:1.45;font-weight:750
+}
+.aud-choice:after{
+  content:'›';position:absolute;right:16px;top:50%;transform:translateY(-50%);
+  font-size:20px;color:rgba(255,255,255,.25)
+}
+.aud-choice:active{transform:scale(.995)}
+@media (hover:hover) and (pointer:fine){
+  .aud-choice:hover{border-color:rgba(245,168,0,.5);background:rgba(245,168,0,.055)}
+}
+.aud-choice:focus,.aud-choice:focus-visible{
+  outline:none;
+  border-color:rgba(255,255,255,.11);
+  background:#121216;
+}
+.aud-choice small{display:block;font-size:10px;line-height:1.4;color:rgba(255,255,255,.4);font-weight:600;margin-top:4px}
+.aud-backlink{border:0;background:none;color:rgba(255,255,255,.42);font-weight:800;font-size:11px;padding:14px 0 0;cursor:pointer}
+.aud-final-new{
+  display:none;margin-top:17px;padding:15px;border-radius:15px;
+  border:1px solid rgba(245,168,0,.3);background:rgba(245,168,0,.055)
+}
+.aud-final-new.show{display:block}
+.aud-final-new b{font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px}
+.aud-final-who{font-size:11px;line-height:1.45;color:rgba(255,255,255,.5);margin-top:7px}
+.aud-final-angle{font-size:14px;line-height:1.5;color:#fff;font-weight:800;margin-top:7px}
+
+/* Bottom nav simpler and always obvious */
+.wizard-nav{
+  position:fixed!important;left:50%!important;transform:translateX(-50%);
+  bottom:10px!important;width:min(732px,calc(100% - 24px))!important;
+  grid-template-columns:112px 1fr!important;margin:0!important;
+  background:rgba(15,15,18,.94)!important;border:1px solid rgba(255,255,255,.1)!important;
+  box-shadow:0 8px 30px rgba(0,0,0,.35)!important
+}
+.wizard-next,.wizard-prev{min-height:50px!important}
+@media(min-width:620px){
+  .chips[data-target="product"],.chips[data-target="place"]{grid-template-columns:1fr 1fr!important}
+  .aud-options.aud-two{grid-template-columns:1fr 1fr}
+}
+
+/* Explicit selection marker for the first choice steps */
+.chips[data-target] .chip:after{display:none!important}
+.chips[data-target] .chip .select-mark{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  width:22px;height:22px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.22);
+  display:flex;align-items:center;justify-content:center;
+  color:transparent;background:transparent;
+  font-size:12px;font-weight:1000;
+  transition:.14s ease;
+}
+.chips[data-target] .chip.active .select-mark{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#111;
+}
+.chips[data-target] .chip.active{
+  border-color:rgba(245,168,0,.62)!important;
+  background:rgba(245,168,0,.075)!important;
+}
+.aud-mini-progress{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:0 0 18px}
+.aud-mini-progress button{font-size:9px;text-align:center;padding:7px 3px;border-radius:8px;background:#121216;border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.32);font-weight:800}
+.aud-mini-progress button.done{color:rgba(255,255,255,.72);border-color:rgba(245,168,0,.25)}
+.aud-mini-progress button.current{color:#111;background:var(--accent);border-color:var(--accent)}
+
+.traffic-methods{margin-top:10px!important;margin-bottom:10px!important}
+.traffic-methods .chip{padding-right:42px!important}
+
+.traffic-selected-list{display:grid;gap:10px;margin-top:12px}
+.traffic-detail-card{border:1px solid rgba(255,255,255,.09);background:#101014;border-radius:13px;padding:12px;display:grid;gap:9px}
+.traffic-detail-title{font-size:12px;font-weight:900;color:#fff}
+.traffic-empty{font-size:10px;color:rgba(255,255,255,.38);padding:4px 1px}
+
+/* Main sales funnel - linear path with final branch */
+.funnel-new{display:grid;gap:12px}
+.funnel-stage{border:1px solid rgba(255,255,255,.09);background:#101014;border-radius:15px;padding:13px}
+.funnel-stage-head{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;margin-bottom:11px}
+.funnel-stage-head>span{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(245,168,0,.1);color:var(--accent);font-size:10px;font-weight:950}
+.funnel-stage-head b{display:block;font-size:12px;color:#fff;margin-bottom:3px}
+.funnel-stage-head small{display:block;font-size:10px;color:rgba(255,255,255,.4);line-height:1.45}
+.funnel-options{display:grid;grid-template-columns:1fr;gap:7px}
+.funnel-options button{position:relative;width:100%;border:1px solid rgba(255,255,255,.1);background:#131318;color:rgba(255,255,255,.76);border-radius:11px;padding:10px 38px 10px 11px;text-align:left;font-size:11px;font-weight:750;cursor:pointer}
+.funnel-options button:after{content:'';position:absolute;right:12px;top:50%;transform:translateY(-50%);width:17px;height:17px;border-radius:50%;border:1px solid rgba(255,255,255,.2)}
+.funnel-options button.active{border-color:rgba(245,168,0,.55);background:rgba(245,168,0,.07);color:#fff}
+.funnel-options button.active:after{content:'✓';display:flex;align-items:center;justify-content:center;background:var(--accent);border-color:var(--accent);color:#111;font-size:10px;font-weight:950}
+.funnel-custom{margin-top:8px}
+.funnel-custom.hidden{display:none}
+.funnel-preview-new{border:1px solid rgba(245,168,0,.25);background:rgba(245,168,0,.04);border-radius:15px;padding:14px}
+.funnel-preview-chain{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-top:9px}
+.funnel-chain-node{display:inline-flex;align-items:center;gap:5px;background:#15151a;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 10px;font-size:11px;font-weight:800}
+.funnel-chain-arrow{color:var(--accent);font-size:13px;font-weight:900}
+.funnel-branch{display:flex;flex-wrap:wrap;gap:6px}
+.funnel-branch .funnel-chain-node{border-color:rgba(245,168,0,.32)}
+.funnel-preview-note{font-size:9px;color:rgba(255,255,255,.35);line-height:1.45;margin-top:10px}
+@media(min-width:620px){.funnel-options{grid-template-columns:1fr 1fr}}
+
+/* Traffic rows: frequency expands inside the selected method */
+.traffic-method-list{display:grid;gap:8px;margin-top:11px}
+.traffic-method-row{border:1px solid rgba(255,255,255,.09);background:#101014;border-radius:13px;overflow:hidden}
+.traffic-method-main{display:grid;grid-template-columns:1fr 23px;gap:10px;align-items:center;padding:11px 12px;cursor:pointer}
+.traffic-method-main b{font-size:11px;color:rgba(255,255,255,.8)}
+.traffic-method-check{width:20px;height:20px;border:1px solid rgba(255,255,255,.22);border-radius:50%;display:flex;align-items:center;justify-content:center;color:transparent;font-size:10px;font-weight:950}
+.traffic-method-row.active{border-color:rgba(245,168,0,.45);background:rgba(245,168,0,.035)}
+.traffic-method-row.active .traffic-method-check{background:var(--accent);border-color:var(--accent);color:#111}
+.traffic-inline-controls{display:none;grid-template-columns:160px 1fr;gap:8px;padding:0 12px 12px}
+.traffic-method-row.active .traffic-inline-controls{display:grid}
+.traffic-inline-controls input,.traffic-inline-controls select{min-height:42px}
+@media(max-width:560px){.traffic-inline-controls{grid-template-columns:1fr}}
+
+.aud-mini-progress button{cursor:pointer;font-family:inherit}
+.aud-mini-progress button:disabled{cursor:default;opacity:.42}
+.aud-mini-progress button.selected{color:#111!important;background:var(--accent)!important;border-color:var(--accent)!important;box-shadow:0 0 0 1px rgba(245,168,0,.2),0 5px 16px rgba(245,168,0,.12)}
+.aud-final-new.show{border:1px solid rgba(245,168,0,.55)!important;background:rgba(245,168,0,.075)!important;box-shadow:0 12px 34px rgba(0,0,0,.24);padding:16px!important}
+.aud-final-new.show>b{display:inline-flex;background:var(--accent);color:#111;border-radius:8px;padding:6px 9px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px}
+.aud-final-new.show .aud-final-angle{font-size:14px!important;line-height:1.5!important;font-weight:850!important;color:#fff!important}
+.aud-final-new.show .aud-final-who{color:rgba(255,255,255,.52)!important;margin-bottom:8px}
+.aud-choice.selected-final{border-color:var(--accent)!important;background:rgba(245,168,0,.11)!important;box-shadow:0 0 0 1px rgba(245,168,0,.15)}
+.aud-choice.selected-final:after{content:'✓';position:absolute;right:13px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--accent);color:#111;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:1000}
+.aud-choice.selected-final{position:relative;padding-right:45px!important}
+
+/* ===== Full weekly plan navigator ===== */
+.sales-route-wrap{
+  margin:0 0 14px;
+  border:1px solid rgba(255,255,255,.09);
+  background:#101014;
+  border-radius:16px;
+  padding:12px;
+}
+.sales-route-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:10px}
+.sales-route-head>div:first-child b{display:block;font-size:11px;color:#fff;margin-bottom:3px}
+.sales-route-head>div:first-child span{display:block;font-size:10px;color:rgba(255,255,255,.42)}
+.sales-route{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:6px;
+}
+.sales-route button{
+  position:relative;
+  min-width:0;
+  min-height:49px;
+  border:1px solid rgba(255,255,255,.08);
+  background:#15151a;
+  color:rgba(255,255,255,.33);
+  border-radius:10px;
+  padding:7px 25px 7px 8px;
+  display:grid;
+  grid-template-columns:20px minmax(0,1fr);
+  align-items:center;
+  gap:6px;
+  text-align:left;
+  cursor:pointer;
+  font-family:inherit;
+}
+.sales-route button i{
+  width:20px;height:20px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.045);
+  color:rgba(255,255,255,.35);
+  font-style:normal;font-size:9px;font-weight:950;
+}
+.sales-route button span{font-size:9.5px;line-height:1.15;font-weight:850;overflow-wrap:anywhere}
+.sales-route button em{
+  display:none;
+  position:absolute;right:7px;top:50%;transform:translateY(-50%);
+  width:17px;height:17px;border-radius:50%;
+  align-items:center;justify-content:center;
+  font-style:normal;font-size:9px;font-weight:1000;
+  background:var(--accent);color:#111;
+}
+.sales-route button.route-done{
+  border-color:rgba(245,168,0,.42);
+  background:rgba(245,168,0,.055);
+  color:rgba(255,255,255,.78);
+}
+.sales-route button.route-done i{background:rgba(245,168,0,.13);color:var(--accent)}
+.sales-route button.route-done em{display:flex}
+.sales-route button.route-current{
+  border-color:var(--accent);
+  background:var(--accent);
+  color:#111;
+  box-shadow:0 6px 18px rgba(245,168,0,.14);
+}
+.sales-route button.route-current i{background:rgba(0,0,0,.14);color:#111}
+.sales-route button.route-current em{display:none}
+.sales-route button.route-available{color:rgba(255,255,255,.55);border-color:rgba(255,255,255,.12)}
+.sales-route button:disabled{cursor:default;opacity:.55}
+.wizard-status{display:none!important}
+@media(min-width:700px){
+  .sales-route{grid-template-columns:repeat(9,minmax(0,1fr))}
+  .sales-route button{min-height:58px;grid-template-columns:1fr;justify-items:center;text-align:center;padding:7px 5px}
+  .sales-route button em{right:5px;top:5px;transform:none}
+}
+
+.wizard-next:disabled,.wizard-next.wizard-next-locked{
+  opacity:.38!important;
+  cursor:not-allowed!important;
+  filter:saturate(.45);
+}
+
+.sales-route-actions{display:flex;align-items:center;gap:8px}
+.preview-plan-btn{
+  border:1px solid rgba(245,168,0,.32);
+  background:rgba(245,168,0,.07);
+  color:var(--accent);
+  border-radius:9px;
+  min-height:34px;
+  padding:0 10px;
+  font-size:9.5px;
+  font-weight:900;
+  cursor:pointer
+}
+.preview-plan-btn:hover{background:rgba(245,168,0,.12)}
+.preview-plan-btn:disabled{opacity:.32;cursor:default}
+
+.plan-preview-modal{position:fixed;inset:0;z-index:999;display:none;align-items:center;justify-content:center;padding:16px}
+.plan-preview-modal.open{display:flex}
+.plan-preview-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(4px)}
+.plan-preview-dialog{
+  position:relative;z-index:1;
+  width:min(680px,100%);max-height:min(82vh,760px);
+  display:flex;flex-direction:column;
+  border:1px solid rgba(255,255,255,.1);
+  background:#101014;
+  border-radius:18px;
+  box-shadow:0 25px 70px rgba(0,0,0,.5);
+  overflow:hidden
+}
+.plan-preview-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px 16px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+.plan-preview-head small{display:block;color:var(--accent);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.9px;margin-bottom:4px}
+.plan-preview-head h3{margin:0;font-size:19px;line-height:1.2}
+.plan-preview-x{border:0;background:transparent;color:rgba(255,255,255,.55);font-size:26px;line-height:1;cursor:pointer;padding:0 2px}
+.plan-preview-body{overflow:auto;padding:14px 16px 16px}
+.preview-section{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.preview-section:last-child{border-bottom:0}
+.preview-section b{display:block;color:var(--accent);font-size:9px;letter-spacing:.8px;text-transform:uppercase;margin-bottom:6px}
+.preview-section div{font-size:12px;line-height:1.55;color:rgba(255,255,255,.82);white-space:pre-line}
+.preview-empty{padding:24px 4px;text-align:center;color:rgba(255,255,255,.4);font-size:11px;line-height:1.5}
+.plan-preview-actions{display:grid;grid-template-columns:120px 1fr;gap:8px;padding:12px 16px 16px;border-top:1px solid rgba(255,255,255,.08)}
+.plan-preview-close,.plan-preview-copy{min-height:44px;border-radius:10px;font-weight:900;cursor:pointer}
+.plan-preview-close{border:1px solid rgba(255,255,255,.1);background:#16161b;color:rgba(255,255,255,.7)}
+.plan-preview-copy{border:0;background:var(--accent);color:#111}
+@media(max-width:560px){
+  .sales-route-head{align-items:flex-start}
+  .sales-route-actions{flex-direction:column;align-items:flex-end}
+  .preview-plan-btn{min-height:32px;padding:0 8px}
+  .plan-preview-dialog{max-height:88vh}
+  .plan-preview-actions{grid-template-columns:1fr}
+}
+
+.aud-summary-lines{display:grid;gap:7px;margin-top:8px}
+.aud-summary-line{display:grid;grid-template-columns:82px 1fr;gap:8px;font-size:11px;line-height:1.45}
+.aud-summary-line span{color:rgba(255,255,255,.38);font-weight:800}
+.aud-summary-line strong{color:rgba(255,255,255,.78);font-weight:750}
+.aud-custom-box{margin-top:10px;border-top:1px solid rgba(255,255,255,.07);padding-top:10px}
+.aud-custom-label{font-size:10px;color:rgba(255,255,255,.42);margin-bottom:7px}
+.aud-custom-row{display:grid;grid-template-columns:1fr auto;gap:7px}
+.aud-custom-row input{min-width:0}
+.aud-custom-row button{border:0;border-radius:10px;background:rgba(245,168,0,.12);color:var(--accent);font-weight:900;padding:0 12px;cursor:pointer}
+@media(max-width:560px){.aud-custom-row{grid-template-columns:1fr}.aud-custom-row button{min-height:42px}}
+
+.sales-route-head-simple{align-items:center!important}
+.route-current-name{font-size:10px;color:rgba(255,255,255,.42);font-weight:800}
+</style></head><body>
+<div class="wrap">
+<section class="hero"><div class="logo"><div class="logo-ring">⚡</div><div class="logo-name">New<br/>Level Team</div></div><div class="eyebrow">Планирование продаж на 7 дней</div><h1>Продажи <b>на неделю</b></h1><p>Собери конкретный план: что ты продаёшь, кому, через какую проблему или желание заходишь, какой связкой ведёшь к продаже и какой объём действий делаешь.</p></section>
+<div style="display:none"><input id="weekDate" type="date"/><b id="progressText">0 из 8</b><div id="progressFill"></div></div>
+<div class="wizard-shell" id="wizardShell">
+<div class="sales-route-wrap">
+  <div class="sales-route-head sales-route-head-simple">
+    <span id="wizardStepName" class="route-current-name">Что продаём</span>
+    <div class="sales-route-actions">
+      <button type="button" id="previewPlanBtn" class="preview-plan-btn">Посмотреть план</button>
+      <div class="wizard-step-count" id="wizardStepCount">1 из 9</div>
+    </div>
+  </div>
+  <div class="sales-route" id="salesRoute">
+    <button type="button" data-route-step="0"><i>1</i><span>Что продаём</span><em>✓</em></button>
+    <button type="button" data-route-step="1"><i>2</i><span>Куда ведём</span><em>✓</em></button>
+    <button type="button" data-route-step="2"><i>3</i><span>Где продаём</span><em>✓</em></button>
+    <button type="button" data-route-step="3"><i>4</i><span>Кому / через что</span><em>✓</em></button>
+    <button type="button" data-route-step="4"><i>5</i><span>Связка</span><em>✓</em></button>
+    <button type="button" data-route-step="5"><i>6</i><span>Действия</span><em>✓</em></button>
+    <button type="button" data-route-step="6"><i>7</i><span>Вовлечение</span><em>✓</em></button>
+    <button type="button" data-route-step="7"><i>8</i><span>Продажи</span><em>✓</em></button>
+    <button type="button" data-route-step="8"><i>9</i><span>Готовый план</span><em>✓</em></button>
+  </div>
+</div><div class="wizard-guide" id="wizardGuide"><div class="wizard-guide-icon">?</div><div><b id="wizardGuideTitle">Что сейчас сделать</b><span id="wizardGuideText"></span></div></div></div><main class="form">
+<section class="card" data-sales-step="0"><div class="topline"><div class="num">01</div><div class="titlebox"><h2>Что продаём?</h2><p>Что конкретно хочешь продать по итогу недели?</p><div class="micro">Можно выбрать один или несколько вариантов</div></div></div>
+<div class="chips" data-mode="multi" data-target="product">
+<button class="chip">Партнёрство в проекте</button><button class="chip">Обучение</button>
+<button class="chip">Тест-драйв системы</button><button class="chip">Тест-драйв проекта</button>
+<button class="chip">Нейрорекрутинг</button><button class="chip">Обучение по трафику</button>
+<button class="chip">Игровая воронка</button><button class="chip">Бот-рекрутер</button>
+<button class="chip">Продукт</button><button class="chip custom-choice" data-custom-focus="product">Свой вариант ↓</button>
+</div>
+<label class="label">Что именно продаю</label>
+<textarea id="product" placeholder="Выбранные варианты появятся здесь. Свой вариант можно дописать вручную с новой строки."></textarea>
+<div class="hint">Если направлений несколько, они остаются в одной стратегии недели, а в пункте 08 для каждого появится отдельная цель по продажам.</div></section>
+<section class="card" data-sales-step="1" hidden=""><div class="topline"><div class="num">02</div><div class="titlebox"><h2>Куда вовлекаем?</h2><p>В какую конкретную точку ведём человека из контента и продвижения?</p><div class="micro">Выбери из готовых или напиши свой вариант</div></div></div>
+<div class="chips" data-mode="single" data-target="point">
+<button class="chip">В личку</button><button class="chip">На эфир / вебинар</button><button class="chip">В бот</button>
+<button class="chip">На тест-драйв</button><button class="chip">На разбор</button><button class="chip">На аудит</button>
+<button class="chip custom-choice" data-custom-focus="point">Свой вариант ↓</button>
+</div>
+<label class="label">Моя точка вовлечения</label>
+<textarea id="point" placeholder="Например: на разбор системы привлечения"></textarea>
+<div class="hint">Кодовое слово, подарок и другие промежуточные шаги добавляются ниже в продающую связку.</div></section>
+<section class="card" data-sales-step="2" hidden=""><div class="topline"><div class="num">03</div><div class="titlebox"><h2>Где продаём?</h2><p>Какие площадки и каналы используешь в течение недели?</p><div class="micro">Можно выбрать несколько вариантов</div></div></div>
+<div class="chips" data-mode="multi" data-target="place">
+<button class="chip">ВКонтакте</button><button class="chip">Telegram</button><button class="chip">Рассылка по подписной базе</button>
+<button class="chip">Stories</button><button class="chip">Клиентский чат</button>
+<button class="chip custom-choice" data-custom-focus="place">Свой вариант ↓</button>
+</div>
+<label class="label">Мои площадки</label>
+<textarea id="place" placeholder="Выбранные варианты появятся здесь. Свой можно дописать вручную."></textarea></section>
+<section class="card audience-focus" data-sales-step="3" hidden>
+<div class="topline"><div class="num">04</div><div class="titlebox">
+<h2>Кому и через что продаём?</h2>
+<p>Не собирай аудиторию как анкету. Я задам четыре простых вопроса по очереди.</p>
+<div class="micro">Один вопрос → один выбор → следующий</div>
+</div></div>
+
+<div class="aud-interview"><div class="aud-mini-progress" id="audMiniProgress">
+<button type="button" data-aud-jump="1">Кто</button>
+<button type="button" data-aud-jump="2">Ситуация</button>
+<button type="button" data-aud-jump="3">Что болит</button>
+<button type="button" data-aud-jump="4">Заход</button>
+</div>
+  <div id="audInterviewStage"></div>
+  <div class="aud-final-new" id="audFinalNew">
+    <b id="audFinalLabel">Предварительный главный смысл недели</b>
+    <div class="aud-summary-lines" id="audSummaryLines"></div>
+    <div class="aud-final-angle" id="audFinalAngle"></div>
+  </div>
+</div>
+<textarea id="audienceWho" style="display:none"></textarea>
+<textarea id="audiencePain" style="display:none"></textarea>
+</section>
+<section class="card" data-sales-step="4" hidden="">
+<div class="topline"><div class="num">05</div><div class="titlebox">
+<h2>Собери основную продающую связку</h2>
+<p>Здесь не нужно отмечать все каналы, которые используешь за неделю. Собери один главный путь: от первого касания до продажи.</p>
+<div class="micro">Один этап → следующий этап → финальная развилка</div>
+</div></div>
+
+<div class="funnel-new" id="funnelBuilderNew">
+
+<div class="funnel-stage">
+<div class="funnel-stage-head"><span>1</span><div><b>С чего начинается связка?</b><small>Выбери один основной источник, откуда человек входит именно в эту цепочку.</small></div></div>
+<div class="funnel-options" data-funnel-stage="source" data-mode="single">
+<button type="button">Контент</button><button type="button">Stories</button><button type="button">Клипы</button>
+<button type="button">Трафик</button><button type="button">Рассылка</button><button type="button">Свой вариант</button>
+</div>
+<input class="funnel-custom hidden" id="funnelCustomSource" placeholder="Напиши свой источник"/>
+</div>
+
+<div class="funnel-stage">
+<div class="funnel-stage-head"><span>2</span><div><b>На что человек реагирует?</b><small>Что заставляет его сделать следующий шаг.</small></div></div>
+<div class="funnel-options" data-funnel-stage="trigger" data-mode="single">
+<button type="button">Кодовое слово</button><button type="button">Подарок</button><button type="button">Призыв написать</button>
+<button type="button">Отклик / реакция</button><button type="button">Бот</button><button type="button">Свой вариант</button>
+</div>
+<input class="funnel-custom hidden" id="funnelCustomTrigger" placeholder="Напиши свой триггер"/>
+</div>
+
+<div class="funnel-stage">
+<div class="funnel-stage-head"><span>3</span><div><b>Куда человек попадает дальше?</b><small>Первое место, где начинается нормальный контакт.</small></div></div>
+<div class="funnel-options" data-funnel-stage="contact" data-mode="single">
+<button type="button">Личка</button><button type="button">Бот</button><button type="button">Чат</button><button type="button">Свой вариант</button>
+</div>
+<input class="funnel-custom hidden" id="funnelCustomContact" placeholder="Напиши свой вариант"/>
+</div>
+
+<div class="funnel-stage">
+<div class="funnel-stage-head"><span>4</span><div><b>Что происходит перед продажей?</b><small>Если есть промежуточный шаг - выбери его. Если нет - можно пропустить.</small></div></div>
+<div class="funnel-options" data-funnel-stage="conversion" data-mode="single">
+<button type="button">Разбор</button><button type="button">Аудит</button><button type="button">Эфир / вебинар</button>
+<button type="button">Тест-драйв</button><button type="button">Сразу предложение</button><button type="button">Свой вариант</button>
+</div>
+<input class="funnel-custom hidden" id="funnelCustomConversion" placeholder="Напиши свой промежуточный шаг"/>
+</div>
+
+<div class="funnel-stage funnel-stage-final">
+<div class="funnel-stage-head"><span>5</span><div><b>Чем может закончиться эта связка?</b><small>Здесь можно выбрать несколько вариантов. Это не последовательность, а разные финалы одной связки.</small></div></div>
+<div class="funnel-options" data-funnel-stage="outcome" data-mode="multi">
+<button type="button">Регистрация в проекте</button><button type="button">Оплата обучения</button>
+<button type="button">Покупка / заказ продукта</button><button type="button">Запись на следующий шаг</button><button type="button">Свой вариант</button>
+</div>
+<input class="funnel-custom hidden" id="funnelCustomOutcome" placeholder="Напиши свой вариант результата"/>
+</div>
+
+<div class="funnel-preview-new">
+<div class="builder-label">Моя основная продающая связка</div>
+<div id="funnelPreviewNew" class="funnel-preview-chain"><span class="flow-empty">Начни с первого этапа - связка соберётся здесь</span></div>
+<div class="funnel-preview-note">Если финалов несколько, они показываются как развилка: например, «Разбор → Оплата обучения / Регистрация в проекте».</div>
+</div>
+
+</div>
+<input id="funnel" type="hidden"/>
+</section>
+<section class="card" data-sales-step="5" hidden=""><div class="topline"><div class="num">06</div><div class="titlebox"><h2>Какой объём действий?</h2><p>Фиксируем не абстрактную активность, а конкретно: что, сколько, как часто и с кем ты делаешь на этой неделе.</p></div></div>
+<div id="actionsUI">
+<div class="action-card"><div><h3>Посты</h3><p>Сколько постов выйдет за неделю?</p></div><div class="action-controls"><div class="counter"><button data-counter="posts" data-d="-1">−</button><input id="act_posts" min="0" type="number" value="0"/><button data-counter="posts" data-d="1">+</button></div><input id="act_posts_note" placeholder="Необязательно: заметка для себя, например смысл или тема постов"/></div></div>
+<div class="action-card"><div><h3>Stories</h3><p>Как часто выходишь в Stories?</p></div><div class="action-controls"><select class="mini-select" id="act_stories_freq"><option value="">Не выбрано</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option><option>2 раза в неделю</option><option>1 раз в неделю</option><option>Свой режим</option></select><input id="act_stories_note" placeholder="Необязательно: комментарий для себя"/></div></div>
+<div class="action-card"><div><h3>Трафик</h3><p>Выбери нужные способы. Частота появится сразу внутри каждого выбранного способа.</p></div>
+<div class="traffic-method-list" id="trafficMethodList">
+<div class="traffic-method-row" data-traffic-method="Нейрокомментинг">
+<div class="traffic-method-main"><b>Нейрокомментинг</b><span class="traffic-method-check">✓</span></div>
+<div class="traffic-inline-controls">
+<select class="mini-select traffic-freq">
+<option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
+<option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option>
+</select>
+<input class="traffic-note" placeholder="Объём / детали для этого способа"/>
+</div></div><div class="traffic-method-row" data-traffic-method="Реклама">
+<div class="traffic-method-main"><b>Реклама</b><span class="traffic-method-check">✓</span></div>
+<div class="traffic-inline-controls">
+<select class="mini-select traffic-freq">
+<option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
+<option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option>
+</select>
+<input class="traffic-note" placeholder="Объём / детали для этого способа"/>
+</div></div><div class="traffic-method-row" data-traffic-method="Клипы">
+<div class="traffic-method-main"><b>Клипы</b><span class="traffic-method-check">✓</span></div>
+<div class="traffic-inline-controls">
+<select class="mini-select traffic-freq">
+<option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
+<option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option>
+</select>
+<input class="traffic-note" placeholder="Объём / детали для этого способа"/>
+</div></div><div class="traffic-method-row" data-traffic-method="Посевы / размещения">
+<div class="traffic-method-main"><b>Посевы / размещения</b><span class="traffic-method-check">✓</span></div>
+<div class="traffic-inline-controls">
+<select class="mini-select traffic-freq">
+<option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
+<option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option>
+</select>
+<input class="traffic-note" placeholder="Объём / детали для этого способа"/>
+</div></div><div class="traffic-method-row" data-traffic-method="Масслайкинг">
+<div class="traffic-method-main"><b>Масслайкинг</b><span class="traffic-method-check">✓</span></div>
+<div class="traffic-inline-controls">
+<select class="mini-select traffic-freq">
+<option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
+<option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option>
+</select>
+<input class="traffic-note" placeholder="Объём / детали для этого способа"/>
+</div></div><div class="traffic-method-row" data-traffic-method="Массфолловинг">
+<div class="traffic-method-main"><b>Массфолловинг</b><span class="traffic-method-check">✓</span></div>
+<div class="traffic-inline-controls">
+<select class="mini-select traffic-freq">
+<option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
+<option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option>
+</select>
+<input class="traffic-note" placeholder="Объём / детали для этого способа"/>
+</div></div><div class="traffic-method-row" data-traffic-method="Свой способ">
+<div class="traffic-method-main"><b>Свой способ</b><span class="traffic-method-check">✓</span></div>
+<div class="traffic-inline-controls">
+<select class="mini-select traffic-freq">
+<option value="">Частота</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
+<option>2 раза в неделю</option><option>1 раз в неделю</option><option>Разово</option><option>Свой режим</option>
+</select>
+<input class="traffic-note" placeholder="Объём / детали для этого способа"/>
+</div></div>
+</div>
+<textarea id="act_traffic_type" style="display:none"></textarea>
+</div>
+<div class="action-card"><div><h3>Отработка активности</h3><p>Работа с теми, кто уже проявился: реакции, комментарии, ответы, новые друзья, просмотры Stories.</p></div><div class="action-controls"><select class="mini-select" id="act_activity"><option value="">Не делаю / не выбрано</option><option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option><option>2 раза в неделю</option><option>1 раз в неделю</option><option>Свой режим</option></select><input id="act_activity_note" placeholder="Пропиши, как конкретно будешь отрабатывать активность"/></div></div>
+<div class="action-card"><div><h3>Исходящие сообщения</h3><p>Сколько сообщений отправляешь и кому. Сюда же можно включить возвраты в старые или текущие диалоги - отдельный блок для них не нужен.</p></div><div class="action-controls three"><div class="counter"><button data-counter="outgoing" data-d="-1">−</button><input id="act_outgoing" min="0" type="number" value="0"/><button data-counter="outgoing" data-d="1">+</button></div><select class="mini-select" id="act_outgoing_unit"><option>в день</option><option>за неделю</option></select><input id="act_outgoing_note" placeholder="Кому пишу: новые люди / активность / старые диалоги / текущие диалоги / своя выборка"/></div></div>
+<div class="action-card"><div><h3>Рассылки по подписной базе</h3><p>Сколько отдельных рассылок сделаешь за неделю?</p></div><div class="action-controls"><div class="counter"><button data-counter="mail" data-d="-1">−</button><input id="act_mail" min="0" type="number" value="0"/><button data-counter="mail" data-d="1">+</button></div><input id="act_mail_note" placeholder="Необязательно: комментарий для себя - тема, сегмент или куда веду"/></div></div>
+</div>
+<div class="divider"></div><div class="custom-inline"><input id="customAction" placeholder="Добавить своё действие, например: эфир"/><button class="chip" id="addCustomAction">Добавить</button></div><div id="customActionsList"></div><textarea id="actions" style="display:none"></textarea></section><section class="card" data-sales-step="6" hidden=""><div class="topline"><div class="num">07</div><div class="titlebox"><h2>Цель по вовлечению</h2><p>Сколько людей должно дойти до выбранной точки продаж?</p></div></div><div class="goal-row"><div><div class="goal-row-title" id="engageTargetLabel">Точка продаж пока не выбрана</div><div class="goal-row-sub">Цель подтягивается из пункта 02. При необходимости название можно поправить.</div><input id="goalEngageTarget" placeholder="Например: разбор" style="margin-top:8px"/></div><div class="counter"><button data-counter="engage" data-d="-1">−</button><input id="goalEngageQty" min="0" type="number" value="0"/><button data-counter="engage" data-d="1">+</button></div></div><div class="goal-preview" id="goalEngagePreview">Укажи количество.</div><input id="goalEngage" type="hidden"/></section>
+<section class="card" data-sales-step="7" hidden=""><div class="topline"><div class="num">08</div><div class="titlebox"><h2>Цель по продажам</h2><p>Для каждого выбранного направления продаж - своя цель.</p></div></div><div class="goal-list" id="salesGoals"></div><div class="hint">Если в пункте 01 выбрано два продукта, здесь автоматически появятся две отдельные цели.</div><textarea id="goalSales" style="display:none"></textarea></section>
+</main><div class="wizard-nav" id="wizardNav"><button class="wizard-prev" id="wizardPrev">← Назад</button><button class="wizard-next" id="wizardNext">Дальше →</button></div>
+<section class="result" data-sales-step="8" hidden=""><div class="result-head"><div class="small">Готовый итог</div><h2>Мой план продаж на неделю</h2><p>Собирается автоматически из заполненных пунктов.</p></div><div class="strategy" id="strategy"></div><button class="copy" id="copyBtn">Скопировать план продаж</button><button class="reset" id="resetBtn">Очистить и собрать новую неделю</button></section></div>
+<div class="plan-preview-modal" id="planPreviewModal" aria-hidden="true">
+  <div class="plan-preview-backdrop" data-preview-close="1"></div>
+  <div class="plan-preview-dialog" role="dialog" aria-modal="true" aria-labelledby="planPreviewTitle">
+    <div class="plan-preview-head">
+      <div>
+        <small>Предварительный просмотр</small>
+        <h3 id="planPreviewTitle">Текущий план продаж</h3>
+      </div>
+      <button type="button" class="plan-preview-x" data-preview-close="1" aria-label="Закрыть">×</button>
+    </div>
+    <div class="plan-preview-body" id="planPreviewBody"></div>
+    <div class="plan-preview-actions">
+      <button type="button" class="plan-preview-close" data-preview-close="1">Закрыть</button>
+      <button type="button" class="plan-preview-copy" id="copyPreviewPlan">Скопировать текущий план</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast">План скопирован ✓</div>
+<script id="wizard-hard-core">
+(function(){
+  var panels=[].slice.call(document.querySelectorAll('[data-sales-step]'));
+  var prev=document.getElementById('wizardPrev');
+  var next=document.getElementById('wizardNext');
+  var shell=document.getElementById('wizardShell');
+  var stepName=document.getElementById('wizardStepName');
+  var stepCount=document.getElementById('wizardStepCount');
+  var guideTitle=document.getElementById('wizardGuideTitle');
+  var guideText=document.getElementById('wizardGuideText');
+  var names=['Что продаём','Куда вовлекаем','Где продаём','Кому и через что продаём','Продающая связка','Объём действий','Цель по вовлечению','Цель по продажам','Готовый план'];
+  var guides=[
+    ['Выбери, что продаёшь','Можно выбрать один или несколько вариантов или написать свой.'],
+    ['Выбери, куда ведёшь человека','Например: в личку, на разбор, аудит или вебинар.'],
+    ['Отметь площадки','Можно выбрать несколько площадок, которые реально используешь на этой неделе.'],
+    ['Собери человека и главный смысл','Отвечай на один вопрос за раз. Следующий выбор появляется после предыдущего.'],
+    ['Собери связку','Нажимай элементы в том порядке, в котором человек будет двигаться.'],
+    ['Зафиксируй действия','Заполняй только то, что действительно будешь делать на этой неделе.'],
+    ['Поставь цель по вовлечению','Сколько людей должно дойти до выбранной точки?'],
+    ['Поставь цели по продажам','Для каждого выбранного продукта укажи отдельную цель.'],
+    ['План готов','Проверь итог и скопируй его.']
+  ];
+  var step=0;
+  var maxVisited=0;
+  var completionState=[false,false,false,false,false,false,false,false,false];
+
+  function audienceStepComplete(){
+    var who=document.getElementById('audienceWho');
+    var pain=document.getElementById('audiencePain');
+    return !!(who && who.value.trim() && pain && pain.value.trim());
+  }
+  function canLeaveCurrentStepForward(){
+    // Step 4 in the UI (index 3) is mandatory through the final "Заход".
+    if(step===3) return audienceStepComplete();
+    return true;
+  }
+  function syncNextAvailability(){
+    if(!next)return;
+    var blocked = step===3 && typeof audStep!=='undefined' && audStep>=4 && !audienceStepComplete();
+    next.disabled=blocked;
+    next.classList.toggle('wizard-next-locked',blocked);
+    next.title=blocked?'Сначала выбери финальный заход: через проблему или желание, а затем конкретный смысл':'';
+  }
+  window.salesWizardRefreshNavigation=function(){
+    renderRoute();
+    syncNextAvailability();
+  };
+
+  function renderRoute(){
+    var buttons=[].slice.call(document.querySelectorAll('#salesRoute [data-route-step]'));
+    buttons.forEach(function(b,i){
+      var completed=!!completionState[i];
+      var current=i===step;
+      var reachable=i<=maxVisited || completed || i===0;
+      if(step===3 && !audienceStepComplete() && i>3) reachable=false;
+      b.classList.toggle('route-current',current);
+      b.classList.toggle('route-done',completed && !current);
+      b.classList.toggle('route-available',reachable && !completed && !current);
+      b.disabled=!reachable;
+      b.setAttribute('aria-current',current?'step':'false');
+    });
+  }
+  window.salesWizardSetCompletion=function(arr){
+    if(Array.isArray(arr)){
+      completionState=arr.slice(0,9);
+      while(completionState.length<9)completionState.push(false);
+    }
+    renderRoute();
+  };
+  var route=document.getElementById('salesRoute');
+  if(route)route.addEventListener('click',function(e){
+    var b=e.target.closest('[data-route-step]');
+    if(!b || b.disabled)return;
+    salesWizardShow(+b.dataset.routeStep,true);
+  });
+  window.salesWizardShow=function(n,scroll){
+    if(!panels.length)return;
+    step=Math.max(0,Math.min(panels.length-1,n));
+    maxVisited=Math.max(maxVisited,step);
+    panels.forEach(function(p,i){ if(i===step)p.removeAttribute('hidden'); else p.setAttribute('hidden',''); });
+    renderRoute();
+    if(stepName)stepName.textContent=names[step]||'Шаг';
+    if(stepCount)stepCount.textContent=(step+1)+' из '+panels.length;
+    if(guideTitle)guideTitle.textContent=guides[step][0];
+    if(guideText)guideText.textContent=guides[step][1];
+    if(prev)prev.disabled=step===0;
+    if(next)next.textContent=step===panels.length-2?'Посмотреть готовый план →':step===panels.length-1?'Вернуться к началу':'Дальше →';
+    syncNextAvailability();
+    if(scroll!==false && shell)shell.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  function audienceInnerNext(){
+    if(step!==3 || typeof audStep==='undefined') return false;
+    // Внутри шага «Кому и через что» глобальные кнопки работают как навигация по матрёшке.
+    if(audStep<4){
+      // Нельзя перескочить незаполненный внутренний уровень.
+      var ready =
+        (audStep===1 && aud && aud.type) ||
+        (audStep===2 && aud && aud.situation) ||
+        (audStep===3 && aud && aud.focus && aud.focus.length);
+      if(!ready) return true;
+      audStep++;
+      if(typeof renderAudience==='function') renderAudience();
+      if(typeof changed==='function') changed();
+      return true;
+    }
+    // На финальном внутреннем экране остаёмся в шаге 4, пока не выбран заход.
+    if(!audienceStepComplete()) return true;
+    return false; // только теперь можно перейти к «Связке»
+  }
+  function audienceInnerPrev(){
+    if(step!==3 || typeof audStep==='undefined' || audStep<=1) return false;
+    audStep--;
+    if(typeof renderAudience==='function') renderAudience();
+    if(typeof changed==='function') changed();
+    return true;
+  }
+  if(prev)prev.onclick=function(e){
+    e.preventDefault();
+    if(audienceInnerPrev()) return;
+    salesWizardShow(step-1,true);
+  };
+  if(next)next.onclick=function(e){
+    e.preventDefault();
+    if(audienceInnerNext()){
+      syncNextAvailability();
+      return;
+    }
+    if(!canLeaveCurrentStepForward()){
+      syncNextAvailability();
+      var guide=document.getElementById('wizardGuideText');
+      if(guide) guide.textContent='Остался последний выбор: выбери заход и конкретный главный смысл недели.';
+      return;
+    }
+    salesWizardShow(step===panels.length-1?0:step+1,true);
+  };
+  salesWizardShow(0,false);
+})();
+</script><script>
+const $=id=>document.getElementById(id); const val=id=>($(id)?.value||'').trim();
+let state={};
+const clean=s=>s.replace(/^\s*[•\-*]\s*/,'').trim(); const lines=id=>val(id).split('\n').map(clean).filter(Boolean); const norm=s=>clean(s).replace(/[«»"]/g,'').toLowerCase();
+function bullets(arr){return arr.length?arr.map(x=>'• '+x).join('\n'):'НЕ ЗАПОЛНЕНО'}
+function setLines(id,arr){$ (id).value=arr.map(x=>'• '+x).join('\n')}
+function moscowToday(){const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Moscow',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const o=Object.fromEntries(p.map(x=>[x.type,x.value]));return `${o.year}-${o.month}-${o.day}`}
+function pretty(v){if(!v)return'';const [y,m,d]=v.split('-');return `${d}.${m}.${y}`}
+$('weekDate').value=moscowToday();
+function multiToggle(id,text){
+  let a=lines(id),i=a.findIndex(x=>norm(x)===norm(text));
+  if(i>=0)a.splice(i,1); else a.push(text);
+  setLines(id,a);
+}
+function ensureSelectionMarks(){
+  document.querySelectorAll('.chips[data-target] .chip').forEach(b=>{
+    if(!b.querySelector('.select-mark')){
+      const m=document.createElement('span');
+      m.className='select-mark';
+      m.textContent='✓';
+      m.setAttribute('aria-hidden','true');
+      b.appendChild(m);
+    }
+  });
+}
+function chipLabel(b){
+  const clone=b.cloneNode(true);
+  clone.querySelectorAll('.select-mark').forEach(x=>x.remove());
+  return clone.textContent.trim();
+}
+function syncBasicChips(){
+  document.querySelectorAll('.chips[data-target]').forEach(g=>{
+    const id=g.dataset.target,mode=g.dataset.mode,arr=lines(id).map(norm),cur=norm(val(id));
+    g.querySelectorAll('.chip').forEach(b=>{
+      const selected=mode==='multi'?arr.includes(norm(chipLabel(b))):cur===norm(chipLabel(b));
+      b.classList.toggle('active',selected);
+      b.setAttribute('aria-pressed',selected?'true':'false');
+    });
+  });
+}
+ensureSelectionMarks();
+document.querySelectorAll('.chips[data-target]').forEach(g=>g.addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b)return;
+  if(b.dataset.customFocus){
+    const field=$(b.dataset.customFocus);
+    if(field){field.focus();field.scrollIntoView({behavior:'smooth',block:'center'});}
+    return;
+  }
+  const id=g.dataset.target, text=chipLabel(b);
+  if(g.dataset.mode==='multi'){
+    multiToggle(id,text);
+    b.classList.toggle('active');
+  }else{
+    $(id).value=text;
+    g.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+  }
+  changed();
+}));
+
+const audData={
+'Сетевик':{
+'Весь день что-то делаю, а команда всё равно почти не растёт':{
+focus:['Я весь день чем-то занята: пост написала, Stories сняла, людям ответила, в чат сходила. А вечером смотрю на структуру - там вообще ничего не изменилось.','Всю неделю что-то делала для бизнеса. А в воскресенье пытаюсь понять: так, а что из этого вообще привело мне людей? И не могу нормально ответить.','Чтобы появился один новый человек, приходится тащить на себе слишком много ручной работы','Каждую неделю добавляется что-то новое, потому что старое будто не срабатывает'],
+problem:['Я весь день чем-то занята для бизнеса, а вечером открываю структуру - и там ничего не изменилось. Вот это бесит больше всего','Иногда ощущение, что я работаю не на результат, а просто обслуживаю бесконечный список действий','Я уже не понимаю, мне правда нужно делать больше - или я просто делаю не то? Потому что сил уходит дофига, а людей больше не становится','Самое неприятное - вроде ленивой себя не назовёшь. Работаешь. А результат такой, будто почти ничего и не делала'],
+desire:['Хочу наконец видеть прямую связь: сделала вот это - получила вот такие диалоги и новых людей','Хочу в конце недели смотреть не на огромный список выполненного, а на конкретный результат: вот люди, вот диалоги, вот регистрации','Хочу убрать половину суеты и оставить действия, которые действительно приводят людей','Хочу заканчивать неделю не с мыслью «я опять устала», а с понятным результатом в структуре']},
+'Задолбалась постоянно писать первой и искать людей вручную':{
+focus:['Если я сама сегодня никому не написала, в личке почти тишина. И это, если честно, уже напрягает.','Каждый день опять надо придумать, кому написать первой. И главное - что написать, чтобы это не выглядело как очередное «привет, есть предложение».','Большая часть исходящих остаётся без ответа или быстро затухает','Стоит на несколько дней выпасть из активности - новые разговоры почти заканчиваются'],
+problem:['Я уже не хочу открывать список людей и снова думать: так, кому сегодня написать? Это реально выматывает','Больше всего бесит, что стоит мне перестать первой шевелиться - и будто весь рекрутинг выключили','Иногда ловлю себя на том, что откладываю сообщения не потому, что не умею, а потому что просто задолбалась постоянно начинать первой','Я не хочу ещё несколько лет строить бизнес на том, что каждый день лично добываю себе очередной диалог'],
+desire:['Хочу открывать сообщения и видеть не только тех, кому написала я, но и людей, которые сами пришли ко мне','Хочу перестать чувствовать, что рекрутинг держится исключительно на моей способности каждый день заставлять себя писать первой','Хочу больше разговаривать с уже заинтересованными людьми, а не тратить часы на поиск тех, кому вообще это не нужно','Хочу, чтобы новые диалоги появлялись даже в те дни, когда я не сижу весь день в исходящих']},
+'Веду соцсети, но они как будто вообще не работают на мой бизнес':{
+focus:['Я посты пишу, Stories снимаю, люди всё это смотрят. Только новых людей в личке от этого почему-то больше не становится.','Люди смотрят Stories, ставят реакции, читают посты - и на этом всё заканчивается','Иногда я неделями веду соцсети и вообще не понимаю: хоть один человек пришёл ко мне именно благодаря этому контенту или нет?','На создание контента уходит заметно больше времени, чем он возвращает новыми диалогами'],
+problem:['Самое обидное - я реально трачу время на контент. Думаю, что написать, снимаю Stories, стараюсь быть живой. А потом смотрю в личку - и где люди-то?','У меня не мёртвый блог. Люди смотрят, реагируют, иногда что-то отвечают. Но до вопроса «а что у тебя за проект?» почему-то почти никто не доходит','Иногда думаю: а нафига я вообще столько времени веду соцсети, если новые люди всё равно появляются только когда я сама иду к ним?','Я могу показать просмотры, реакции, охваты. Но если спросить, сколько из этого превратилось в реальные разговоры про бизнес - вот тут уже становится грустно'],
+desire:['Хочу, чтобы после контента происходило не только «посмотрели», а появлялся следующий шаг - сообщение, заявка, диалог','Хочу наконец понимать, какой контент реально приводит людей, а какой просто красиво заполняет ленту','Хочу, чтобы человек мог почитать меня несколько дней и сам подумать: блин, мне интересно, что она там делает','Хочу перестать отдельно вести соцсети и отдельно заниматься рекрутингом - хочу, чтобы одно работало на другое']},
+'То заявки идут, то потом неделями тишина':{
+focus:['Сегодня мне написали трое. Я такая: оооо, наконец пошло. А потом неделю - вообще никто.','На этой неделе было пять новых диалогов. А сколько будет на следующей? Понятия не имею. Может пять. Может ноль.','Результат сильно зависит от случайно удачного поста, эфира или всплеска активности','Каждый спад приходится компенсировать новым рывком'],
+problem:['Самое нервное - я вообще не понимаю, что будет на следующей неделе. Сегодня мне пишут пятеро, а потом десять дней тишина','Каждый раз, когда пошли заявки, думаю: ну всё, наконец заработало. А потом снова пусто - и я опять не понимаю, что сломалось','На таком потоке невозможно нормально строить планы. Сегодня ты вся на подъёме, через неделю уже думаешь, что опять надо всё переделывать','Я устала от этих качелей: то кажется, что всё полетело, то через неделю опять начинаешь с нуля и ломаешь голову, чем раскачать людей'],
+desire:['Хочу не угадывать, будет ли кто-то на этой неделе, а иметь хотя бы примерно предсказуемый поток','Хочу перестать зависеть от одного удачного поста или случайного всплеска активности','Хочу понимать, какие действия поддерживают поток постоянно, а не только дают разовый эффект','Хочу, чтобы тихая неделя не означала, что надо срочно всё переделывать и начинать новый способ продвижения']},
+'Я уже столько всего внедрила, а в одну систему это так и не сложилось':{
+focus:['У меня уже есть бот, контент, нейросети, рассылки, какие-то воронки. Только я до сих пор не могу нормально собрать это в один понятный путь человека.','Часть воронок и механик запущена, часть заброшена, часть используется время от времени','Когда нет результата, непонятно, на каком этапе реально проблема','Каждый раз нахожу новый инструмент и думаю: ну вот, сейчас-то точно станет проще. Через месяц у меня просто ещё один инструмент, за которым надо следить.'],
+problem:['У меня уже бот, нейросети, контент, рассылки, какие-то воронки - а ощущения, что всё это работает вместе, до сих пор нет','Я столько всего изучила, что теперь проблема не «не знаю как», а наоборот - я уже не понимаю, за что хвататься первым','Самое бесячее - каждый новый инструмент кажется решением. Внедряю, проходит время, и он просто становится ещё одной штукой, которой надо заниматься','Я могу рассказать про десять способов привлечения, но если спросить: «а какой путь проходит твой человек от первого касания до регистрации?» - там уже начинается каша'],
+desire:['Хочу одну понятную картину: вот откуда пришёл человек, вот что увидел, вот куда пошёл дальше, вот где случилась продажа','Хочу перестать коллекционировать способы продвижения и наконец заставить уже имеющиеся работать вместе','Хочу быстро понимать, где именно провал: нет трафика, не цепляет контент, не переводим в диалог или теряем дальше','Хочу, чтобы новый инструмент добавлялся только тогда, когда понятно, зачем он нужен системе, а не просто потому что «все сейчас так делают»']},
+'Люди меня смотрят, реагируют... и на этом всё':{
+focus:['Stories смотрят. Реакции есть. Иногда даже пишут что-то в ответ. Но нормальных разговоров про работу из этого почти не получается.','Много реакций остаются просто реакциями без продолжения','Есть люди, которые смотрят меня месяцами. Я уже их по аватаркам узнаю 😄 Но про бизнес мы с ними так ни разу и не поговорили.','Между интересом и регистрацией теряется слишком много людей'],
+problem:['Иногда смотришь: Stories посмотрели сотни людей, реакции есть, комментарии есть. А в новых нормальных диалогах - два человека. И вот куда делись остальные?','Меня больше всего бесит не отсутствие активности. Активность как раз есть. Бесит, что я не умею нормально превращать её во что-то дальше','Человек месяцами смотрит меня, реагирует, может даже что-то спрашивать - и всё равно до разговора про работу не доходит. Как будто между нами постоянно не хватает одного шага','У меня ощущение, что рядом уже есть тёплые люди, но я просто теряю их где-то между «посмотрел сторис» и «давай обсудим подробнее»'],
+desire:['Хочу видеть в реакциях не просто активность, а понятные точки, из которых можно естественно начать разговор','Хочу, чтобы человеку было очевидно, что делать дальше, если его зацепил мой контент','Хочу больше диалогов не за счёт ещё большего охвата, а из тех людей, которые уже рядом и уже смотрят','Хочу перестать терять тёплых людей между интересом и конкретным следующим шагом']},
+'Хочу меньше ручной рутины и больше автоматизации':{
+focus:['Иногда полдня уходит на какую-то мелочь: этому ссылку отправить, той напомнить, сюда вернуться, тут проверить, что я вообще человеку уже отправляла.','У меня слишком многое хранится просто в голове. Забыла человеку написать - всё, он потерялся где-то в переписках.','Рост количества откликов автоматически увеличивает ручную нагрузку','На рутину уходит время, которое можно было бы тратить на реальные разговоры'],
+problem:['Я уже устала быть собственной CRM: помнить, кому что отправила, кому надо написать завтра, кто куда дошёл и кто опять потерялся','Самое смешное - когда людей становится больше, я не радуюсь. Первая мысль: господи, как я теперь всё это успею обработать?','Я не хочу тратить лучшие часы дня на копирование ссылок, одинаковые сообщения и напоминания, которые спокойно можно было бы снять с себя','Стоит мне что-то забыть, отвлечься или просто взять выходной - часть процесса тупо останавливается. И это уже не система, это я сама в роли двигателя'],
+desire:['Хочу снять с себя повторяющуюся рутину и оставить себе то, где реально нужен человек - разговор, решение, поддержка','Хочу спокойно увеличивать поток людей без мысли, что вместе с ним в два раза вырастет моя ручная работа','Хочу, чтобы система сама помогала не терять людей и вовремя возвращать их в нужный шаг','Хочу хотя бы часть рекрутинга перевести из «держу всё в голове» в понятный автоматизированный процесс']},
+'Знаю уже дофига, но всё равно каждый день думаю: а что мне сегодня делать?':{
+focus:['Я утром открываю телефон и начинаю: так... пост писать? Трафик делать? В старые диалоги идти? Рассылку запускать? И уже устала, хотя ещё ничего не сделала.','Контент, трафик, рассылки и диалоги конкурируют за внимание','Нет минимального набора действий, который повторяется из недели в неделю','Воскресенье. Я всю неделю была занята. А теперь попробуй ответить, какие конкретно действия я стабильно делала для новых людей и продаж. Вот тут сложнее.'],
+problem:['Я реально могу утром открыть телефон и зависнуть: так, мне сегодня пост писать, людей искать, рассылку делать, бот настраивать или старые диалоги поднимать?','Я много знаю, но это уже не помогает - наоборот, чем больше знаю, тем больше вариантов, куда сегодня слить время','У меня нет ощущения рабочего дня. Есть ощущение, что я весь день тушу мелкие задачи и в конце всё равно не уверена, что сделала главное','Самое неприятное - неделю была занята, а в воскресенье не могу нормально ответить себе: что конкретно я сделала для новых людей и продаж?'],
+desire:['Хочу утром открывать план и не думать, за что хвататься - просто видеть свои ключевые действия на сегодня','Хочу перестать путать занятость с продвижением и понимать свой обязательный минимум на неделю','Хочу, чтобы контент, трафик и диалоги не конкурировали между собой, а складывались в один ритм','Хочу повторяемую систему действий, которую не надо каждую неделю изобретать заново']},
+'Столько лет в сетевом, а чек до сих пор даже не 50 тысяч':{
+focus:['Я уже столько лет в сетевом, что новичком себя точно не назову. А чек до сих пор такой, что особо хвастаться им не хочется.','Когда спрашивают: «А ты давно в сетевом? А сколько зарабатываешь?» - на первый вопрос я ещё отвечаю нормально. На второй уже хочется как-нибудь съехать 😄','Особенно цепляет, когда люди с меньшим опытом растут быстрее, хотя со стороны будто делают всё проще','Есть ощущение, что знаний накопилось много, а в деньги они почему-то так и не сложились'],
+problem:['Самое неприятное - я уже столько лет в сетевом, а чек до сих пор такой, что мне самой неловко сопоставлять эти две цифры','Иногда смотрю на человека и думаю: ну каааак? У меня опыта больше, я знаю больше, делаю вроде не меньше - а результат почему-то у него','Я уже не могу сказать себе «я просто новичок, мне нужно время». Времени было достаточно. И от этого вопрос «почему я всё ещё здесь?» только сильнее','Меня бесит не только сумма. Бесит ощущение, что я столько лет вкладывалась, училась, пробовала - а бизнес так и не стал тем бизнесом, который я себе представляла'],
+desire:['Хочу наконец чувствовать, что мои годы в сетевом конвертируются не только в опыт и знания, но и в нормальные деньги','Хочу спокойно называть свой чек и не пытаться быстро перевести разговор на другую тему','Хочу видеть рост, который объясняется моей системой, а не ждать, когда мне наконец тоже повезёт','Хочу выйти на уровень, где я сама смотрю на свой результат и думаю: да, вот теперь это действительно бизнес']},
+'Человека привела. А что с ним делать дальше - сама не до конца понимаю':{
+focus:['Человек зарегистрировался, пишет: «Ну всё, я с тобой. Что мне теперь делать?» А у меня внутри иногда: блииин... хороший вопрос.','Когда партнёр говорит «у меня нет результата», сложно быстро понять, что именно ему менять','В командном обучении много информации, но непонятно, что новичку нужно делать первым, вторым и третьим','Если честно, сильного человека иногда даже страшновато приглашать. Вдруг он придёт, начнёт задавать нормальные вопросы, а я пойму, что сама не знаю, как его вести.'],
+problem:['Завожу человека в команду, он смотрит на меня как на наставника, а у меня внутри иногда одна мысль: господи, кто бы теперь мне самой сказал, что с ним делать','Пока новичок заряженный и всё делает - я спокойна. А как только он говорит «у меня ничего не получается», я сама не понимаю, за какую ниточку тянуть','Иногда проще лишний раз не написать партнёру, чем услышать вопрос «что мне делать дальше?» и понять, что у меня нет нормального ответа','Мне хочется быть наставником, который реально выводит людей на результат, а не человеком, который дал доступ к куче обучения и надеется, что новичок там сам выплывет'],
+desire:['Хочу заводить человека в команду без внутреннего «блин, теперь что с ним делать?» - я точно знаю его первый шаг, второй и третий','Хочу быстро видеть, где партнёр застрял, и понимать, что именно ему сейчас нужно поправить','Хочу, чтобы новичок не барахтался в тонне информации, а шёл по понятной дорожной карте','Хочу чувствовать себя наставником не потому, что у меня есть команда, а потому что я реально умею помогать людям получать результат']},
+'Пока привожу новых, старые уже куда-то деваются':{
+focus:['Пока я ищу новых людей, смотрю - а половина тех, кого привела месяц назад, уже куда-то пропала.','Я вроде людей регистрирую. Только пока одного привела - кто-то из старых уже слился. И по итогу команда как была на месте, так и стоит.','Большинство людей не успевают дойти до заметного результата и постепенно перестают действовать','Вместо выращивания лидеров снова и снова приходится возвращаться к поиску новых людей'],
+problem:['Пока я ищу новых, старые уже куда-то исчезли. Иногда ощущение, что я не команду строю, а занимаюсь бесконечной переписью населения','Регистрации вроде есть, а команда каждый месяц будто начинается заново: пришёл, активировался, попробовал, результата не увидел - пропал','Я хочу растить лидеров, а по факту всё время ищу замену тем, кто уже слился. И это какой-то бесконечный круг','Иногда думаю: а смысл мне привести ещё десять человек, если я пока не умею сделать так, чтобы те, кто уже пришёл, остались и выросли?'],
+desire:['Хочу перестать каждый месяц практически заново собирать команду','Хочу, чтобы люди не просто регистрировались, а оставались, получали первые результаты и росли дальше','Хочу наконец увидеть в структуре людей, которых я привела не вчера и которые уже сами умеют вести других','Хочу тратить силы не только на постоянный поиск новых, а на выращивание тех, кто уже выбрал идти со мной']},
+'Ко мне почему-то снова приходят люди, которых надо тащить':{
+focus:['Опять приходит человек: денег хочет, но времени нет, показываться не хочет, писать никому не будет... А зарабатывать, конечно, желательно тысяч сто 😄','Человек сам пришёл, сам сказал: «Я хочу». Проходит три дня - и почему-то уже я больше него хочу, чтобы у него получилось.','Люди легко загораются на старте, но сливаются при первой сложности','Хочется работать с более самостоятельными людьми, а притягивается совсем другая аудитория'],
+problem:['Иногда хочется спросить: почему ко мне опять пришёл человек, которого надо уговаривать сделать вообще всё? Откуда я их так стабильно собираю?','Я не хочу тащить взрослого человека за руку и каждый день выяснять, сделал ли он элементарные действия. Я хочу партнёров, а не ещё детей в семье','Человек вроде сам пришёл, сам сказал «хочу», а через три дня уже нужно убеждать его не бросать. И я снова трачу силы не туда','Самый неприятный вопрос - а что я сама транслирую, если ко мне снова и снова приходят люди, которые хотят результат, но вообще не готовы включаться?'],
+desire:['Хочу, чтобы ко мне приходили взрослые самостоятельные люди, которых не нужно постоянно уговаривать действовать','Хочу заранее привлекать тех, кому подходит мой подход, темп и формат работы','Хочу меньше случайных регистраций и больше партнёров, с которыми реально можно строить вдолгую','Хочу смотреть на нового человека и думать не «сколько его придётся тащить», а «класс, с ним можно работать»']},
+'Люди в структуре есть. А команды как будто вообще нет':{
+focus:['Я пишу что-то в командный чат. Все прочитали. И... всё 😄 Иногда ощущение, что я там сама с собой разговариваю.','Если я сама не придумаю созвон, активность, разбор и ещё пять раз не напомню - в команде вообще ничего не происходит.','Не хватает регулярных разборов, планёрок и ощущения общего движения','На фоне других команд особенно заметно, что своей не хватает сплочённости'],
+problem:['Иногда пишу что-то в командный чат и ощущение, будто сама с собой разговариваю. Сообщение висит, тишина - прекрасная командная работа','Смотрю на другие команды: планёрки, разборы, люди что-то обсуждают, поддерживают друг друга. И да, мне завидно, потому что у нас этого нет','Я могу ещё раз придумать марафон, чат, активность и попытаться всех раскачать. Но я уже устала быть единственным человеком, который создаёт движуху','Мне хочется команды, а не просто списка фамилий в структуре. Чтобы люди реально чувствовали: мы здесь не по одному'],
+desire:['Хочу открыть командный чат и видеть там жизнь не только после моего сообщения','Хочу, чтобы планёрки, разборы и совместные действия были нормальной частью работы, а не разовой попыткой всех оживить','Хочу, чтобы партнёры чувствовали себя частью команды и сами включались в общий процесс','Хочу создать среду, в которой людям хочется оставаться, расти и потом самим поддерживать новичков']},
+'В компании вроде нормально, но всё чаще думаю: а я вообще здесь вырасту?':{
+focus:['У меня нет такого, что компания ужасная и надо срочно бежать. Мне многое нравится. Только результата, который я хочу, почему-то всё равно нет.','Я всё чаще смотрю по сторонам. Но как представлю: опять новая компания, новый маркетинг, новая команда, опять всё сначала... глаз уже дёргается.','Одних обещаний «у нас маркетинг лучше» уже недостаточно для серьёзного решения','Есть страх потерять время ещё раз - как при переходе, так и если остаться'],
+problem:['Самое сложное - у меня нет истории «всё ужасно, надо срочно бежать». Всё вроде нормально. Только результата, ради которого я здесь, почему-то нет','Я уже несколько раз смотрела другие компании и каждый раз закрывала всё с мыслью: господи, опять начинать сначала? Нет уж','Меня уже невозможно забрать фразой «у нас маркетинг лучше». Если менять компанию, я хочу очень чётко понимать, что конкретно для меня изменится','Страшно не только перейти не туда. Иногда ещё страшнее представить, что пройдёт два года, а я останусь здесь же просто потому, что здесь привычно'],
+desire:['Хочу принять решение не на эмоциях и красивой презентации, а чётко понимать, что именно новая система даст мне по сравнению с тем, что есть сейчас','Хочу найти место, где мне не придётся снова самой достраивать половину системы и обучения','Хочу перестать бесконечно присматриваться к другим вариантам и наконец спокойно строить в одном месте вдолгую','Хочу понимать: если я остаюсь или если перехожу - это решение действительно ведёт меня к тому уровню бизнеса, который я хочу']}
+
+},
+'Не сетевик':{
+'Хочу больше денег, но вторую работу я уже не вывезу':{
+focus:['Мне в целом хватает денег на обычную жизнь. Но месяц заканчивается - и откладывать опять почти нечего.','Зарабатывать больше я хочу. Но вторую работу мне куда? После основной ещё дом, семья, дела. Я вообще-то иногда ещё и жить хочу.','Незапланированные расходы сильно выбивают бюджет','Хочется начать постепенно, не теряя основной источник дохода'],
+problem:['Я не хочу ещё одну работу. Я и с этой прихожу домой без сил. Но денег всё равно не хватает - и вот это тупик','Меня бесит, что любая неожиданная трата сразу превращается в проблему: сломалось что-то, заболел ребёнок, понадобилась крупная покупка - и бюджет посыпался','Я бы с удовольствием зарабатывала больше, но брать ещё смены просто некуда. У суток почему-то всё ещё 24 часа','Мне нужен не «лёгкий заработок», а нормальный второй источник денег, который не потребует жить на двух работах'],
+desire:['Хочу постепенно добавить к своему доходу ещё одну сумму, не ломая ради этого всю жизнь','Хочу иметь запас денег не только на обязательные расходы, но и на то, что хочется','Хочу начать параллельно основной работе и сначала увидеть, получается ли у меня','Хочу второй источник дохода, который со временем можно увеличивать, а не ещё одну подработку по часам']},
+'Хочу зарабатывать через интернет, но вокруг какая-то дичь':{
+focus:['Я смотрю варианты заработка в интернете, и там либо «миллион за месяц», либо сначала полгода учись новой профессии. А что-нибудь нормальное есть?','Чем красивее мне рассказывают про лёгкие деньги онлайн, тем быстрее я начинаю искать, где меня сейчас хотят развести.','Не хочется долго учиться до первых результатов','Нужен понятный и проверяемый старт'],
+problem:['Я уже столько раз гуглила «как заработать онлайн», что от одного этого запроса тошнит. Везде либо обещают миллионы, либо предлагают сначала год учиться','Мне хочется работать через интернет, но я вообще не понимаю, где нормальная возможность, а где очередная фигня с красивыми обещаниями','Я не хочу потратить полгода на обучение новой профессии, а потом понять, что мне это вообще не подходит','Мне не нужен рассказ про свободу и ноутбук у моря. Покажите мне лучше, что я конкретно буду делать завтра'],
+desire:['Хочу увидеть конкретно, как выглядит работа онлайн изнутри и что там нужно делать каждый день','Хочу начать с понятных шагов, а не с огромного курса и обещаний когда-нибудь потом','Хочу попробовать онлайн-формат без резкого разворота всей жизни','Хочу найти направление, где результат зависит от моих действий, а не от красивых обещаний']},
+'Хочу своё дело, но увольняться с работы пока страшно':{
+focus:['На своё дело у меня пока только кусочки времени: вечер, выходной, иногда час утром. Ещё одну полноценную работу туда уже не впихнуть.','Есть свободные окна, но они короткие и разбросаны по дню','Уволиться просто потому, что «я верю в себя», я точно не готова. Мне нравится знать, что в определённый день мне придёт зарплата.','Важно иметь гибкий темп старта'],
+problem:['Я могу выделить час вечером, что-то сделать в выходной, иногда поработать утром. Но я не могу подписаться ещё на один график с девяти до шести','Я не готова бросить работу ради идеи, про которую пока вообще не знаю, получится у меня или нет','Мне нужен вариант, который встраивается в жизнь, а не ещё одна жизнь, которую надо каким-то чудом впихнуть сверху','Я хочу попробовать что-то своё, но без ощущения, что теперь я должна выбирать между семьёй, работой и новым делом'],
+desire:['Хочу развивать новое дело в тех окнах времени, которые у меня реально есть','Хочу сначала спокойно попробовать и только потом решать, насколько глубоко в это идти','Хочу гибкий формат, где я сама могу усиливать темп, когда готова','Хочу постепенно построить дополнительный доход рядом с основной работой, а не вместо неё с первого дня']},
+'Задолбалась менять своё время на деньги':{
+focus:['Если я хочу больше денег, вариантов немного: работать больше или ждать повышения. А работать больше мне уже, если честно, некуда.','Я могу стать в два раза сильнее в своей работе. Но зарплата почему-то от этого автоматически в два раза не вырастет.','Если не работать, деньги сразу перестают приходить','Нет ощущения, что сегодняшние усилия создают что-то на будущее'],
+problem:['Меня раздражает сама математика: хочешь больше денег - просто работай больше. А больше уже физически некуда','Если я заболела, уехала или просто решила неделю отдохнуть - доход сразу проседает. Всё держится на том, сколько часов я лично отработала','Я могу стать быстрее, опытнее, лучше - но зарплата всё равно упирается в ставку и количество часов','Не хочу через пять лет обнаружить, что единственный способ зарабатывать больше у меня всё тот же - брать больше работы'],
+desire:['Хочу строить доход, который можно увеличивать не только количеством моих рабочих часов','Хочу, чтобы сегодняшние действия создавали базу, которая продолжает работать дальше','Хочу иметь второй источник денег, у которого нет такого жёсткого потолка','Хочу постепенно выйти из модели «не работаю - не зарабатываю»']},
+'Сетевой мне интересен, но я точно не хочу бегать за знакомыми':{
+focus:['Мне сетевой в целом интересен. Но если первый шаг - открыть список контактов и написать всем знакомым, то я, пожалуй, пас.','Я не хочу проснуться завтра и начать смотреть на каждого знакомого как на человека, которому мне срочно надо что-то предложить.','Важно сначала понять механику проекта','Нет опыта, поэтому нужен понятный старт'],
+problem:['Мне сетевой в целом интересен. Но если первый шаг - открыть контакты и написать всем, с кем я училась в школе, то я, пожалуй, пас 😄','Я не хочу потом краснеть перед друзьями и объяснять, во что я опять ввязалась','Меня уже не цепляют рассказы про «успешный успех». Я хочу понять: что я конкретно буду делать завтра, если зайду?','Я готова попробовать, но не готова сначала поверить на слово во всё красивое, а потом разбираться по ходу'],
+desire:['Хочу спокойно посмотреть проект изнутри и самой решить, подходит он мне или нет','Хочу увидеть реальные действия новичка без пафоса и обещаний лёгких денег','Хочу начать без опыта, но с понятным планом первых шагов','Хочу увидеть современный вариант: где брать людей, что делать новичку и как работать без беготни за знакомыми']}
+}};
+let aud={type:'',situation:'',focus:[],angleType:'',angleSpecific:'',customType:false,customSituation:false,customFocus:false,customAngle:false};
+let audStep=1;
+
+function escAud(t){
+  return String(t||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+function audWho(){ return [aud.type,aud.situation,...aud.focus].filter(Boolean).join('. '); }
+function choice(text, action, index='', sub='', selected=false){
+  return `<button type="button" class="aud-choice ${selected?'selected-final active':''}" data-aud-action="${action}" ${index!==''?`data-aud-index="${index}"`:''} data-aud-value="${escAud(text)}" aria-pressed="${selected?'true':'false'}">${escAud(text)}${sub?`<small>${escAud(sub)}</small>`:''}</button>`;
+}
+function customBox(kind,placeholder){
+  return `<div class="aud-custom-box"><div class="aud-custom-label">Не нашла подходящий вариант? Напиши свой.</div><div class="aud-custom-row"><input id="audCustomInput" data-aud-custom="${kind}" placeholder="${escAud(placeholder)}"/><button type="button" data-aud-custom-apply="${kind}">Применить свой вариант</button></div></div>`;
+}
+function renderAudienceSummary(){
+  const card=$('audFinalNew');
+  const rows=[];
+  if(aud.type) rows.push(['Кто',aud.type]);
+  if(aud.situation) rows.push(['Ситуация',aud.situation]);
+  if(aud.focus[0]) rows.push(['Что болит',aud.focus[0]]);
+  $('audSummaryLines').innerHTML=rows.map(([l,v])=>`<div class="aud-summary-line"><span>${l}</span><strong>${escAud(v)}</strong></div>`).join('');
+  const final=!!aud.angleSpecific;
+  $('audFinalLabel').textContent=final?'Главный смысл недели':'Предварительный главный смысл недели';
+  $('audFinalAngle').textContent=final?aud.angleSpecific:'';
+  card.classList.toggle('show',!!aud.type);
+}
+function renderAudience(){
+  const mp=$('audMiniProgress');
+  if(mp){
+    const items=[...mp.querySelectorAll('button')];
+    const completed=[!!aud.type,!!aud.situation,!!aud.focus[0],!!aud.angleSpecific];
+    items.forEach((x,i)=>{
+      const step=i+1;
+      x.classList.toggle('done', completed[i] && step!==audStep);
+      x.classList.toggle('current', step===audStep && !aud.angleSpecific);
+      x.classList.toggle('selected', completed[i] && (step===audStep || (step===4 && !!aud.angleSpecific)));
+      const allowed = step===1 || (step===2 && !!aud.type) || (step===3 && !!aud.situation) || (step===4 && !!aud.focus[0]);
+      x.disabled=!allowed;
+    });
+  }
+
+  $('audienceWho').value=audWho();
+  $('audiencePain').value=aud.angleSpecific||'';
+
+  let h='';
+  if(audStep===1){
+    h=`<div class="aud-q-kicker">Вопрос 1 из 4</div>
+       <div class="aud-q">Кому ты продаёшь на этой неделе?</div>
+       <div class="aud-help">Выбери готовый вариант или напиши свой.</div>
+       <div class="aud-options aud-two">
+         ${choice('Сетевик','type','', 'Уже работает в сетевом бизнесе', aud.type==='Сетевик')}
+         ${choice('Не сетевик','type','', 'Пока не работает в сетевом бизнесе', aud.type==='Не сетевик')}
+       </div>
+       ${customBox('type','Например: эксперт, мастер, предприниматель')}`;
+  } else if(audStep===2){
+    const list=audData[aud.type]?Object.keys(audData[aud.type]):[];
+    h=`<div class="aud-q-kicker">Вопрос 2 из 4</div>
+       <div class="aud-q">Что у него сейчас происходит?</div>
+       <div class="aud-help">${list.length?'Выбери близкую ситуацию или напиши свою.':'Ты выбрала свою аудиторию - опиши её ситуацию своими словами.'}</div>
+       ${list.length?`<div class="aud-options">${list.map((x,i)=>choice(x,'situation',i,'',aud.situation===x)).join('')}</div>`:''}
+       ${customBox('situation','Опиши ситуацию одной живой фразой')}`;
+  } else if(audStep===3){
+    const list=(!aud.customSituation && audData[aud.type] && audData[aud.type][aud.situation])?audData[aud.type][aud.situation].focus:[];
+    h=`<div class="aud-q-kicker">Вопрос 3 из 4</div>
+       <div class="aud-q">Что в этой ситуации болит сильнее всего?</div>
+       <div class="aud-help">${list.length?'Выбери одну фразу, в которой человек реально узнает себя, или напиши свою.':'Опиши своими словами, что здесь реально бесит, пугает или не получается.'}</div>
+       ${list.length?`<div class="aud-options">${list.map((x,i)=>choice(x,'focus',i,'',aud.focus[0]===x)).join('')}</div>`:''}
+       ${customBox('focus','Напиши, что человек реально думает или говорит про эту проблему')}`;
+  } else if(audStep===4 && !aud.angleType){
+    h=`<div class="aud-q-kicker">Вопрос 4 из 4</div>
+       <div class="aud-q">С какой стороны зайдём в продажу?</div>
+       <div class="aud-help">Можно выбрать направление или сразу написать свой готовый заход.</div>
+       <div class="aud-options aud-two">
+         ${choice('Через проблему','angleType','', 'Берём то, что бесит, не получается или уже надоело', aud.angleType==='Проблема')}
+         ${choice('Через желание','angleType','', 'Показываем, как человек хочет, чтобы было', aud.angleType==='Желание')}
+       </div>
+       ${customBox('angle','Напиши свой главный продающий смысл недели')}`;
+  } else {
+    const d=(!aud.customSituation && audData[aud.type] && audData[aud.type][aud.situation])?audData[aud.type][aud.situation]:null;
+    const list=d?(aud.angleType==='Проблема'?d.problem:d.desire):[];
+    h=`<div class="aud-q-kicker">Финальный выбор</div>
+       <div class="aud-q">${aud.angleType==='Проблема'?'Какая фраза прям задевает?':'Какое желание здесь самое живое?'}</div>
+       <div class="aud-help">${list.length?'Выбери готовую формулировку или напиши свою.':'Напиши свой финальный заход своими словами.'}</div>
+       ${list.length?`<div class="aud-options">${list.map((x,i)=>choice(x,'angle',i,'',aud.angleSpecific===x)).join('')}</div>`:''}
+       ${customBox('angle','Напиши свой главный продающий смысл недели')}`;
+  }
+
+  $('audInterviewStage').innerHTML=h;
+  if(document.activeElement && typeof document.activeElement.blur==='function') document.activeElement.blur();
+
+  $('audInterviewStage').querySelectorAll('.aud-choice').forEach(btn=>{
+    let selected=false;
+    const action=btn.dataset.audAction, value=btn.dataset.audValue;
+    if(action==='type'){
+      const normalized=value==='Сетевику'?'Сетевик':value==='Не сетевику'?'Не сетевик':value;
+      selected=aud.type===normalized && !aud.customType;
+    } else if(action==='situation') selected=aud.situation===value && !aud.customSituation;
+    else if(action==='focus') selected=aud.focus[0]===value && !aud.customFocus;
+    else if(action==='angleType') selected=(aud.angleType==='Проблема'&&value.includes('проблем'))||(aud.angleType==='Желание'&&value.includes('желан'));
+    else if(action==='angle') selected=aud.angleSpecific===value && !aud.customAngle;
+    btn.classList.toggle('selected-final',selected);
+    btn.classList.toggle('active',selected);
+    btn.setAttribute('aria-pressed',selected?'true':'false');
+  });
+
+  renderAudienceSummary();
+  if(window.salesWizardRefreshNavigation) window.salesWizardRefreshNavigation();
+}
+
+$('audInterviewStage').addEventListener('click',e=>{
+  const apply=e.target.closest('[data-aud-custom-apply]');
+  if(apply){
+    const kind=apply.dataset.audCustomApply;
+    const input=$('audCustomInput');
+    const x=(input?.value||'').trim();
+    if(!x)return;
+    if(kind==='type'){
+      aud={type:x,situation:'',focus:[],angleType:'',angleSpecific:'',customType:true,customSituation:false,customFocus:false,customAngle:false};
+      audStep=2;
+    }else if(kind==='situation'){
+      aud.situation=x; aud.focus=[]; aud.angleType=''; aud.angleSpecific=''; aud.customSituation=true; aud.customFocus=false; aud.customAngle=false; audStep=3;
+    }else if(kind==='focus'){
+      aud.focus=[x]; aud.angleType=''; aud.angleSpecific=''; aud.customFocus=true; aud.customAngle=false; audStep=4;
+    }else if(kind==='angle'){
+      aud.angleSpecific=x; aud.customAngle=true; audStep=4;
+    }
+    renderAudience(); changed(); return;
+  }
+
+  const b=e.target.closest('[data-aud-action]'); if(!b)return;
+  const action=b.dataset.audAction, value=b.dataset.audValue, i=+(b.dataset.audIndex||0);
+  b.blur();
+  if(action==='type'){
+    const type=value==='Сетевику'?'Сетевик':value==='Не сетевику'?'Не сетевик':value;
+    if(aud.type!==type || aud.customType){
+      aud={type,situation:'',focus:[],angleType:'',angleSpecific:'',customType:false,customSituation:false,customFocus:false,customAngle:false};
+    }
+    audStep=2;
+  } else if(action==='situation'){
+    const list=Object.keys(audData[aud.type]||{});
+    const next=list[i]||'';
+    if(aud.situation!==next || aud.customSituation){
+      aud.situation=next; aud.focus=[]; aud.angleType=''; aud.angleSpecific=''; aud.customSituation=false; aud.customFocus=false; aud.customAngle=false;
+    }
+    audStep=3;
+  } else if(action==='focus'){
+    const list=audData[aud.type][aud.situation].focus;
+    const next=list[i]||'';
+    if(aud.focus[0]!==next || aud.customFocus){
+      aud.focus=next?[next]:[]; aud.angleType=''; aud.angleSpecific=''; aud.customFocus=false; aud.customAngle=false;
+    }
+    audStep=4;
+  } else if(action==='angleType'){
+    const next=value.includes('проблем')?'Проблема':'Желание';
+    if(aud.angleType!==next){ aud.angleType=next; aud.angleSpecific=''; aud.customAngle=false; }
+    audStep=4;
+  } else if(action==='angle'){
+    const d=audData[aud.type][aud.situation];
+    const list=aud.angleType==='Проблема'?d.problem:d.desire;
+    aud.angleSpecific=list[i]||''; aud.customAngle=false;
+  }
+  renderAudience(); changed();
+});
+
+$('audMiniProgress').addEventListener('click',e=>{
+  const b=e.target.closest('[data-aud-jump]'); if(!b || b.disabled)return;
+  audStep=+b.dataset.audJump;
+  renderAudience();
+  changed();
+});
+
+renderAudience();
+
+let funnelState={source:'',trigger:'',contact:'',conversion:'',outcomes:[]};
+
+const funnelCustomMap={
+  source:'funnelCustomSource',
+  trigger:'funnelCustomTrigger',
+  contact:'funnelCustomContact',
+  conversion:'funnelCustomConversion',
+  outcome:'funnelCustomOutcome'
+};
+
+function funnelValue(stage){
+  if(stage==='outcome') return funnelState.outcomes;
+  return funnelState[stage]||'';
+}
+function effectiveFunnelValue(stage){
+  const v=funnelValue(stage);
+  if(stage==='outcome'){
+    return v.map(x=>x==='Свой вариант'?(val(funnelCustomMap.outcome)||'Свой вариант'):x);
+  }
+  if(v==='Свой вариант') return val(funnelCustomMap[stage])||'Свой вариант';
+  return v;
+}
+function renderFunnel(){
+  document.querySelectorAll('.funnel-options').forEach(group=>{
+    const stage=group.dataset.funnelStage;
+    const mode=group.dataset.mode;
+    group.querySelectorAll('button').forEach(b=>{
+      const x=b.textContent.trim();
+      const selected=mode==='multi'?funnelState.outcomes.includes(x):funnelState[stage]===x;
+      b.classList.toggle('active',selected);
+      b.setAttribute('aria-pressed',selected?'true':'false');
+    });
+    const customId=funnelCustomMap[stage];
+    const custom=$(customId);
+    if(custom){
+      const selected=mode==='multi'?funnelState.outcomes.includes('Свой вариант'):funnelState[stage]==='Свой вариант';
+      custom.classList.toggle('hidden',!selected);
+    }
+  });
+
+  const steps=[];
+  ['source','trigger','contact','conversion'].forEach(k=>{
+    const v=effectiveFunnelValue(k);
+    if(v && !(k==='conversion' && v==='')) steps.push(v);
+  });
+  const outcomes=effectiveFunnelValue('outcome');
+
+  const preview=$('funnelPreviewNew');
+  if(!steps.length && !outcomes.length){
+    preview.innerHTML='<span class="flow-empty">Начни с первого этапа - связка соберётся здесь</span>';
+    $('funnel').value='';
+    return;
+  }
+  let html='';
+  steps.forEach((x,i)=>{
+    if(i) html+='<span class="funnel-chain-arrow">→</span>';
+    html+=`<span class="funnel-chain-node">${x}</span>`;
+  });
+  if(outcomes.length){
+    if(steps.length) html+='<span class="funnel-chain-arrow">→</span>';
+    html+=`<span class="funnel-branch">${outcomes.map(x=>`<span class="funnel-chain-node">${x}</span>`).join('<span class="funnel-chain-arrow">/</span>')}</span>`;
+  }
+  preview.innerHTML=html;
+
+  let txt=steps.join(' → ');
+  if(outcomes.length){
+    txt+=(txt?' → ':'')+(outcomes.length>1?`(${outcomes.join(' / ')})`:outcomes[0]);
+  }
+  $('funnel').value=txt;
+}
+
+$('funnelBuilderNew').addEventListener('click',e=>{
+  const b=e.target.closest('.funnel-options button'); if(!b)return;
+  const group=b.closest('.funnel-options');
+  const stage=group.dataset.funnelStage;
+  const mode=group.dataset.mode;
+  const x=b.textContent.trim();
+  if(mode==='multi'){
+    const i=funnelState.outcomes.indexOf(x);
+    if(i>=0) funnelState.outcomes.splice(i,1);
+    else funnelState.outcomes.push(x);
+  }else{
+    funnelState[stage]=funnelState[stage]===x?'':x;
+  }
+  renderFunnel(); changed();
+});
+Object.values(funnelCustomMap).forEach(id=>{
+  $(id)?.addEventListener('input',()=>{renderFunnel();changed()});
+});
+renderFunnel();
+
+const actionIds=['act_posts','act_posts_note','act_stories_freq','act_stories_note','act_activity','act_activity_note','act_outgoing','act_outgoing_unit','act_outgoing_note','act_mail','act_mail_note'];actionIds.forEach(id=>{$(id).addEventListener('input',changed);$(id).addEventListener('change',changed)});let customActions=[];
+let trafficSelected=[];
+let trafficDetails={};
+
+function renderTrafficMethods(){
+  const list=$('trafficMethodList'); if(!list)return;
+  list.querySelectorAll('.traffic-method-row').forEach(row=>{
+    const x=row.dataset.trafficMethod;
+    const active=trafficSelected.includes(x);
+    row.classList.toggle('active',active);
+    const f=row.querySelector('.traffic-freq');
+    const n=row.querySelector('.traffic-note');
+    const d=trafficDetails[x]||{freq:'',note:''};
+    if(f && f.value!==d.freq) f.value=d.freq||'';
+    if(n && n.value!==d.note) n.value=d.note||'';
+  });
+  $('act_traffic_type').value=trafficSelected.join('\n');
+}
+
+$('trafficMethodList')?.addEventListener('click',e=>{
+  // Don't toggle off when interacting with controls.
+  if(e.target.closest('select,input')) return;
+  const row=e.target.closest('.traffic-method-row'); if(!row)return;
+  const x=row.dataset.trafficMethod;
+  const i=trafficSelected.indexOf(x);
+  if(i>=0){
+    trafficSelected.splice(i,1);
+    delete trafficDetails[x];
+  }else{
+    trafficSelected.push(x);
+    trafficDetails[x]={freq:'',note:''};
+  }
+  renderTrafficMethods(); changed();
+});
+
+$('trafficMethodList')?.addEventListener('change',e=>{
+  const row=e.target.closest('.traffic-method-row'); if(!row)return;
+  const x=row.dataset.trafficMethod;
+  if(!trafficSelected.includes(x))return;
+  trafficDetails[x]=trafficDetails[x]||{freq:'',note:''};
+  if(e.target.classList.contains('traffic-freq')) trafficDetails[x].freq=e.target.value;
+  renderTrafficMethods(); changed();
+});
+$('trafficMethodList')?.addEventListener('input',e=>{
+  const row=e.target.closest('.traffic-method-row'); if(!row)return;
+  const x=row.dataset.trafficMethod;
+  if(!trafficSelected.includes(x))return;
+  trafficDetails[x]=trafficDetails[x]||{freq:'',note:''};
+  if(e.target.classList.contains('traffic-note')) trafficDetails[x].note=e.target.value;
+  changed();
+});
+renderTrafficMethods();
+
+document.querySelectorAll('[data-counter]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();const key=b.dataset.counter,map={posts:'act_posts',outgoing:'act_outgoing',mail:'act_mail',engage:'goalEngageQty'};const inp=$(map[key]);inp.value=Math.max(0,(+inp.value||0)+(+b.dataset.d));changed()}));
+function actionLines(){
+  const a=[];let n;
+  if((n=+val('act_posts'))>0)a.push(`Посты: ${n}${val('act_posts_note')?' - '+val('act_posts_note'):''}`);
+  if(val('act_stories_freq'))a.push(`Stories: ${val('act_stories_freq')}${val('act_stories_note')?' - '+val('act_stories_note'):''}`);
+  if(trafficSelected.length){
+    trafficSelected.forEach(x=>{
+      const d=trafficDetails[x]||{};
+      let t=`Трафик - ${x}`;
+      if(d.freq)t+=`: ${d.freq}`;
+      if(d.note)t+=` - ${d.note}`;
+      a.push(t);
+    });
+  }
+  if(val('act_activity'))a.push(`Отработка активности: ${val('act_activity')}${val('act_activity_note')?' - '+val('act_activity_note'):''}`);
+  if((n=+val('act_outgoing'))>0)a.push(`Исходящие сообщения: ${n} ${val('act_outgoing_unit')}${val('act_outgoing_note')?' - '+val('act_outgoing_note'):''}`);
+  if((n=+val('act_mail'))>0)a.push(`Рассылки по подписной базе: ${n}${val('act_mail_note')?' - '+val('act_mail_note'):''}`);
+  return a.concat(customActions);
+}
+$('addCustomAction').onclick=()=>{const x=val('customAction');if(x){customActions.push(x);$('customAction').value='';renderCustomActions();changed()}};function renderCustomActions(){$('customActionsList').innerHTML=customActions.map((x,i)=>`<div class="goal-row"><div class="goal-row-title">${x}</div><button class="chip" data-custom-remove="${i}">Удалить</button></div>`).join('')};$('customActionsList').onclick=e=>{const b=e.target.closest('[data-custom-remove]');if(!b)return;customActions.splice(+b.dataset.customRemove,1);renderCustomActions();changed()};renderCustomActions();
+
+$('goalEngageQty').addEventListener('input',changed);$('goalEngageTarget').addEventListener('input',changed);
+let salesGoalVals={};function renderSalesGoals(){const prods=lines('product');const box=$('salesGoals');if(!prods.length){box.innerHTML='<div class="hint">Сначала выбери, что продаёшь в пункте 01.</div>';$('goalSales').value='';return}box.innerHTML=prods.map((p,i)=>`<div class="goal-row"><div><div class="goal-row-title">${p}</div><div class="goal-row-sub">Сколько продаж хочешь сделать?</div></div><div class="counter"><button data-sales="${i}" data-d="-1">−</button><input type="number" min="0" data-sales-input="${i}" value="${salesGoalVals[p]||0}"><button data-sales="${i}" data-d="1">+</button></div></div>`).join('');box.querySelectorAll('[data-sales-input]').forEach(inp=>inp.addEventListener('input',()=>{salesGoalVals[prods[+inp.dataset.salesInput]]=+inp.value||0;changed(false)}));box.querySelectorAll('button[data-sales]').forEach(b=>b.addEventListener('click',()=>{const p=prods[+b.dataset.sales],inp=box.querySelector(`[data-sales-input="${b.dataset.sales}"]`);inp.value=Math.max(0,(+inp.value||0)+(+b.dataset.d));salesGoalVals[p]=+inp.value;changed(false)}));updateSalesGoalHidden()}
+function updateSalesGoalHidden(){const a=lines('product').filter(p=>salesGoalVals[p]>0).map(p=>`${salesGoalVals[p]} - ${p}`);$('goalSales').value=a.map(x=>'• '+x).join('\n')}
+
+function autoEngage(){const p=val('point');if(p&&(!val('goalEngageTarget')||state.lastAutoPoint===val('goalEngageTarget'))){$('goalEngageTarget').value=p;state.lastAutoPoint=p}$('engageTargetLabel').textContent=val('goalEngageTarget')||'Точка продаж пока не выбрана';const n=+val('goalEngageQty');$('goalEngage').value=n>0?`${n} заявок / вовлечений → ${val('goalEngageTarget')||'точка продаж'}`:'';$('goalEngagePreview').textContent=$('goalEngage').value||'Укажи количество.'}
+function build(){const d=val('weekDate');return `МОЙ ПЛАН ПРОДАЖ НА НЕДЕЛЮ${d?'\nНеделя с '+pretty(d):''}\n\n🎯 ЧТО ПРОДАЮ\n${bullets(lines('product'))}\n\n📍 КУДА ВОВЛЕКАЮ\n${val('point')||'НЕ ЗАПОЛНЕНО'}\n\n📱 ГДЕ ПРОДАЮ\n${bullets(lines('place'))}\n\n👥 КОМУ ПРОДАЮ\n${val('audienceWho')||'НЕ ЗАПОЛНЕНО'}\n\n🔥 ЧЕРЕЗ ЧТО ЗАХОЖУ\n${val('audiencePain')||'НЕ ЗАПОЛНЕНО'}\n\n🔗 ПРОДАЮЩАЯ СВЯЗКА\n${val('funnel')||'НЕ ЗАПОЛНЕНО'}\n\n⚡ ОБЪЁМ ДЕЙСТВИЙ\n${bullets(actionLines())}\n\n🏁 ЦЕЛЬ ПО ВОВЛЕЧЕНИЮ\n${val('goalEngage')||'НЕ ЗАПОЛНЕНО'}\n\n💰 ЦЕЛЬ ПО ПРОДАЖАМ\n${val('goalSales')||'НЕ ЗАПОЛНЕНО'}`}
+
+
+function currentPlanSections(){
+  const sections=[];
+  const prods=lines('product');
+  const point=val('point');
+  const places=lines('place');
+  const who=val('audienceWho');
+  const angle=val('audiencePain');
+  const funnel=val('funnel');
+  const actions=actionLines();
+  const engage=val('goalEngage');
+  const sales=lines('goalSales');
+
+  if(prods.length) sections.push(['Что продаю',prods.map(x=>'• '+x).join('\n')]);
+  if(point) sections.push(['Куда вовлекаю',point]);
+  if(places.length) sections.push(['Где продаю',places.map(x=>'• '+x).join('\n')]);
+  if(who) sections.push(['Кому продаю',who]);
+  if(angle) sections.push(['Через что захожу',angle]);
+  if(funnel) sections.push(['Продающая связка',funnel]);
+  if(actions.length) sections.push(['Объём действий',actions.map(x=>'• '+x).join('\n')]);
+  if(engage) sections.push(['Цель по вовлечению',engage]);
+  if(sales.length) sections.push(['Цель по продажам',sales.map(x=>'• '+x).join('\n')]);
+  return sections;
+}
+
+function currentPlanText(){
+  const sections=currentPlanSections();
+  const date=pretty(val('weekDate'));
+  let out='МОЙ ПЛАН ПРОДАЖ НА НЕДЕЛЮ';
+  if(date) out+=`\nНеделя с ${date}`;
+  if(sections.length) out+='\n\n'+sections.map(([t,v])=>`${t.toUpperCase()}\n${v}`).join('\n\n');
+  return out;
+}
+
+function renderPlanPreview(){
+  const body=$('planPreviewBody');
+  const sections=currentPlanSections();
+  if(!sections.length){
+    body.innerHTML='<div class="preview-empty">Пока нечего показывать. Заполни хотя бы один шаг - и здесь появится текущий план.</div>';
+    return;
+  }
+  body.innerHTML=sections.map(([t,v])=>`<div class="preview-section"><b>${t}</b><div>${escAud(v)}</div></div>`).join('');
+}
+function openPlanPreview(){
+  renderPlanPreview();
+  const modal=$('planPreviewModal');
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
+function closePlanPreview(){
+  const modal=$('planPreviewModal');
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+$('previewPlanBtn')?.addEventListener('click',openPlanPreview);
+$('planPreviewModal')?.addEventListener('click',e=>{
+  if(e.target.closest('[data-preview-close]')) closePlanPreview();
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape' && $('planPreviewModal')?.classList.contains('open'))closePlanPreview()});
+$('copyPreviewPlan')?.addEventListener('click',async()=>{
+  const txt=currentPlanText();
+  try{await navigator.clipboard.writeText(txt)}
+  catch(e){
+    const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();
+  }
+  $('toast').classList.add('show');
+  setTimeout(()=>$('toast').classList.remove('show'),1500);
+});
+function weeklyRouteCompletion(){
+  const products=lines('product').length>0;
+  const point=!!val('point');
+  const places=lines('place').length>0;
+  const audience=!!val('audienceWho') && !!val('audiencePain');
+  const funnelReady=!!val('funnel');
+  const actionsReady=actionLines().length>0;
+  const engage=!!val('goalEngage');
+  const sales=!!val('goalSales');
+  const result=products&&point&&places&&audience&&funnelReady&&actionsReady&&engage&&sales;
+  return [products,point,places,audience,funnelReady,actionsReady,engage,sales,result];
+}
+function syncWeeklyRoute(){
+  if(window.salesWizardSetCompletion) window.salesWizardSetCompletion(weeklyRouteCompletion());
+  if(window.salesWizardRefreshNavigation) window.salesWizardRefreshNavigation();
+  const pb=$('previewPlanBtn');
+  if(pb) pb.disabled=currentPlanSections().length===0;
+}
+function completion(){const checks=[lines('product').length>0,!!val('point'),lines('place').length>0,(!!val('audienceWho')&&!!val('audiencePain')),funnel.length>0,actionLines().length>0,!!val('goalEngage'),!!val('goalSales')];const n=checks.filter(Boolean).length;$('progressText').textContent=`${n} из 8`;$('progressFill').style.width=(n/8*100)+'%'}
+function changed(renderSales=true){
+  ensureSelectionMarks();
+  autoEngage();
+  updateSalesGoalHidden();
+  if(renderSales)renderSalesGoals();
+  $('actions').value=actionLines().map(x=>'• '+x).join('\n');
+  $('strategy').textContent=build();
+  const ap=$('audiencePreview'); if(ap) ap.textContent=val('audienceWho')||'Собери аудиторию выше.';
+  const ang=$('anglePreview'); if(ang) ang.textContent=val('audiencePain')?('Через что заходим: '+val('audiencePain')):'';
+  syncBasicChips();
+  completion();
+  syncWeeklyRoute();
+}
+['weekDate','product','point','place','audienceWho','audiencePain'].forEach(id=>{$ (id).addEventListener('input',()=>changed(id==='product'));$(id).addEventListener('change',()=>changed(id==='product'))});renderSalesGoals();changed(false);syncWeeklyRoute();
+$('copyBtn').onclick=async()=>{const txt=build();try{await navigator.clipboard.writeText(txt)}catch(e){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1500)};$('resetBtn').onclick=()=>{if(!confirm('Очистить текущий план и начать новую неделю?'))return;
+  state={}; aud={type:'',situation:'',focus:[],angleType:'',angleSpecific:'',customType:false,customSituation:false,customFocus:false,customAngle:false}; audStep=1; funnelState={source:'',trigger:'',contact:'',conversion:'',outcomes:[]}; trafficSelected=[]; trafficDetails={}; customActions=[]; salesGoalVals={};
+  document.querySelectorAll('input, textarea, select').forEach(el=>{
+    if(el.id==='weekDate') el.value=moscowToday();
+    else if(el.tagName==='SELECT') el.selectedIndex=0;
+    else if(el.type==='number') el.value=0;
+    else el.value='';
+  });
+  renderAudience(); renderFunnel(); renderTrafficMethods(); renderCustomActions(); renderSalesGoals(); syncBasicChips(); changed(false); syncWeeklyRoute();
+  if(window.salesWizardShow) window.salesWizardShow(0,true); else window.scrollTo({top:0,behavior:'smooth'});
+};
+
+
+</script></body></html>
