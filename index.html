@@ -621,6 +621,110 @@ button, .chip, .aud-choice, .funnel-options button{
 .activity-choice-list button.active{border-color:rgba(245,168,0,.48);background:rgba(245,168,0,.08);color:#fff}
 .activity-choice-list button.active span{background:var(--accent);border-color:var(--accent);color:#111}
 @media(max-width:560px){.activity-choice-list{grid-template-columns:1fr}.activity-choice-list button{min-height:40px}}
+
+.preview-section div{white-space:pre-line}
+.strategy{white-space:pre-wrap}
+
+[data-sales-step="8"] .reset{
+  background:transparent!important;
+  border:1px solid rgba(255,255,255,.10)!important;
+  color:rgba(255,255,255,.48)!important;
+  box-shadow:none!important;
+}
+[data-sales-step="8"] .reset:hover{color:rgba(255,255,255,.72)!important;border-color:rgba(255,255,255,.16)!important}
+
+.action-field-error{
+  border-color:#e15b64!important;
+  box-shadow:0 0 0 2px rgba(225,91,100,.12)!important;
+}
+.action-validation-error{
+  display:none;
+  margin-top:7px;
+  padding:7px 9px;
+  border:1px solid rgba(225,91,100,.35);
+  background:rgba(225,91,100,.08);
+  color:#ff9aa1;
+  border-radius:8px;
+  font-size:9.5px;
+  line-height:1.3;
+  font-weight:800;
+}
+.action-validation-error.show{display:block}
+
+.action-required-wrap{position:relative}
+#act_activity.action-field-error{
+  border:1px solid #e15b64!important;
+  background:#111115!important;
+  color:#fff!important;
+  box-shadow:0 0 0 2px rgba(225,91,100,.12)!important;
+}
+#activityFreqError.show{
+  display:block!important;
+  color:#ff9ca3!important;
+  border-color:rgba(225,91,100,.38)!important;
+  background:rgba(225,91,100,.085)!important;
+}
+
+.activity-controls{display:grid;gap:12px;width:100%}
+.activity-frequency-row{display:grid;grid-template-columns:minmax(190px,260px) minmax(0,1fr);gap:10px;align-items:start}
+.activity-frequency-row .mini-select{width:100%}
+.activity-frequency-row .action-validation-error{
+  margin-top:0!important;
+  min-height:42px;
+  display:none!important;
+  align-items:center;
+}
+.activity-frequency-row .action-validation-error.show{
+  display:flex!important;
+}
+.activity-choice-box{width:100%}
+.activity-choice-list{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:8px!important;
+  width:100%!important;
+}
+.activity-choice-list button{
+  width:100%!important;
+  min-width:0!important;
+}
+.activity-note-wrap{width:100%;max-width:520px}
+.activity-note-wrap input{width:100%!important;min-height:42px}
+@media(max-width:700px){
+  .activity-frequency-row{grid-template-columns:1fr}
+  .activity-frequency-row .action-validation-error{min-height:auto}
+  .activity-choice-list{grid-template-columns:1fr!important}
+  .activity-note-wrap{max-width:none}
+}
+
+/* Activity required-state: final override */
+#act_activity.action-field-error{
+  border:1px solid #e15b64!important;
+  background:#111115!important;
+  color:#fff!important;
+  box-shadow:0 0 0 2px rgba(225,91,100,.12)!important;
+}
+#activityFreqError{
+  display:none!important;
+}
+#activityFreqError.show{
+  display:flex!important;
+  align-items:center!important;
+  min-height:42px!important;
+  border:1px solid rgba(225,91,100,.42)!important;
+  background:rgba(225,91,100,.10)!important;
+  color:#ff9ca3!important;
+}
+
+#act_activity,
+#act_activity option{
+  background:#111115;
+  color:#fff;
+}
+#act_activity.action-field-error option{
+  background:#111115!important;
+  color:#fff!important;
+}
 </style></head><body>
 <div class="wrap">
 <section class="hero"><div class="logo"><div class="logo-ring">⚡</div><div class="logo-name">New<br/>Level Team</div></div><div class="eyebrow">Планирование продаж на 7 дней</div><h1>Продажи <b>на неделю</b></h1><p>Собери конкретный план: что ты продаёшь, кому, через какую проблему или желание заходишь, какой связкой ведёшь к продаже и какой объём действий делаешь.</p></section>
@@ -649,7 +753,7 @@ button, .chip, .aud-choice, .funnel-options button{
 </div><div class="wizard-guide" id="wizardGuide"><div class="wizard-guide-icon">?</div><div><b id="wizardGuideTitle">Что сейчас сделать</b><span id="wizardGuideText"></span></div></div></div><main class="form">
 <section class="card" data-sales-step="0"><div class="topline"><div class="num">01</div><div class="titlebox"><h2>Что продаём?</h2><p>Выбери одно или несколько направлений.</p><div class="micro">Можно выбрать готовое или написать своё</div></div></div>
 <div class="chips" data-mode="multi" data-target="product">
-<button class="chip">Партнёрство в проекте</button><button class="chip">Обучение</button>
+<button class="chip">Партнёрство в проекте</button><button class="chip">Обучение/Систему</button>
 <button class="chip">Тест-драйв системы</button><button class="chip">Тест-драйв проекта</button>
 <button class="chip">Нейрорекрутинг</button><button class="chip">Обучение по трафику</button>
 <button class="chip">Игровая воронка</button><button class="chip">Бот-рекрутер</button>
@@ -837,12 +941,15 @@ button, .chip, .aud-choice, .funnel-options button{
 <button type="button" class="action-toggle" data-action-toggle="3"><span class="action-toggle-mark">✓</span><b>Отработка активности</b><em>Добавить в план</em></button>
 <div class="action-card-body">
   <div><h3>Отработка активности</h3><p>Выбери частоту и отметь, с какой активностью ты реально будешь работать.</p></div>
-  <div class="action-controls">
-    <select class="mini-select" id="act_activity">
-      <option value="">Частота не выбрана</option>
-      <option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
-      <option>2 раза в неделю</option><option>1 раз в неделю</option><option>Свой режим</option>
-    </select>
+  <div class="activity-controls">
+    <div class="activity-frequency-row">
+      <select class="mini-select" id="act_activity">
+        <option value="">Частота не выбрана</option>
+        <option>Ежедневно</option><option>Через день</option><option>3 раза в неделю</option>
+        <option>2 раза в неделю</option><option>1 раз в неделю</option><option>Свой режим</option>
+      </select>
+      <div class="action-validation-error" id="activityFreqError">Сначала выбери частоту отработки активности ↑</div>
+    </div>
 
     <div class="activity-choice-box">
       <div class="activity-choice-title">Что именно отрабатываю</div>
@@ -859,7 +966,9 @@ button, .chip, .aud-choice, .funnel-options button{
       </div>
     </div>
 
-    <input id="act_activity_note" placeholder="Свой вариант или заметка для себя"/>
+    <div class="activity-note-wrap">
+      <input id="act_activity_note" placeholder="Свой вариант или заметка для себя"/>
+    </div>
   </div>
 </div></div>
 <div class="action-card action-collapsible" data-action-box="4">
@@ -945,6 +1054,24 @@ button, .chip, .aud-choice, .funnel-options button{
     var pain=document.getElementById('audiencePain');
     return !!(who && who.value.trim() && pain && pain.value.trim());
   }
+  function validateActions(showErrors){
+    var freqEl=document.getElementById('act_activity');
+    var err=document.getElementById('activityFreqError');
+    var activityBox=document.querySelector('[data-action-box="3"]');
+    var activityOn=!!(activityBox && activityBox.classList.contains('active'));
+    var selectedCount=document.querySelectorAll('#activityChoiceList [data-activity-type].active').length;
+    var note=document.getElementById('act_activity_note');
+    var hasDetails=selectedCount>0 || !!(note && note.value.trim());
+    var hasFreq=!!(freqEl && freqEl.value.trim());
+    var missing=activityOn && hasDetails && !hasFreq;
+
+    if(freqEl)freqEl.classList.toggle('action-field-error',missing);
+    if(err)err.classList.toggle('show',missing);
+    window.activityActionValid=!missing;
+
+    return !missing;
+  }
+
   function stepComplete(index){
     if(index===0){
       var p=document.getElementById('product');
@@ -966,7 +1093,7 @@ button, .chip, .aud-choice, .funnel-options button{
       return !!(f && f.value.trim());
     }
     if(index===5){
-      return typeof actionLines==='function' && actionLines().length>0;
+      return typeof actionLines==='function' && actionLines().length>0 && validateActions(false);
     }
     if(index===6){
       var ge=document.getElementById('goalEngage');
@@ -1069,7 +1196,7 @@ button, .chip, .aud-choice, .funnel-options button{
     if(guideTitle)guideTitle.textContent=guides[step][0];
     if(guideText)guideText.textContent=guides[step][1];
     if(prev)prev.disabled=step===0;
-    if(next)next.textContent=step===panels.length-2?'Посмотреть готовый план →':step===panels.length-1?'Вернуться к началу':'Дальше →';
+    if(next)next.textContent=step===panels.length-2?'Посмотреть готовый план →':step===panels.length-1?'Скопировать план':'Дальше →';
     syncNextAvailability();
     if(scroll!==false){
       var target=document.getElementById('wizardGuide') || shell || panels[step];
@@ -1132,6 +1259,7 @@ button, .chip, .aud-choice, .funnel-options button{
       return;
     }
     if(!canLeaveCurrentStepForward()){
+      if(step===5)validateActions(true);
       syncNextAvailability();
       var guide=document.getElementById('wizardGuideText');
       var hints=[
@@ -1140,7 +1268,7 @@ button, .chip, .aud-choice, .funnel-options button{
         'Отметь хотя бы одну площадку.',
         'Заверши текущий выбор: кто → ситуация → что болит → заход.',
         'Собери основную продающую связку.',
-        'Добавь хотя бы одно действие, которое реально будешь делать.',
+        'Проверь выбранные действия: для них должны быть заполнены обязательные настройки, например частота.',
         'Укажи цель по вовлечению.',
         'Поставь хотя бы одну цель по продажам.'
       ];
@@ -1148,8 +1276,21 @@ button, .chip, .aud-choice, .funnel-options button{
       return;
     }
     // Сразу блокируем кнопку на время перехода, чтобы двойной тап не перескочил ещё один шаг.
+    if(step===panels.length-1){
+      const txt=(typeof build==='function'?build():(document.getElementById('strategy')?.textContent||''));
+      try{
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(txt);
+        }else{
+          const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();
+        }
+      }catch(err){}
+      const toast=document.getElementById('toast');
+      if(toast){toast.classList.add('show');setTimeout(function(){toast.classList.remove('show')},1500)}
+      return;
+    }
     next.disabled=true;
-    salesWizardShow(step===panels.length-1?0:step+1,true);
+    salesWizardShow(step+1,true);
   }
   var lastNavTouch=0;
   var navTransitionLock=false;
@@ -1675,7 +1816,17 @@ document.getElementById('actionsUI')?.addEventListener('click',e=>{
   const key=actionKeys[+b.dataset.actionToggle];
   actionEnabled[key]=!actionEnabled[key];
   if(!actionEnabled[key] && key==='traffic'){trafficSelected=[];trafficDetails={};renderTrafficMethods()}
+  if(key==='activity'){
+    if(!actionEnabled.activity){
+      const el=document.getElementById('act_activity'),err=document.getElementById('activityFreqError');
+      if(el)el.classList.remove('action-field-error');
+      if(err)err.classList.remove('show');
+      window.activityActionValid=true;
+    }
+    if(typeof updateActivityRequiredUI==='function')updateActivityRequiredUI();
+  }
   syncActionBoxes();changed();
+  if(key==='activity' && typeof updateActivityRequiredUI==='function')updateActivityRequiredUI();
 });
 syncActionBoxes();
 
@@ -1697,6 +1848,26 @@ function renderActivityChoices(){
     b.setAttribute('aria-pressed',active?'true':'false');
   });
 }
+function updateActivityRequiredUI(){
+  const freqEl=$('act_activity');
+  const err=$('activityFreqError');
+  const hasDetails=activitySelected.length>0 || !!val('act_activity_note');
+  const missing=!!actionEnabled.activity && hasDetails && !val('act_activity');
+
+  if(freqEl)freqEl.classList.toggle('action-field-error',missing);
+  if(err)err.classList.toggle('show',missing);
+
+  // Expose only the boolean to the wizard layer so navigation and visuals use the same rule.
+  window.activityActionValid=!missing;
+  if(window.salesWizardRefreshNavigation)window.salesWizardRefreshNavigation();
+  return !missing;
+}
+
+$('act_activity')?.addEventListener('change',()=>{
+  updateActivityRequiredUI();
+  changed();
+  updateActivityRequiredUI();
+});
 $('activityChoiceList')?.addEventListener('click',e=>{
   const b=e.target.closest('[data-activity-type]');if(!b)return;
   e.preventDefault();
@@ -1704,9 +1875,15 @@ $('activityChoiceList')?.addEventListener('click',e=>{
   const i=activitySelected.indexOf(x);
   if(i>=0)activitySelected.splice(i,1);else activitySelected.push(x);
   renderActivityChoices();
+  updateActivityRequiredUI();
   changed();
+  updateActivityRequiredUI();
 });
 renderActivityChoices();
+$('act_activity_note')?.addEventListener('input',()=>{
+  updateActivityRequiredUI();
+});
+updateActivityRequiredUI();
 
 function actionLines(){
   const a=[];let n;
@@ -1724,7 +1901,9 @@ function actionLines(){
   if(actionEnabled.activity && val('act_activity') && (activitySelected.length || val('act_activity_note'))){
     const parts=[...activitySelected];
     if(val('act_activity_note'))parts.push(`Свой вариант / заметка: ${val('act_activity_note')}`);
-    a.push(`Отработка активности: ${val('act_activity')}${parts.length?' - '+parts.join('; '):''}`);
+    let t=`Отработка активности: ${val('act_activity')}`;
+    if(parts.length)t+='\n'+parts.map(x=>'     - '+x).join('\n');
+    a.push(t);
   }
   if(actionEnabled.outgoing && (n=+val('act_outgoing'))>0)a.push(`Исходящие сообщения: ${n} ${val('act_outgoing_unit')}${val('act_outgoing_note')?' - '+val('act_outgoing_note'):''}`);
   if(actionEnabled.mail && (n=+val('act_mail'))>0)a.push(`Рассылки по подписной базе: ${n}${val('act_mail_note')?' - '+val('act_mail_note'):''}`);
@@ -1741,6 +1920,11 @@ function build(){return `МОЙ ПЛАН ПРОДАЖ НА НЕДЕЛЮ\n\n🎯 
 
 
 
+
+function normalizeProductName(x){
+  const t=String(x||'').trim();
+  return t==='Обучение' ? 'Обучение/Систему' : t;
+}
 function normalizeImportedPlanText(txt){
   return String(txt||'').replace(/\r/g,'').replace(/\u00a0/g,' ').trim();
 }
@@ -1881,7 +2065,20 @@ function importActionsText(raw){
   $('act_outgoing').value=0;$('act_outgoing_unit').value='в день';$('act_outgoing_note').value='';
   $('act_mail').value=0;$('act_mail_note').value='';
 
-  const rows=String(raw||'').split('\n').map(stripBulletLine).filter(x=>x && x!=='НЕ ЗАПОЛНЕНО');
+  const rawLines=String(raw||'').split('\n').filter(x=>x.trim() && x.trim()!=='НЕ ЗАПОЛНЕНО');
+  const rows=[];
+  for(let i=0;i<rawLines.length;i++){
+    const cleaned=stripBulletLine(rawLines[i]);
+    if(/^Отработка активности:/i.test(cleaned)){
+      let combined=cleaned;
+      while(i+1<rawLines.length && /^\s*[•\-*]/.test(rawLines[i+1]) && !/^\s*[•\-*]\s*(Посты:|Stories:|Трафик\s*-|Исходящие сообщения:|Рассылки по подписной базе:)/i.test(rawLines[i+1])){
+        combined+='\n'+stripBulletLine(rawLines[++i]);
+      }
+      rows.push(combined);
+    }else{
+      rows.push(cleaned);
+    }
+  }
   rows.forEach(row=>{
     let m;
     if((m=row.match(/^Посты:\s*(\d+)(?:\s*-\s*(.*))?$/i))){
@@ -1898,13 +2095,18 @@ function importActionsText(raw){
       trafficDetails[key]={freq,note:key==='Свой способ' && method!=='Свой способ'?`${method}${note?' - '+note:''}`:note};
       return;
     }
-    if((m=row.match(/^Отработка активности:\s*([^-]+?)(?:\s*-\s*(.*))?$/i))){
+    if(/^Отработка активности:/i.test(row)){
       actionEnabled.activity=true;
-      $('act_activity').value=m[1].trim();
       activitySelected=[];
       $('act_activity_note').value='';
-      const details=(m[2]||'').split(/\s*;\s*/).map(x=>x.trim()).filter(Boolean);
-      details.forEach(x=>{
+      const parts=row.split('\n').map(x=>x.trim()).filter(Boolean);
+      const head=parts.shift()||'';
+      let mh=head.match(/^Отработка активности:\s*([^-]+?)(?:\s*-\s*(.*))?$/i);
+      if(mh){
+        $('act_activity').value=mh[1].trim();
+        if(mh[2])parts.unshift(...mh[2].split(/\s*;\s*/).map(x=>x.trim()).filter(Boolean));
+      }
+      parts.forEach(x=>{
         if(activityKnown.includes(x))activitySelected.push(x);
         else if(/^Свой вариант \/ заметка:\s*/i.test(x))$('act_activity_note').value=x.replace(/^Свой вариант \/ заметка:\s*/i,'').trim();
         else if(x)$('act_activity_note').value=[$('act_activity_note').value,x].filter(Boolean).join('; ');
@@ -1929,7 +2131,7 @@ function importSalesText(raw){
   salesGoalVals={};
   String(raw||'').split('\n').map(stripBulletLine).filter(Boolean).forEach(row=>{
     const m=row.match(/^(\d+)\s*-\s*(.+)$/);
-    if(m)salesGoalVals[m[2].trim()]=+m[1];
+    if(m)salesGoalVals[normalizeProductName(m[2].trim())]=+m[1];
   });
 }
 function resetForImportedPlan(){
@@ -1952,7 +2154,8 @@ function applyImportedPlanText(txt){
   }
   resetForImportedPlan();
 
-  setImportedLines('product',sec.product);
+  const importedProducts=String(sec.product||'').split('\n').map(stripBulletLine).filter(Boolean).map(normalizeProductName);
+  setLines('product',importedProducts);
   $('point').value=(sec.point||'').replace(/^•\s*/,'').trim();
   setImportedLines('place',sec.place);
   matchImportedAudience(sec.audience,sec.angle);
@@ -2148,6 +2351,7 @@ function changed(renderSales=true){
   syncBasicChips();
   completion();
   syncWeeklyRoute();
+  validateActions(false);
   renderPlanChecks();
 }
 ['product','point','place','audienceWho','audiencePain'].forEach(id=>{$ (id).addEventListener('input',()=>changed(id==='product'));$(id).addEventListener('change',()=>changed(id==='product'))});renderSalesGoals();changed(false);syncWeeklyRoute();
