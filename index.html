@@ -503,6 +503,33 @@ button, .chip, .aud-choice, .funnel-options button{
 
 .preview-copy-status{display:none;text-align:center;font-size:10px;font-weight:900;color:var(--accent);padding-top:2px}
 .preview-copy-status.show{display:block}
+
+.import-plan-btn{border-color:rgba(255,255,255,.12);background:#15151a;color:rgba(255,255,255,.72)}
+.plan-import-screen{position:fixed;inset:0;z-index:1200;display:none;background:#0b0b0e;overflow:auto}
+.plan-import-screen.open{display:block}
+.plan-import-inner{width:min(760px,100%);min-height:100dvh;margin:0 auto;padding:22px 16px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column}
+.plan-import-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding-top:env(safe-area-inset-top,0px)}
+.plan-import-head small{display:block;color:var(--accent);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}
+.plan-import-head h2{margin:0 0 8px;font-size:27px;line-height:1.1;letter-spacing:-.5px}
+.plan-import-head p{margin:0;max-width:600px;font-size:12px;line-height:1.55;color:rgba(255,255,255,.5)}
+.plan-import-x{border:0;background:#15151a;color:rgba(255,255,255,.6);width:38px;height:38px;border-radius:10px;font-size:25px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 38px}
+.plan-import-body{flex:1;display:flex;flex-direction:column;padding:18px 0 14px}
+#importPlanText{flex:1;min-height:420px;width:100%;resize:vertical;border:1px solid rgba(255,255,255,.12);background:#111115;border-radius:15px;padding:14px;color:#fff;font:inherit;font-size:12px;line-height:1.55}
+.plan-import-note{font-size:10px;line-height:1.45;color:rgba(255,255,255,.36);margin-top:9px}
+.plan-import-error{display:none;margin-top:10px;padding:10px 11px;border-radius:10px;background:rgba(255,90,90,.08);border:1px solid rgba(255,90,90,.2);color:#ffb3b3;font-size:10px;line-height:1.45}
+.plan-import-error.show{display:block}
+.plan-import-actions{display:grid;grid-template-columns:130px 1fr;gap:9px;position:sticky;bottom:0;background:#0b0b0e;padding-top:10px;padding-bottom:env(safe-area-inset-bottom,0px)}
+.plan-import-cancel,.plan-import-apply{min-height:48px;border-radius:11px;font-weight:900;cursor:pointer}
+.plan-import-cancel{border:1px solid rgba(255,255,255,.1);background:#15151a;color:rgba(255,255,255,.7)}
+.plan-import-apply{border:0;background:var(--accent);color:#111}
+@media(max-width:560px){
+  .sales-route-actions{gap:5px!important}
+  .import-plan-btn,.preview-plan-btn{font-size:8.5px!important;padding:0 7px!important}
+  .plan-import-inner{padding:14px 12px calc(16px + env(safe-area-inset-bottom,0px))}
+  .plan-import-head h2{font-size:24px}
+  #importPlanText{min-height:50dvh}
+  .plan-import-actions{grid-template-columns:1fr}
+}
 </style></head><body>
 <div class="wrap">
 <section class="hero"><div class="logo"><div class="logo-ring">⚡</div><div class="logo-name">New<br/>Level Team</div></div><div class="eyebrow">Планирование продаж на 7 дней</div><h1>Продажи <b>на неделю</b></h1><p>Собери конкретный план: что ты продаёшь, кому, через какую проблему или желание заходишь, какой связкой ведёшь к продаже и какой объём действий делаешь.</p></section>
@@ -512,6 +539,7 @@ button, .chip, .aud-choice, .funnel-options button{
   <div class="sales-route-head sales-route-head-simple">
     <span id="wizardStepName" class="route-current-name">Что продаём</span>
     <div class="sales-route-actions">
+      <button type="button" id="importPlanBtn" class="preview-plan-btn import-plan-btn">Заполнить из прошлого плана</button>
       <button type="button" id="previewPlanBtn" class="preview-plan-btn">Посмотреть план</button>
       <div class="wizard-step-count" id="wizardStepCount">1 из 9</div>
     </div>
@@ -715,6 +743,28 @@ button, .chip, .aud-choice, .funnel-options button{
 <section class="card" data-sales-step="7" hidden=""><div class="topline"><div class="num">08</div><div class="titlebox"><h2>Цель по продажам</h2><p>Для каждого выбранного направления продаж - своя цель.</p></div></div><div class="goal-list" id="salesGoals"></div><div class="hint">Если в пункте 01 выбрано два продукта, здесь автоматически появятся две отдельные цели.</div><textarea id="goalSales" style="display:none"></textarea></section>
 </main><div class="wizard-nav" id="wizardNav"><button class="wizard-prev" id="wizardPrev">← Назад</button><button class="wizard-next" id="wizardNext">Дальше →</button></div>
 <section class="result" data-sales-step="8" hidden=""><div class="result-head"><div class="small">Готовый итог</div><h2>Мой план продаж на неделю</h2><p>Собирается автоматически из заполненных пунктов.</p></div><div class="strategy" id="strategy"></div><button class="copy" id="copyBtn">Скопировать план продаж</button><button class="reset" id="resetBtn">Очистить и собрать новую неделю</button></section></div>
+
+<div class="plan-import-screen" id="planImportScreen" aria-hidden="true">
+  <div class="plan-import-inner">
+    <div class="plan-import-head">
+      <div>
+        <small>Заполнить из прошлого плана</small>
+        <h2>Вставь готовый план целиком</h2>
+        <p>Скопируй сюда план, который ты раньше получила в этом инструменте. Я разложу его обратно по шагам, и ты сможешь просто подкорректировать нужные пункты.</p>
+      </div>
+      <button type="button" class="plan-import-x" id="closeImportPlan" aria-label="Закрыть">×</button>
+    </div>
+    <div class="plan-import-body">
+      <textarea id="importPlanText" placeholder="МОЙ ПЛАН ПРОДАЖ НА НЕДЕЛЮ&#10;&#10;🎯 ЧТО ПРОДАЮ&#10;• ...&#10;&#10;📍 КУДА ВОВЛЕКАЮ&#10;..."></textarea>
+      <div class="plan-import-note">Лучше вставлять план целиком без изменений в заголовках разделов. Дата из старого плана не переносится - останется текущая.</div>
+      <div class="plan-import-error" id="importPlanError"></div>
+    </div>
+    <div class="plan-import-actions">
+      <button type="button" class="plan-import-cancel" id="cancelImportPlan">Отмена</button>
+      <button type="button" class="plan-import-apply" id="applyImportPlan">Заполнить план</button>
+    </div>
+  </div>
+</div>
 <div class="plan-preview-modal" id="planPreviewModal" aria-hidden="true">
   <div class="plan-preview-backdrop" data-preview-close="1"></div>
   <div class="plan-preview-dialog" role="dialog" aria-modal="true" aria-labelledby="planPreviewTitle">
@@ -1373,6 +1423,253 @@ function autoEngage(){const p=val('point');if(p&&(!val('goalEngageTarget')||stat
 function build(){const d=val('weekDate');return `МОЙ ПЛАН ПРОДАЖ НА НЕДЕЛЮ${d?'\nНеделя с '+pretty(d):''}\n\n🎯 ЧТО ПРОДАЮ\n${bullets(lines('product'))}\n\n📍 КУДА ВОВЛЕКАЮ\n${val('point')||'НЕ ЗАПОЛНЕНО'}\n\n📱 ГДЕ ПРОДАЮ\n${bullets(lines('place'))}\n\n👥 КОМУ ПРОДАЮ\n${val('audienceWho')||'НЕ ЗАПОЛНЕНО'}\n\n🔥 ЧЕРЕЗ ЧТО ЗАХОЖУ\n${val('audiencePain')||'НЕ ЗАПОЛНЕНО'}\n\n🔗 ПРОДАЮЩАЯ СВЯЗКА\n${val('funnel')||'НЕ ЗАПОЛНЕНО'}\n\n⚡ ОБЪЁМ ДЕЙСТВИЙ\n${bullets(actionLines())}\n\n🏁 ЦЕЛЬ ПО ВОВЛЕЧЕНИЮ\n${val('goalEngage')||'НЕ ЗАПОЛНЕНО'}\n\n💰 ЦЕЛЬ ПО ПРОДАЖАМ\n${val('goalSales')||'НЕ ЗАПОЛНЕНО'}`}
 
 
+
+function normalizeImportedPlanText(txt){
+  return String(txt||'').replace(/\r/g,'').replace(/\u00a0/g,' ').trim();
+}
+function stripBulletLine(x){return x.replace(/^\s*[•\-*]\s*/,'').trim()}
+function parseImportedSections(txt){
+  txt=normalizeImportedPlanText(txt);
+  const defs=[
+    ['product','🎯 ЧТО ПРОДАЮ'],
+    ['point','📍 КУДА ВОВЛЕКАЮ'],
+    ['place','📱 ГДЕ ПРОДАЮ'],
+    ['audience','👥 КОМУ ПРОДАЮ'],
+    ['angle','🔥 ЧЕРЕЗ ЧТО ЗАХОЖУ'],
+    ['funnel','🔗 ПРОДАЮЩАЯ СВЯЗКА'],
+    ['actions','⚡ ОБЪЁМ ДЕЙСТВИЙ'],
+    ['engage','🏁 ЦЕЛЬ ПО ВОВЛЕЧЕНИЮ'],
+    ['sales','💰 ЦЕЛЬ ПО ПРОДАЖАМ']
+  ];
+  const found=[];
+  defs.forEach(([key,label])=>{
+    const i=txt.indexOf(label);
+    if(i>=0)found.push({key,label,i});
+  });
+  found.sort((a,b)=>a.i-b.i);
+  const out={};
+  found.forEach((x,n)=>{
+    const start=x.i+x.label.length;
+    const end=n+1<found.length?found[n+1].i:txt.length;
+    out[x.key]=txt.slice(start,end).trim();
+  });
+  return out;
+}
+function setImportedLines(id,raw){
+  const arr=String(raw||'').split('\n').map(stripBulletLine).filter(x=>x && x!=='НЕ ЗАПОЛНЕНО');
+  setLines(id,arr);
+  return arr;
+}
+function matchImportedAudience(who,angle){
+  who=(who||'').trim(); angle=(angle||'').trim();
+  let matched=null;
+  outer:
+  for(const [type,situations] of Object.entries(audData)){
+    for(const [situation,d] of Object.entries(situations)){
+      for(const focus of d.focus){
+        if(`${type}. ${situation}. ${focus}`===who){
+          matched={type,situation,focus,customType:false,customSituation:false,customFocus:false};
+          break outer;
+        }
+      }
+    }
+  }
+  if(matched){
+    aud={
+      type:matched.type,situation:matched.situation,focus:[matched.focus],
+      angleType:'',angleSpecific:angle||'',
+      customType:false,customSituation:false,customFocus:false,customAngle:false
+    };
+    const d=audData[matched.type][matched.situation];
+    if(d.problem.includes(angle))aud.angleType='Проблема';
+    else if(d.desire.includes(angle))aud.angleType='Желание';
+    else if(angle){aud.angleType='';aud.customAngle=true}
+    audStep=4;
+    return;
+  }
+
+  // Fallback for plans edited by hand: preserve the exact text instead of losing it.
+  let type='',rest=who;
+  for(const known of ['Сетевик','Не сетевик']){
+    if(who===known || who.startsWith(known+'. ')){
+      type=known;
+      rest=who.slice(known.length).replace(/^\.\s*/,'');
+      break;
+    }
+  }
+  aud={
+    type:type||who,
+    situation:rest||'',
+    focus:[],
+    angleType:'',
+    angleSpecific:angle||'',
+    customType:!type,
+    customSituation:!!rest,
+    customFocus:false,
+    customAngle:!!angle
+  };
+  audStep=4;
+}
+function importFunnelText(raw){
+  funnelState={source:'',trigger:'',contact:'',conversion:'',outcomes:[]};
+  Object.values(funnelCustomMap).forEach(id=>{if($(id))$(id).value=''});
+  const txt=(raw||'').trim();
+  if(!txt || txt==='НЕ ЗАПОЛНЕНО')return;
+
+  let parts=txt.split(/\s*→\s*/).map(x=>x.trim()).filter(Boolean);
+  let final=parts.length?parts[parts.length-1]:'';
+  let outcomes=[];
+  if(/^\(.*\)$/.test(final)){
+    outcomes=final.slice(1,-1).split(/\s*\/\s*/).map(x=>x.trim()).filter(Boolean);
+    parts.pop();
+  }else{
+    const knownOutcomes=['Регистрация в проекте','Оплата обучения','Покупка / заказ продукта','Запись на следующий шаг'];
+    if(knownOutcomes.includes(final)){outcomes=[final];parts.pop()}
+  }
+
+  const known={
+    source:['Контент','Stories','Клипы','Трафик','Рассылка'],
+    trigger:['Кодовое слово','Подарок','Призыв написать','Отклик / реакция','Бот'],
+    contact:['Личка','Бот','Чат'],
+    conversion:['Разбор','Аудит','Эфир / вебинар','Тест-драйв','Сразу предложение']
+  };
+  const order=['source','trigger','contact','conversion'];
+  parts.slice(0,4).forEach((x,i)=>{
+    const stage=order[i];
+    if(known[stage].includes(x))funnelState[stage]=x;
+    else{
+      funnelState[stage]='Свой вариант';
+      const cid=funnelCustomMap[stage]; if($(cid))$(cid).value=x;
+    }
+  });
+
+  const knownOutcomes=['Регистрация в проекте','Оплата обучения','Покупка / заказ продукта','Запись на следующий шаг'];
+  outcomes.forEach(x=>{
+    if(knownOutcomes.includes(x))funnelState.outcomes.push(x);
+    else{
+      if(!funnelState.outcomes.includes('Свой вариант'))funnelState.outcomes.push('Свой вариант');
+      if($(funnelCustomMap.outcome))$(funnelCustomMap.outcome).value=x;
+    }
+  });
+}
+function importActionsText(raw){
+  trafficSelected=[];trafficDetails={};customActions=[];
+  $('act_posts').value=0;$('act_posts_note').value='';
+  $('act_stories_freq').value='';$('act_stories_note').value='';
+  $('act_activity').value='';$('act_activity_note').value='';
+  $('act_outgoing').value=0;$('act_outgoing_unit').value='в день';$('act_outgoing_note').value='';
+  $('act_mail').value=0;$('act_mail_note').value='';
+
+  const rows=String(raw||'').split('\n').map(stripBulletLine).filter(x=>x && x!=='НЕ ЗАПОЛНЕНО');
+  rows.forEach(row=>{
+    let m;
+    if((m=row.match(/^Посты:\s*(\d+)(?:\s*-\s*(.*))?$/i))){
+      $('act_posts').value=+m[1];$('act_posts_note').value=m[2]||'';return;
+    }
+    if((m=row.match(/^Stories:\s*([^-]+?)(?:\s*-\s*(.*))?$/i))){
+      $('act_stories_freq').value=m[1].trim();$('act_stories_note').value=m[2]||'';return;
+    }
+    if((m=row.match(/^Трафик\s*-\s*(.+?):\s*([^-]+?)(?:\s*-\s*(.*))?$/i))){
+      const method=m[1].trim(),freq=m[2].trim(),note=m[3]||'';
+      const available=[...document.querySelectorAll('#trafficMethodList .traffic-method-row')].map(x=>x.dataset.trafficMethod);
+      const key=available.includes(method)?method:(available.includes('Свой способ')?'Свой способ':method);
+      if(!trafficSelected.includes(key))trafficSelected.push(key);
+      trafficDetails[key]={freq,note:key==='Свой способ' && method!=='Свой способ'?`${method}${note?' - '+note:''}`:note};
+      return;
+    }
+    if((m=row.match(/^Отработка активности:\s*([^-]+?)(?:\s*-\s*(.*))?$/i))){
+      $('act_activity').value=m[1].trim();$('act_activity_note').value=m[2]||'';return;
+    }
+    if((m=row.match(/^Исходящие сообщения:\s*(\d+)\s+(в день|за неделю)(?:\s*-\s*(.*))?$/i))){
+      $('act_outgoing').value=+m[1];$('act_outgoing_unit').value=m[2];$('act_outgoing_note').value=m[3]||'';return;
+    }
+    if((m=row.match(/^Рассылки по подписной базе:\s*(\d+)(?:\s*-\s*(.*))?$/i))){
+      $('act_mail').value=+m[1];$('act_mail_note').value=m[2]||'';return;
+    }
+    customActions.push(row);
+  });
+}
+function importEngageText(raw){
+  const txt=(raw||'').trim();
+  const m=txt.match(/^(\d+)\s+заявок\s*\/\s*вовлечений\s*→\s*(.+)$/i);
+  if(m){$('goalEngageQty').value=+m[1];$('goalEngageTarget').value=m[2].trim()}
+}
+function importSalesText(raw){
+  salesGoalVals={};
+  String(raw||'').split('\n').map(stripBulletLine).filter(Boolean).forEach(row=>{
+    const m=row.match(/^(\d+)\s*-\s*(.+)$/);
+    if(m)salesGoalVals[m[2].trim()]=+m[1];
+  });
+}
+function resetForImportedPlan(){
+  state={};
+  aud={type:'',situation:'',focus:[],angleType:'',angleSpecific:'',customType:false,customSituation:false,customFocus:false,customAngle:false};
+  audStep=1;
+  funnelState={source:'',trigger:'',contact:'',conversion:'',outcomes:[]};
+  trafficSelected=[];trafficDetails={};customActions=[];salesGoalVals={};
+
+  ['product','point','place','audienceWho','audiencePain','funnel','actions','goalEngage','goalSales','goalEngageTarget'].forEach(id=>{if($(id))$(id).value=''});
+  ['act_posts','act_outgoing','act_mail','goalEngageQty'].forEach(id=>{if($(id))$(id).value=0});
+  ['act_posts_note','act_stories_note','act_activity_note','act_outgoing_note','act_mail_note'].forEach(id=>{if($(id))$(id).value=''});
+  ['act_stories_freq','act_activity'].forEach(id=>{if($(id))$(id).selectedIndex=0});
+  if($('act_outgoing_unit'))$('act_outgoing_unit').value='в день';
+}
+function applyImportedPlanText(txt){
+  const sec=parseImportedSections(txt);
+  if(!sec.product && !sec.point && !sec.place && !sec.audience && !sec.funnel && !sec.actions){
+    throw new Error('Не нашла в тексте разделы плана. Вставь план целиком, начиная с «МОЙ ПЛАН ПРОДАЖ НА НЕДЕЛЮ».');
+  }
+  resetForImportedPlan();
+
+  setImportedLines('product',sec.product);
+  $('point').value=(sec.point||'').replace(/^•\s*/,'').trim();
+  setImportedLines('place',sec.place);
+  matchImportedAudience(sec.audience,sec.angle);
+  importFunnelText(sec.funnel);
+  importActionsText(sec.actions);
+  importEngageText(sec.engage);
+  importSalesText(sec.sales);
+
+  renderAudience();
+  renderFunnel();
+  renderTrafficMethods();
+  renderCustomActions();
+  renderSalesGoals();
+  updateSalesGoalHidden();
+  autoEngage();
+  syncBasicChips();
+  changed(false);
+  if(window.salesWizardShow)window.salesWizardShow(0,true);
+}
+
+function openImportPlan(){
+  $('importPlanText').value='';
+  $('importPlanError').textContent='';
+  $('importPlanError').classList.remove('show');
+  $('planImportScreen').classList.add('open');
+  $('planImportScreen').setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>$('importPlanText')?.focus(),50);
+}
+function closeImportPlan(){
+  $('planImportScreen').classList.remove('open');
+  $('planImportScreen').setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+$('importPlanBtn')?.addEventListener('click',openImportPlan);
+$('closeImportPlan')?.addEventListener('click',closeImportPlan);
+$('cancelImportPlan')?.addEventListener('click',closeImportPlan);
+$('applyImportPlan')?.addEventListener('click',()=>{
+  const err=$('importPlanError');
+  err.classList.remove('show');err.textContent='';
+  try{
+    applyImportedPlanText($('importPlanText').value);
+    closeImportPlan();
+  }catch(e){
+    err.textContent=e.message||'Не получилось разобрать план. Проверь, что вставлен полный текст.';
+    err.classList.add('show');
+  }
+});
 function currentPlanSections(){
   const sections=[];
   const prods=lines('product');
@@ -1469,7 +1766,7 @@ function syncWeeklyRoute(){
   const pb=$('previewPlanBtn');
   if(pb) pb.disabled=currentPlanSections().length===0;
 }
-function completion(){const checks=[lines('product').length>0,!!val('point'),lines('place').length>0,(!!val('audienceWho')&&!!val('audiencePain')),funnel.length>0,actionLines().length>0,!!val('goalEngage'),!!val('goalSales')];const n=checks.filter(Boolean).length;$('progressText').textContent=`${n} из 8`;$('progressFill').style.width=(n/8*100)+'%'}
+function completion(){const checks=[lines('product').length>0,!!val('point'),lines('place').length>0,(!!val('audienceWho')&&!!val('audiencePain')),!!val('funnel'),actionLines().length>0,!!val('goalEngage'),!!val('goalSales')];const n=checks.filter(Boolean).length;$('progressText').textContent=`${n} из 8`;$('progressFill').style.width=(n/8*100)+'%'}
 function changed(renderSales=true){
   ensureSelectionMarks();
   autoEngage();
