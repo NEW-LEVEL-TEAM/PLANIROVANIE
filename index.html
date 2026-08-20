@@ -607,6 +607,11 @@ button, .chip, .aud-choice, .funnel-options button{
     pointer-events:none!important;
   }
 }
+
+#wizardGuide{scroll-margin-top:10px}
+@media(max-width:560px){
+  #wizardGuide{scroll-margin-top:8px}
+}
 </style></head><body>
 <div class="wrap">
 <section class="hero"><div class="logo"><div class="logo-ring">⚡</div><div class="logo-name">New<br/>Level Team</div></div><div class="eyebrow">Планирование продаж на 7 дней</div><h1>Продажи <b>на неделю</b></h1><p>Собери конкретный план: что ты продаёшь, кому, через какую проблему или желание заходишь, какой связкой ведёшь к продаже и какой объём действий делаешь.</p></section>
@@ -1032,7 +1037,7 @@ button, .chip, .aud-choice, .funnel-options button{
     if(next)next.textContent=step===panels.length-2?'Посмотреть готовый план →':step===panels.length-1?'Вернуться к началу':'Дальше →';
     syncNextAvailability();
     if(scroll!==false){
-      var target=panels[step] || shell;
+      var target=document.getElementById('wizardGuide') || shell || panels[step];
       if(target){
         requestAnimationFrame(function(){
           target.scrollIntoView({behavior:'smooth',block:'start'});
@@ -1040,6 +1045,16 @@ button, .chip, .aud-choice, .funnel-options button{
       }
     }
   };
+  function scrollToWizardTop(){
+    var target=document.getElementById('wizardGuide') || document.getElementById('wizardShell');
+    if(target){
+      requestAnimationFrame(function(){
+        target.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    }
+  }
+  window.salesWizardScrollTop=scrollToWizardTop;
+
   function audienceInnerNext(){
     if(step!==3 || typeof audStep==='undefined') return false;
     // Внутри шага «Кому и через что» глобальные кнопки работают как навигация по матрёшке.
@@ -1053,6 +1068,7 @@ button, .chip, .aud-choice, .funnel-options button{
       audStep++;
       if(typeof renderAudience==='function') renderAudience();
       if(typeof changed==='function') changed();
+      scrollToWizardTop();
       return true;
     }
     // На финальном внутреннем экране остаёмся в шаге 4, пока не выбран заход.
@@ -1064,6 +1080,7 @@ button, .chip, .aud-choice, .funnel-options button{
     audStep--;
     if(typeof renderAudience==='function') renderAudience();
     if(typeof changed==='function') changed();
+    scrollToWizardTop();
     return true;
   }
   function goPrev(e){
@@ -1444,6 +1461,7 @@ $('audInterviewStage').addEventListener('click',e=>{
     aud.angleSpecific=list[i]||''; aud.customAngle=false;
   }
   renderAudience(); changed();
+  if(window.salesWizardScrollTop) window.salesWizardScrollTop();
 });
 
 $('audMiniProgress').addEventListener('click',e=>{
@@ -1451,6 +1469,7 @@ $('audMiniProgress').addEventListener('click',e=>{
   audStep=+b.dataset.audJump;
   renderAudience();
   changed();
+  if(window.salesWizardScrollTop) window.salesWizardScrollTop();
 });
 
 renderAudience();
