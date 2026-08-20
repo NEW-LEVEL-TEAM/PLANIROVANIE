@@ -564,6 +564,20 @@ button, .chip, .aud-choice, .funnel-options button{
  .action-toggle em{grid-column:2}
  .action-card-body{padding:0 10px 10px}
 }
+
+.wizard-next:disabled,
+.wizard-next.wizard-next-locked{
+  opacity:.32!important;
+  cursor:not-allowed!important;
+  pointer-events:none!important;
+  filter:saturate(.25) brightness(.85)!important;
+  box-shadow:none!important;
+}
+.wizard-next:not(:disabled):not(.wizard-next-locked){
+  opacity:1!important;
+  filter:none!important;
+  pointer-events:auto!important;
+}
 </style></head><body>
 <div class="wrap">
 <section class="hero"><div class="logo"><div class="logo-ring">⚡</div><div class="logo-name">New<br/>Level Team</div></div><div class="eyebrow">Планирование продаж на 7 дней</div><h1>Продажи <b>на неделю</b></h1><p>Собери конкретный план: что ты продаёшь, кому, через какую проблему или желание заходишь, какой связкой ведёшь к продаже и какой объём действий делаешь.</p></section>
@@ -862,17 +876,81 @@ button, .chip, .aud-choice, .funnel-options button{
     var pain=document.getElementById('audiencePain');
     return !!(who && who.value.trim() && pain && pain.value.trim());
   }
-  function canLeaveCurrentStepForward(){
-    // Step 4 in the UI (index 3) is mandatory through the final "Заход".
-    if(step===3) return audienceStepComplete();
+  function stepComplete(index){
+    if(index===0){
+      var p=document.getElementById('product');
+      return !!(p && p.value.trim());
+    }
+    if(index===1){
+      var pt=document.getElementById('point');
+      return !!(pt && pt.value.trim());
+    }
+    if(index===2){
+      var pl=document.getElementById('place');
+      return !!(pl && pl.value.trim());
+    }
+    if(index===3){
+      return audienceStepComplete();
+    }
+    if(index===4){
+      var f=document.getElementById('funnel');
+      return !!(f && f.value.trim());
+    }
+    if(index===5){
+      return typeof actionLines==='function' && actionLines().length>0;
+    }
+    if(index===6){
+      var ge=document.getElementById('goalEngage');
+      return !!(ge && ge.value.trim());
+    }
+    if(index===7){
+      var gs=document.getElementById('goalSales');
+      return !!(gs && gs.value.trim());
+    }
     return true;
+  }
+  function currentInnerAudienceReady(){
+    if(step!==3 || typeof audStep==='undefined') return true;
+    if(audStep===1) return !!(aud && aud.type);
+    if(audStep===2) return !!(aud && aud.situation);
+    if(audStep===3) return !!(aud && aud.focus && aud.focus.length);
+    return audienceStepComplete();
+  }
+  function canLeaveCurrentStepForward(){
+    if(step===3 && typeof audStep!=='undefined' && audStep<4){
+      return currentInnerAudienceReady();
+    }
+    return stepComplete(step);
   }
   function syncNextAvailability(){
     if(!next)return;
-    var blocked = step===3 && typeof audStep!=='undefined' && audStep>=4 && !audienceStepComplete();
-    next.disabled=blocked;
-    next.classList.toggle('wizard-next-locked',blocked);
-    next.title=blocked?'Сначала выбери финальный заход: через проблему или желание, а затем конкретный смысл':'';
+
+    var ready;
+    if(step===3 && typeof audStep!=='undefined' && audStep<4){
+      ready=currentInnerAudienceReady();
+    }else{
+      ready=stepComplete(step);
+    }
+
+    // Финальный экран всегда позволяет вернуться к началу.
+    if(step===panels.length-1) ready=true;
+
+    next.disabled=!ready;
+    next.classList.toggle('wizard-next-locked',!ready);
+    next.setAttribute('aria-disabled',ready?'false':'true');
+
+    var messages=[
+      'Сначала выбери, что продаёшь.',
+      'Сначала выбери, куда ведёшь человека.',
+      'Сначала выбери хотя бы одну площадку.',
+      'Сначала заверши текущий выбор в блоке «Кому и через что».',
+      'Сначала собери продающую связку.',
+      'Сначала добавь хотя бы одно действие на неделю.',
+      'Сначала поставь цель по вовлечению.',
+      'Сначала поставь хотя бы одну цель по продажам.',
+      ''
+    ];
+    next.title=ready?'':(messages[step]||'Сначала заполни текущий шаг.');
   }
   window.salesWizardRefreshNavigation=function(){
     renderRoute();
@@ -884,8 +962,13 @@ button, .chip, .aud-choice, .funnel-options button{
     buttons.forEach(function(b,i){
       var completed=!!completionState[i];
       var current=i===step;
-      var reachable=i<=maxVisited || completed || i===0;
-      if(step===3 && !audienceStepComplete() && i>3) reachable=false;
+      var prereq=true;
+      for(var j=0;j<i;j++){
+        if(!completionState[j]){prereq=false;break;}
+      }
+      // Назад можно всегда. Вперёд - только когда заполнены все предыдущие шаги.
+      var reachable = i===0 || i<=step || completed || prereq;
+      if(i>step && !prereq) reachable=false;
       b.classList.toggle('route-current',current);
       b.classList.toggle('route-done',completed && !current);
       b.classList.toggle('route-available',reachable && !completed && !current);
@@ -968,9 +1051,21 @@ button, .chip, .aud-choice, .funnel-options button{
     if(!canLeaveCurrentStepForward()){
       syncNextAvailability();
       var guide=document.getElementById('wizardGuideText');
-      if(guide) guide.textContent='Остался последний выбор: выбери заход и конкретный главный смысл недели.';
+      var hints=[
+        'Выбери хотя бы одно направление продаж.',
+        'Выбери, куда ведёшь человека.',
+        'Отметь хотя бы одну площадку.',
+        'Заверши текущий выбор: кто → ситуация → что болит → заход.',
+        'Собери основную продающую связку.',
+        'Добавь хотя бы одно действие, которое реально будешь делать.',
+        'Укажи цель по вовлечению.',
+        'Поставь хотя бы одну цель по продажам.'
+      ];
+      if(guide) guide.textContent=hints[step]||'Сначала заполни текущий шаг.';
       return;
     }
+    // Сразу блокируем кнопку на время перехода, чтобы двойной тап не перескочил ещё один шаг.
+    next.disabled=true;
     salesWizardShow(step===panels.length-1?0:step+1,true);
   }
   if(prev){
